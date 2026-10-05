@@ -1,0 +1,1021 @@
+// Settings window: a sidebar with pages, Windows 11 Settings style.
+
+import { Button, ComboBox, Switch, LineEdit, SpinBox, ScrollView, AboutSlint, Palette } from "std-widgets.slint";
+import { Theme } from "theme.slint";
+import { Icons } from "icons.slint";
+import { Strings } from "strings.slint";
+import { HistoryRow, HotkeyRow } from "types.slint";
+import { SettingRow, SectionTitle, KeyCap, IconButton } from "widgets.slint";
+
+component NavItem inherits Rectangle {
+    in property <image> icon;
+    in property <string> text;
+    in property <bool> selected;
+    callback clicked();
+    height: 38px;
+    border-radius: Theme.radius-sm;
+    background: root.selected ? Theme.selected : ta.has-hover ? Theme.hover : transparent;
+    accessible-role: tab;
+    accessible-label: root.text;
+    accessible-item-selected: root.selected;
+    accessible-action-default => {
+        root.clicked();
+    }
+    // Windows 11 selection indicator
+    if root.selected: Rectangle {
+        x: 0;
+        width: 3px;
+        height: 16px;
+        y: (parent.height - self.height) / 2;
+        border-radius: 1.5px;
+        background: Theme.accent-fg;
+    }
+    HorizontalLayout {
+        padding-left: 14px;
+        padding-right: 10px;
+        spacing: 12px;
+        Image {
+            source: root.icon;
+            width: 18px;
+            height: 18px;
+            y: (parent.height - self.height) / 2;
+            colorize: Theme.text;
+        }
+        Text {
+            text: root.text;
+            color: Theme.text;
+            font-size: Theme.body;
+            vertical-alignment: center;
+            overflow: elide;
+        }
+    }
+    ta := TouchArea {
+        clicked => {
+            root.clicked();
+        }
+    }
+}
+
+component PageTitle inherits Text {
+    font-size: Theme.title;
+    font-weight: 600;
+    color: Theme.text;
+}
+
+component Hint inherits Text {
+    font-size: Theme.caption;
+    color: Theme.text-secondary;
+    wrap: word-wrap;
+}
+
+component LinkText inherits Text {
+    callback clicked();
+    color: Theme.accent-fg;
+    font-size: Theme.body;
+    accessible-role: button;
+    accessible-action-default => {
+        root.clicked();
+    }
+    TouchArea {
+        mouse-cursor: pointer;
+        clicked => {
+            root.clicked();
+        }
+    }
+}
+
+// Button that shows a shortcut and records a new one when clicked.
+component HotkeyButton inherits Rectangle {
+    in property <string> value;
+    in property <bool> recording;
+    // 0 ok, 1 failed to register, 2 invalid
+    in property <int> state;
+    callback clicked();
+    min-width: 170px;
+    height: 32px;
+    border-radius: Theme.radius-sm;
+    border-width: root.recording ? 2px : 1px;
+    border-color: root.recording ? Theme.accent-fg : root.state != 0 ? Theme.danger : Theme.stroke-strong;
+    background: ta.has-hover ? Theme.hover : Theme.surface;
+    accessible-role: button;
+    accessible-label: root.recording ? @tr("Press the new shortcut") : root.value;
+    accessible-action-default => {
+        root.clicked();
+    }
+    HorizontalLayout {
+        padding-left: 10px;
+        padding-right: 10px;
+        spacing: 8px;
+        Image {
+            source: Icons.keyboard;
+            width: 16px;
+            height: 16px;
+            y: (parent.height - self.height) / 2;
+            colorize: Theme.text-secondary;
+        }
+        Text {
+            text: root.recording ? @tr("Press keys… (Esc to cancel)") : root.value == "" ? @tr("Not set") : root.value;
+            color: root.recording ? Theme.accent-fg : Theme.text;
+            font-size: Theme.body;
+            vertical-alignment: center;
+            overflow: elide;
+        }
+    }
+    ta := TouchArea {
+        clicked => {
+            root.clicked();
+        }
+    }
+}
+
+export component SettingsWindow inherits Window {
+    title: @tr("QRcode tool — Settings");
+    icon: Icons.logo;
+    min-width: 760px;
+    min-height: 540px;
+    preferred-width: 920px;
+    preferred-height: 660px;
+    background: Theme.bg;
+    property <bool> dark: Theme.dark;
+
+    // 0 general, 1 scanning, 2 camera, 3 shortcuts, 4 privacy & history, 5 about
+    in-out property <int> page: 0;
+
+    // General
+    in property <[string]> languages;
+    in-out property <int> language-index: 0;
+    in-out property <int> theme-index: 0;
+    in-out property <bool> autostart: true;
+    in-out property <bool> shell-menu: true;
+    in property <bool> shell-menu-supported: false;
+    in-out property <bool> bubble-at-startup: false;
+    in-out property <bool> hide-in-fullscreen: true;
+    in-out property <bool> check-updates: true;
+    in property <bool> fullscreen-detection-supported: true;
+
+    // Scanning
+    in-out property <bool> auto-open-trusted: true;
+    in property <[string]> trusted-domains;
+    in-out property <bool> auto-copy: false;
+    in-out property <bool> sound: false;
+    in-out property <bool> all-formats: true;
+
+    // Camera
+    in property <bool> camera-available: true;
+    in property <[string]> cameras;
+    in-out property <int> camera-index: 0;
+    in-out property <bool> mirror: true;
+    in-out property <bool> close-after-scan: true;
+    in-out property <int> hold-seconds: 8;
+
+    // Shortcuts
+    in property <[HotkeyRow]> hotkeys;
+    in property <bool> hotkeys-supported: true;
+    in-out property <string> recording-id;
+
+    // Privacy & history
+    in-out property <bool> history-enabled: false;
+    in-out property <int> history-max: 50;
+    in property <[HistoryRow]> history;
+
+    // About
+    in property <string> version;
+    in property <string> update-status;
+    in property <bool> update-busy: false;
+    in property <string> trademark-notice;
+
+    // Something changed; `key` names the setting. Rust reads the properties back.
+    callback changed(string);
+    callback add-trusted(string);
+    callback remove-trusted(int);
+    callback start-recording(string);
+    callback cancel-recording();
+    callback key-recorded(bool, bool, bool, bool, string);
+    callback reset-hotkeys();
+    callback history-open(int);
+    callback history-copy(int);
+    callback history-clear();
+    callback check-for-updates();
+    // repo | issues | privacy | licenses | logs | config | releases | sponsor
+    callback open-link(string);
+    callback show-welcome();
+
+    init => {
+        Palette.color-scheme = root.dark ? ColorScheme.dark : ColorScheme.light;
+    }
+    changed dark => {
+        Palette.color-scheme = root.dark ? ColorScheme.dark : ColorScheme.light;
+    }
+    changed recording-id => {
+        if (root.recording-id != "") {
+            recorder.focus();
+        }
+    }
+
+    // Captures the keys while a shortcut is being recorded.
+    recorder := FocusScope {
+        enabled: root.recording-id != "";
+        key-pressed(event) => {
+            if (root.recording-id == "") {
+                return reject;
+            }
+            if (event.text == Key.Escape && !event.modifiers.control && !event.modifiers.alt && !event.modifiers.shift && !event.modifiers.meta) {
+                root.cancel-recording();
+                return accept;
+            }
+            root.key-recorded(event.modifiers.control, event.modifiers.alt, event.modifiers.shift, event.modifiers.meta, event.text);
+            accept
+        }
+        focus-changed-event(reason) => {
+            if (!self.has-focus && root.recording-id != "") {
+                root.cancel-recording();
+            }
+        }
+    }
+
+    HorizontalLayout {
+        // Sidebar
+        VerticalLayout {
+            width: 240px;
+            padding: 12px;
+            padding-top: 18px;
+            spacing: 4px;
+            HorizontalLayout {
+                padding-left: 8px;
+                padding-bottom: 14px;
+                spacing: 10px;
+                Image {
+                    source: Icons.logo;
+                    width: 28px;
+                    height: 28px;
+                }
+                Text {
+                    text: "QRcode tool";
+                    font-size: Theme.subtitle;
+                    font-weight: 600;
+                    color: Theme.text;
+                    vertical-alignment: center;
+                }
+            }
+            NavItem {
+                icon: Icons.palette;
+                text: @tr("General");
+                selected: root.page == 0;
+                clicked => {
+                    root.page = 0;
+                }
+            }
+            NavItem {
+                icon: Icons.qr;
+                text: @tr("Scanning");
+                selected: root.page == 1;
+                clicked => {
+                    root.page = 1;
+                }
+            }
+            NavItem {
+                icon: Icons.camera;
+                text: @tr("Camera");
+                selected: root.page == 2;
+                clicked => {
+                    root.page = 2;
+                }
+            }
+            NavItem {
+                icon: Icons.keyboard;
+                text: @tr("Shortcuts");
+                selected: root.page == 3;
+                clicked => {
+                    root.page = 3;
+                }
+            }
+            NavItem {
+                icon: Icons.history;
+                text: @tr("Privacy & history");
+                selected: root.page == 4;
+                clicked => {
+                    root.page = 4;
+                }
+            }
+            NavItem {
+                icon: Icons.info;
+                text: @tr("About");
+                selected: root.page == 5;
+                clicked => {
+                    root.page = 5;
+                }
+            }
+            Rectangle { }
+        }
+
+        // Page content
+        ScrollView {
+            horizontal-stretch: 1;
+            VerticalLayout {
+                padding: 28px;
+                padding-top: 22px;
+                spacing: 6px;
+                alignment: start;
+
+                // ───────────── General ─────────────
+                if root.page == 0: VerticalLayout {
+                    spacing: 6px;
+                    PageTitle {
+                        text: @tr("General");
+                    }
+                    Rectangle {
+                        height: 10px;
+                    }
+                    SettingRow {
+                        icon: Icons.globe;
+                        title: @tr("Language");
+                        description: @tr("Language of menus and messages.");
+                        ComboBox {
+                            min-width: 220px;
+                            model: root.languages;
+                            current-index <=> root.language-index;
+                            selected => {
+                                root.changed("language");
+                            }
+                        }
+                    }
+                    SettingRow {
+                        icon: Icons.palette;
+                        title: @tr("Theme");
+                        description: @tr("Follows Windows, macOS or your desktop by default.");
+                        ComboBox {
+                            min-width: 220px;
+                            model: [@tr("Use system setting"), @tr("Light"), @tr("Dark")];
+                            current-index <=> root.theme-index;
+                            selected => {
+                                root.changed("theme");
+                            }
+                        }
+                    }
+                    SettingRow {
+                        icon: Icons.refresh;
+                        title: @tr("Start with the computer");
+                        description: @tr("QRcode tool waits quietly in the tray so the shortcut always works.");
+                        Switch {
+                            checked <=> root.autostart;
+                            toggled => {
+                                root.changed("autostart");
+                            }
+                        }
+                    }
+                    if root.shell-menu-supported: SettingRow {
+                        icon: Icons.image;
+                        title: @tr("Right-click menu");
+                        description: @tr("Adds QRcode tool to the desktop right-click menu and to image files. On Windows 11, open Show more options.");
+                        Switch {
+                            checked <=> root.shell-menu;
+                            toggled => {
+                                root.changed("shell-menu");
+                            }
+                        }
+                    }
+                    Rectangle {
+                        height: 14px;
+                    }
+                    SectionTitle {
+                        text: @tr("Floating bubble");
+                    }
+                    SettingRow {
+                        icon: Icons.bubble;
+                        title: @tr("Show the bubble when the app starts");
+                        description: @tr("A small round button that stays on top. Click it to scan the screen.");
+                        Switch {
+                            checked <=> root.bubble-at-startup;
+                            toggled => {
+                                root.changed("bubble-at-startup");
+                            }
+                        }
+                    }
+                    SettingRow {
+                        icon: Icons.fullscreen;
+                        title: @tr("Hide during full-screen apps");
+                        description: root.fullscreen-detection-supported ? @tr("Hides the bubble and toolbar while you watch a video, present or play a game.") : @tr("Not supported on this system.");
+                        Switch {
+                            enabled: root.fullscreen-detection-supported;
+                            checked <=> root.hide-in-fullscreen;
+                            toggled => {
+                                root.changed("hide-in-fullscreen");
+                            }
+                        }
+                    }
+                    Rectangle {
+                        height: 14px;
+                    }
+                    SectionTitle {
+                        text: @tr("Updates");
+                    }
+                    SettingRow {
+                        icon: Icons.refresh;
+                        title: @tr("Check for updates automatically");
+                        description: @tr("Asks GitHub once a day whether a new version exists. Nothing is installed without asking you.");
+                        Switch {
+                            checked <=> root.check-updates;
+                            toggled => {
+                                root.changed("check-updates");
+                            }
+                        }
+                    }
+                    Rectangle {
+                        height: 14px;
+                    }
+                    HorizontalLayout {
+                        alignment: start;
+                        Button {
+                            text: @tr("Show the welcome screen again");
+                            clicked => {
+                                root.show-welcome();
+                            }
+                        }
+                    }
+                }
+
+                // ───────────── Scanning ─────────────
+                if root.page == 1: VerticalLayout {
+                    spacing: 6px;
+                    PageTitle {
+                        text: @tr("Scanning");
+                    }
+                    Rectangle {
+                        height: 10px;
+                    }
+                    SettingRow {
+                        icon: Icons.copy;
+                        title: @tr("Copy the result automatically");
+                        description: @tr("Puts the content of a single found code on the clipboard.");
+                        Switch {
+                            checked <=> root.auto-copy;
+                            toggled => {
+                                root.changed("auto-copy");
+                            }
+                        }
+                    }
+                    SettingRow {
+                        icon: Icons.info;
+                        title: @tr("Play a sound when a code is found");
+                        Switch {
+                            checked <=> root.sound;
+                            toggled => {
+                                root.changed("sound");
+                            }
+                        }
+                    }
+                    SettingRow {
+                        icon: Icons.receipt;
+                        title: @tr("Also read barcodes");
+                        description: @tr("EAN, UPC, Code 128, Data Matrix, PDF417, Aztec and more, in addition to QR codes.");
+                        Switch {
+                            checked <=> root.all-formats;
+                            toggled => {
+                                root.changed("all-formats");
+                            }
+                        }
+                    }
+                    Rectangle {
+                        height: 14px;
+                    }
+                    SectionTitle {
+                        text: @tr("Trusted sites");
+                    }
+                    Hint {
+                        text: @tr("Links to these sites open right away when they are the only code found and nothing looks suspicious. Every other link waits for you to press Enter or click it.");
+                    }
+                    SettingRow {
+                        icon: Icons.shield;
+                        title: @tr("Open trusted sites without asking");
+                        Switch {
+                            checked <=> root.auto-open-trusted;
+                            toggled => {
+                                root.changed("auto-open-trusted");
+                            }
+                        }
+                    }
+                    Rectangle {
+                        background: Theme.card;
+                        border-radius: Theme.radius;
+                        border-width: 1px;
+                        border-color: Theme.stroke;
+                        VerticalLayout {
+                            padding: 12px;
+                            spacing: 6px;
+                            HorizontalLayout {
+                                spacing: 8px;
+                                new-domain := LineEdit {
+                                    horizontal-stretch: 1;
+                                    placeholder-text: @tr("example.com");
+                                    accepted(text) => {
+                                        if (text != "") {
+                                            root.add-trusted(text);
+                                            self.text = "";
+                                        }
+                                    }
+                                }
+                                Button {
+                                    text: @tr("Add");
+                                    icon: Icons.plus;
+                                    colorize-icon: true;
+                                    enabled: new-domain.text != "";
+                                    clicked => {
+                                        root.add-trusted(new-domain.text);
+                                        new-domain.text = "";
+                                    }
+                                }
+                            }
+                            if root.trusted-domains.length == 0: Hint {
+                                text: @tr("No trusted sites yet. You can also add one from the details of a scanned link.");
+                            }
+                            for d[i] in root.trusted-domains: HorizontalLayout {
+                                spacing: 8px;
+                                padding-left: 4px;
+                                Image {
+                                    source: Icons.globe;
+                                    width: 16px;
+                                    height: 16px;
+                                    y: (parent.height - self.height) / 2;
+                                    colorize: Theme.text-secondary;
+                                }
+                                Text {
+                                    text: d;
+                                    color: Theme.text;
+                                    vertical-alignment: center;
+                                    horizontal-stretch: 1;
+                                    overflow: elide;
+                                }
+                                IconButton {
+                                    icon: Icons.trash;
+                                    label: @tr("Remove");
+                                    size: 30px;
+                                    icon-size: 16px;
+                                    tooltip-above: true;
+                                    clicked => {
+                                        root.remove-trusted(i);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // ───────────── Camera ─────────────
+                if root.page == 2: VerticalLayout {
+                    spacing: 6px;
+                    PageTitle {
+                        text: @tr("Camera");
+                    }
+                    Rectangle {
+                        height: 10px;
+                    }
+                    if !root.camera-available: Hint {
+                        text: @tr("No camera was found. Connect a webcam to scan printed codes or codes on a phone.");
+                    }
+                    SettingRow {
+                        icon: Icons.camera;
+                        title: @tr("Camera");
+                        ComboBox {
+                            min-width: 240px;
+                            enabled: root.camera-available;
+                            model: root.cameras;
+                            current-index <=> root.camera-index;
+                            selected => {
+                                root.changed("camera");
+                            }
+                        }
+                    }
+                    SettingRow {
+                        icon: Icons.region;
+                        title: @tr("Mirror the picture");
+                        description: @tr("Shows the camera like a mirror. Scanning works either way.");
+                        Switch {
+                            checked <=> root.mirror;
+                            toggled => {
+                                root.changed("mirror");
+                            }
+                        }
+                    }
+                    SettingRow {
+                        icon: Icons.history;
+                        title: @tr("Keep results on screen (seconds)");
+                        description: @tr("Codes stay in a fixed list this long after they leave the camera, so links don't jump around or disappear. 0 = only while visible.");
+                        SpinBox {
+                            width: 120px;
+                            minimum: 0;
+                            maximum: 60;
+                            value <=> root.hold-seconds;
+                            edited => {
+                                root.changed("hold-seconds");
+                            }
+                        }
+                    }
+                    SettingRow {
+                        icon: Icons.close;
+                        title: @tr("Close the camera after a code is opened");
+                        Switch {
+                            checked <=> root.close-after-scan;
+                            toggled => {
+                                root.changed("close-after-scan");
+                            }
+                        }
+                    }
+                }
+
+                // ───────────── Shortcuts ─────────────
+                if root.page == 3: VerticalLayout {
+                    spacing: 6px;
+                    PageTitle {
+                        text: @tr("Shortcuts");
+                    }
+                    Rectangle {
+                        height: 10px;
+                    }
+                    Hint {
+                        text: root.hotkeys-supported ? @tr("Click a shortcut, then press the new key combination. Use at least one of Ctrl, Alt, Shift or Win/Cmd.") : @tr("Global shortcuts are not available on this desktop (for example Wayland). Bind the commands “qrcode-tool scan-screen”, “qrcode-tool scan-region”, “qrcode-tool scan-camera” or “qrcode-tool toolbar” to keys in your system’s keyboard settings.");
+                    }
+                    for h in root.hotkeys: SettingRow {
+                        icon: h.id == "screen" ? Icons.fullscreen : h.id == "region" ? Icons.region : h.id == "camera" ? Icons.camera : Icons.toolbar;
+                        title: h.id == "screen" ? @tr("Scan whole screen") : h.id == "region" ? @tr("Select area") : h.id == "camera" ? @tr("Scan with camera") : @tr("Show or hide the toolbar");
+                        description: h.state == 1 ? @tr("Already used by another app — choose another one.") : h.state == 2 ? @tr("Not a valid shortcut.") : "";
+                        HotkeyButton {
+                            value: h.value;
+                            state: h.state;
+                            recording: root.recording-id == h.id;
+                            clicked => {
+                                if (root.hotkeys-supported) {
+                                    root.start-recording(h.id);
+                                }
+                            }
+                        }
+                    }
+                    Rectangle {
+                        height: 10px;
+                    }
+                    HorizontalLayout {
+                        alignment: start;
+                        Button {
+                            text: @tr("Restore defaults");
+                            enabled: root.hotkeys-supported;
+                            clicked => {
+                                root.reset-hotkeys();
+                            }
+                        }
+                    }
+                    Rectangle {
+                        height: 14px;
+                    }
+                    SectionTitle {
+                        text: @tr("While scanning");
+                    }
+                    Rectangle {
+                        background: Theme.card;
+                        border-radius: Theme.radius;
+                        border-width: 1px;
+                        border-color: Theme.stroke;
+                        GridLayout {
+                            padding: 14px;
+                            spacing: 10px;
+                            Row {
+                                KeyCap {
+                                    width: 72px;
+                                    text: "Enter";
+                                }
+                                Text {
+                                    text: @tr("Open the selected code");
+                                    color: Theme.text;
+                                    vertical-alignment: center;
+                                }
+                            }
+                            Row {
+                                KeyCap {
+                                    width: 72px;
+                                    text: "Tab";
+                                }
+                                Text {
+                                    text: @tr("Select the next code (Shift+Tab for the previous one)");
+                                    color: Theme.text;
+                                    vertical-alignment: center;
+                                }
+                            }
+                            Row {
+                                KeyCap {
+                                    width: 72px;
+                                    text: "C";
+                                }
+                                Text {
+                                    text: @tr("Copy the selected code");
+                                    color: Theme.text;
+                                    vertical-alignment: center;
+                                }
+                            }
+                            Row {
+                                KeyCap {
+                                    width: 72px;
+                                    text: "F";
+                                }
+                                Text {
+                                    text: @tr("Search the whole screen again");
+                                    color: Theme.text;
+                                    vertical-alignment: center;
+                                }
+                            }
+                            Row {
+                                KeyCap {
+                                    width: 72px;
+                                    text: "Esc";
+                                }
+                                Text {
+                                    text: @tr("Cancel (right-click works too)");
+                                    color: Theme.text;
+                                    vertical-alignment: center;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // ───────────── Privacy & history ─────────────
+                if root.page == 4: VerticalLayout {
+                    spacing: 6px;
+                    PageTitle {
+                        text: @tr("Privacy & history");
+                    }
+                    Rectangle {
+                        height: 10px;
+                    }
+                    Rectangle {
+                        background: Theme.card;
+                        border-radius: Theme.radius;
+                        border-width: 1px;
+                        border-color: Theme.stroke;
+                        HorizontalLayout {
+                            padding: 14px;
+                            spacing: 12px;
+                            Image {
+                                source: Icons.lock;
+                                width: 20px;
+                                height: 20px;
+                                colorize: Theme.success;
+                            }
+                            Hint {
+                                horizontal-stretch: 1;
+                                font-size: Theme.body;
+                                color: Theme.text;
+                                text: @tr("Everything happens on this computer. QRcode tool sends no usage data and never checks links online. The only network request is the optional update check to GitHub.");
+                            }
+                        }
+                    }
+                    Rectangle {
+                        height: 10px;
+                    }
+                    SettingRow {
+                        icon: Icons.history;
+                        title: @tr("Keep a scan history");
+                        description: @tr("Stored only on this computer. Wi-Fi passwords and 2-step verification keys are never saved.");
+                        Switch {
+                            checked <=> root.history-enabled;
+                            toggled => {
+                                root.changed("history-enabled");
+                            }
+                        }
+                    }
+                    SettingRow {
+                        icon: Icons.save;
+                        title: @tr("Number of entries to keep");
+                        SpinBox {
+                            width: 120px;
+                            enabled: root.history-enabled;
+                            minimum: 5;
+                            maximum: 500;
+                            step-size: 5;
+                            value <=> root.history-max;
+                            edited => {
+                                root.changed("history-max");
+                            }
+                        }
+                    }
+                    Rectangle {
+                        height: 14px;
+                    }
+                    HorizontalLayout {
+                        SectionTitle {
+                            text: @tr("Recent scans");
+                            vertical-alignment: center;
+                            horizontal-stretch: 1;
+                        }
+                        Button {
+                            text: @tr("Clear history");
+                            icon: Icons.trash;
+                            colorize-icon: true;
+                            enabled: root.history.length > 0;
+                            clicked => {
+                                root.history-clear();
+                            }
+                        }
+                    }
+                    if root.history.length == 0: Rectangle {
+                        height: 90px;
+                        background: Theme.card;
+                        border-radius: Theme.radius;
+                        border-width: 1px;
+                        border-color: Theme.stroke;
+                        Hint {
+                            horizontal-alignment: center;
+                            vertical-alignment: center;
+                            text: root.history-enabled ? @tr("Nothing scanned yet.") : @tr("History is turned off.");
+                        }
+                    }
+                    for h[i] in root.history: Rectangle {
+                        min-height: 52px;
+                        background: Theme.card;
+                        border-radius: Theme.radius-sm;
+                        border-width: 1px;
+                        border-color: Theme.stroke;
+                        HorizontalLayout {
+                            padding-left: 12px;
+                            padding-right: 8px;
+                            padding-top: 6px;
+                            padding-bottom: 6px;
+                            spacing: 12px;
+                            Image {
+                                source: Icons.for-kind(h.kind);
+                                width: 18px;
+                                height: 18px;
+                                y: (parent.height - self.height) / 2;
+                                colorize: Theme.text-secondary;
+                            }
+                            VerticalLayout {
+                                horizontal-stretch: 1;
+                                alignment: center;
+                                Text {
+                                    text: h.text;
+                                    color: Theme.text;
+                                    overflow: elide;
+                                }
+                                Text {
+                                    text: Strings.kind-label(h.kind) + " · " + h.time;
+                                    color: Theme.text-tertiary;
+                                    font-size: Theme.caption;
+                                }
+                            }
+                            if h.openable: IconButton {
+                                icon: Icons.open;
+                                label: @tr("Open");
+                                size: 32px;
+                                icon-size: 16px;
+                                tooltip-above: true;
+                                y: (parent.height - self.height) / 2;
+                                clicked => {
+                                    root.history-open(i);
+                                }
+                            }
+                            IconButton {
+                                icon: Icons.copy;
+                                label: @tr("Copy");
+                                size: 32px;
+                                icon-size: 16px;
+                                tooltip-above: true;
+                                y: (parent.height - self.height) / 2;
+                                clicked => {
+                                    root.history-copy(i);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // ───────────── About ─────────────
+                if root.page == 5: VerticalLayout {
+                    spacing: 6px;
+                    PageTitle {
+                        text: @tr("About");
+                    }
+                    Rectangle {
+                        height: 10px;
+                    }
+                    Rectangle {
+                        background: Theme.card;
+                        border-radius: Theme.radius;
+                        border-width: 1px;
+                        border-color: Theme.stroke;
+                        HorizontalLayout {
+                            padding: 18px;
+                            spacing: 18px;
+                            Image {
+                                source: Icons.logo;
+                                width: 64px;
+                                height: 64px;
+                            }
+                            VerticalLayout {
+                                alignment: center;
+                                horizontal-stretch: 1;
+                                spacing: 4px;
+                                Text {
+                                    text: "QRcode tool";
+                                    font-size: Theme.subtitle;
+                                    font-weight: 600;
+                                    color: Theme.text;
+                                }
+                                Text {
+                                    text: @tr("Version {}", root.version);
+                                    color: Theme.text-secondary;
+                                }
+                                Text {
+                                    text: @tr("Scan QR codes on your computer as easily as on your phone.");
+                                    color: Theme.text-secondary;
+                                    wrap: word-wrap;
+                                }
+                            }
+                        }
+                    }
+                    SettingRow {
+                        icon: Icons.refresh;
+                        title: @tr("Updates");
+                        description: root.update-status;
+                        Button {
+                            text: @tr("Check for updates");
+                            enabled: !root.update-busy;
+                            clicked => {
+                                root.check-for-updates();
+                            }
+                        }
+                    }
+                    Rectangle {
+                        height: 10px;
+                    }
+                    Rectangle {
+                        background: Theme.card;
+                        border-radius: Theme.radius;
+                        border-width: 1px;
+                        border-color: Theme.stroke;
+                        VerticalLayout {
+                            padding: 16px;
+                            spacing: 10px;
+                            LinkText {
+                                text: @tr("Source code on GitHub");
+                                clicked => {
+                                    root.open-link("repo");
+                                }
+                            }
+                            LinkText {
+                                text: @tr("Report a problem or suggest an idea");
+                                clicked => {
+                                    root.open-link("issues");
+                                }
+                            }
+                            LinkText {
+                                text: @tr("Support the project");
+                                clicked => {
+                                    root.open-link("sponsor");
+                                }
+                            }
+                            LinkText {
+                                text: @tr("Privacy statement");
+                                clicked => {
+                                    root.open-link("privacy");
+                                }
+                            }
+                            LinkText {
+                                text: @tr("Open-source licenses");
+                                clicked => {
+                                    root.open-link("licenses");
+                                }
+                            }
+                            LinkText {
+                                text: @tr("Open the settings folder");
+                                clicked => {
+                                    root.open-link("config");
+                                }
+                            }
+                            LinkText {
+                                text: @tr("Open the log folder");
+                                clicked => {
+                                    root.open-link("logs");
+                                }
+                            }
+                        }
+                    }
+                    Rectangle {
+                        height: 10px;
+                    }
+                    Hint {
+                        text: @tr("Free and open source under the MIT or Apache-2.0 license.");
+                    }
+                    Hint {
+                        text: root.trademark-notice;
+                    }
+                    Rectangle {
+                        height: 10px;
+                    }
+                    HorizontalLayout {
+                        alignment: start;
+                        AboutSlint {
+                            max-width: 260px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

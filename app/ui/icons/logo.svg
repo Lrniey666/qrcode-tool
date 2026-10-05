@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1254 1254" width="1254" height="1254" role="img" aria-label="Blue teal QR scan icon">
+  <defs>
+    <linearGradient id="gradMain" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1D4FFF"/>
+      <stop offset="46%" stop-color="#159FF0"/>
+      <stop offset="100%" stop-color="#19DFC2"/>
+    </linearGradient>
+    <linearGradient id="gradTL" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#245DFF"/>
+      <stop offset="100%" stop-color="#20D8D0"/>
+    </linearGradient>
+    <linearGradient id="gradTR" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#10A6C9"/>
+      <stop offset="100%" stop-color="#20E1C4"/>
+    </linearGradient>
+    <linearGradient id="gradBL" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#245CFF"/>
+      <stop offset="100%" stop-color="#26B9F4"/>
+    </linearGradient>
+    <linearGradient id="gradBR" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0CB7CF"/>
+      <stop offset="100%" stop-color="#20DFC1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Transparent background: no squircle/background element included -->
+
+  <!-- Camera-style scan brackets -->
+  <path d="M450 235 H345 C279 235 225 289 225 355 V455"
+        fill="none" stroke="url(#gradTL)" stroke-width="82" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M805 235 H905 C971 235 1025 289 1025 355 V455"
+        fill="none" stroke="url(#gradTR)" stroke-width="82" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M225 765 V865 C225 931 279 985 345 985 H450"
+        fill="none" stroke="url(#gradBL)" stroke-width="82" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M805 985 H905 C971 985 1025 931 1025 865 V765"
+        fill="none" stroke="url(#gradBR)" stroke-width="82" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- QR finder pattern -->
+  <rect x="355" y="375" width="350" height="350" rx="63"
+        fill="none" stroke="url(#gradMain)" stroke-width="70"/>
+  <rect x="430" y="450" width="180" height="180" rx="34" fill="url(#gradMain)"/>
+</svg>

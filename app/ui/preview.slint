@@ -1,0 +1,298 @@
+// Preview window used for live camera scanning and for scanning image files / the clipboard.
+
+import { Button, ComboBox, Switch, Palette } from "std-widgets.slint";
+import { Theme } from "theme.slint";
+import { Icons } from "icons.slint";
+import { PillData, DetailData } from "types.slint";
+import { IconButton, Pill, CornerBrackets, DetailCard } from "widgets.slint";
+
+export component PreviewWindow inherits Window {
+    title: camera-mode ? @tr("QRcode tool — Camera") : @tr("QRcode tool — Image");
+    icon: Icons.logo;
+    min-width: 520px;
+    min-height: 420px;
+    preferred-width: 760px;
+    preferred-height: 600px;
+    background: Theme.bg;
+
+    in property <bool> camera-mode: true;
+    in property <image> frame;
+    in property <float> frame-w: 1;
+    in property <float> frame-h: 1;
+    in property <[PillData]> pills;
+    in property <[string]> cameras;
+    in-out property <int> camera-index: 0;
+    in-out property <bool> mirror: true;
+    // 0 starting, 1 scanning, 2 found, 3 nothing in image, 4 error
+    in property <int> status: 0;
+    in property <bool> detail-visible: false;
+    in property <DetailData> detail;
+    property <bool> dark: Theme.dark;
+
+    callback camera-selected(int);
+    callback mirror-toggled(bool);
+    callback pill-clicked(int);
+    callback pill-details(int);
+    callback open-image();
+    callback scan-clipboard();
+    callback key(string);
+    callback detail-action(string);
+    callback detail-copy-field(int);
+    callback detail-close();
+
+    init => {
+        Palette.color-scheme = root.dark ? ColorScheme.dark : ColorScheme.light;
+        fs.focus();
+    }
+    changed dark => {
+        Palette.color-scheme = root.dark ? ColorScheme.dark : ColorScheme.light;
+    }
+
+    property <string> status-text: status == 0 ? @tr("Starting camera…")
+        : status == 1 ? (camera-mode ? @tr("Point the camera at a QR code") : @tr("Looking for codes…"))
+        : status == 2 ? @tr("Click a result to open it, or use Tab and Enter")
+        : status == 3 ? @tr("No QR code found in this image")
+        : @tr("Camera unavailable");
+
+    fs := FocusScope {
+        key-released(event) => {
+            if (event.text == Key.Escape) {
+                root.key("escape");
+                return accept;
+            }
+            reject
+        }
+        key-pressed(event) => {
+            // Escape acts on release: some input methods swallow the key-down.
+            if (event.text == Key.Escape) {
+                return accept;
+            }
+            if (event.text == Key.Return) {
+                root.key("enter");
+                return accept;
+            }
+            if (event.text == Key.Tab || event.text == Key.RightArrow) {
+                root.key("tab");
+                return accept;
+            }
+            if (event.text == Key.Backtab || event.text == Key.LeftArrow) {
+                root.key("backtab");
+                return accept;
+            }
+            if (event.text == "c" || event.text == "C") {
+                root.key("copy");
+                return accept;
+            }
+            reject
+        }
+
+        VerticalLayout {
+            spacing: 0;
+            stage := Rectangle {
+                background: #101010;
+                clip: true;
+                property <float> scale: min(self.width / 1px / root.frame-w, self.height / 1px / root.frame-h);
+                property <length> img-w: root.frame-w * self.scale * 1px;
+                property <length> img-h: root.frame-h * self.scale * 1px;
+                property <length> off-x: (self.width - self.img-w) / 2;
+                property <length> off-y: (self.height - self.img-h) / 2;
+
+                Image {
+                    x: stage.off-x;
+                    y: stage.off-y;
+                    width: stage.img-w;
+                    height: stage.img-h;
+                    source: root.frame;
+                    image-fit: fill;
+                }
+
+                if root.status == 0 || root.status == 4: VerticalLayout {
+                    alignment: center;
+                    spacing: 12px;
+                    Image {
+                        source: root.status == 4 ? Icons.warning : Icons.camera;
+                        width: 48px;
+                        height: 48px;
+                        colorize: #ffffffb0;
+                    }
+                    Text {
+                        text: root.status-text;
+                        color: #ffffffd0;
+                        horizontal-alignment: center;
+                        font-size: Theme.body;
+                    }
+                }
+
+                // Outlines follow the codes. Images: the pill sits on its code.
+                // Camera: pills are docked in a steady list at the bottom (below) so they
+                // do not jump around while the camera or the hand moves.
+                for p[i] in root.pills: Rectangle {
+                    x: stage.off-x + p.x * stage.scale * 1px;
+                    y: stage.off-y + p.y * stage.scale * 1px;
+                    width: p.w * stage.scale * 1px;
+                    height: p.h * stage.scale * 1px;
+                    if p.live: CornerBrackets {
+                        x: -6px;
+                        y: -6px;
+                        width: parent.width + 12px;
+                        height: parent.height + 12px;
+                        stroke: p.selected ? Theme.accent.brighter(0.5) : p.level >= 3 ? #ff6b6b : p.level == 2 ? #ffc83d : #ffffff;
+                        thickness: 4px;
+                    }
+                    if !root.camera-mode: Pill {
+                        data: p;
+                        x: (parent.width - self.width) / 2;
+                        y: (parent.height - self.height) / 2;
+                        clicked => {
+                            root.pill-clicked(i);
+                        }
+                        details => {
+                            root.pill-details(i);
+                        }
+                    }
+                }
+
+                if root.camera-mode && root.pills.length > 0: Rectangle {
+                    x: (parent.width - self.width) / 2;
+                    y: parent.height - self.height - 14px;
+                    width: dock.preferred-width;
+                    height: dock.preferred-height;
+                    dock := VerticalLayout {
+                        spacing: 8px;
+                        for p[i] in root.pills: HorizontalLayout {
+                            alignment: center;
+                            Pill {
+                                data: p;
+                                // Codes that left the picture stay usable, slightly faded.
+                                opacity: p.live ? 1.0 : 0.82;
+                                clicked => {
+                                    root.pill-clicked(i);
+                                }
+                                details => {
+                                    root.pill-details(i);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if root.status != 0 && root.status != 4: Rectangle {
+                    x: (parent.width - self.width) / 2;
+                    y: 14px;
+                    width: chip.preferred-width;
+                    height: 32px;
+                    border-radius: 16px;
+                    background: Theme.pill-bg;
+                    chip := HorizontalLayout {
+                        padding-left: 14px;
+                        padding-right: 14px;
+                        Text {
+                            text: root.status-text;
+                            color: #ffffff;
+                            font-size: 13px;
+                            vertical-alignment: center;
+                        }
+                    }
+                }
+            }
+
+            Rectangle {
+                height: 56px;
+                background: Theme.surface;
+                Rectangle {
+                    y: 0;
+                    height: 1px;
+                    background: Theme.stroke;
+                }
+                HorizontalLayout {
+                    padding-left: 12px;
+                    padding-right: 12px;
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                    spacing: 12px;
+                    alignment: space-between;
+                    if root.camera-mode: HorizontalLayout {
+                        spacing: 12px;
+                        alignment: start;
+                        VerticalLayout {
+                            alignment: center;
+                            Image {
+                                source: Icons.camera;
+                                width: 20px;
+                                height: 20px;
+                                colorize: Theme.text-secondary;
+                            }
+                        }
+                        ComboBox {
+                            min-width: 220px;
+                            model: root.cameras;
+                            current-index <=> root.camera-index;
+                            enabled: root.cameras.length > 1;
+                            selected(v) => {
+                                root.camera-selected(self.current-index);
+                            }
+                        }
+                        Switch {
+                            text: @tr("Mirror");
+                            checked <=> root.mirror;
+                            toggled => {
+                                root.mirror-toggled(self.checked);
+                            }
+                        }
+                    }
+                    if !root.camera-mode: HorizontalLayout {
+                        spacing: 8px;
+                        alignment: start;
+                        Button {
+                            icon: Icons.image;
+                            colorize-icon: true;
+                            text: @tr("Open another image…");
+                            clicked => {
+                                root.open-image();
+                            }
+                        }
+                        Button {
+                            icon: Icons.clipboard;
+                            colorize-icon: true;
+                            text: @tr("Scan clipboard");
+                            clicked => {
+                                root.scan-clipboard();
+                            }
+                        }
+                    }
+                    Text {
+                        text: root.pills.length > 0 ? @tr("{} found", root.pills.length) : "";
+                        color: Theme.text-secondary;
+                        vertical-alignment: center;
+                        font-size: Theme.caption;
+                    }
+                }
+            }
+        }
+
+        if root.detail-visible: Rectangle {
+            background: Theme.scrim;
+            TouchArea {
+                clicked => {
+                    root.detail-close();
+                }
+            }
+            DetailCard {
+                data: root.detail;
+                width: min(520px, root.width - 32px);
+                height: min(self.preferred-height, root.height - 32px);
+                x: (root.width - self.width) / 2;
+                y: max(16px, (root.height - self.height) / 2);
+                action(id) => {
+                    root.detail-action(id);
+                }
+                copy-field(i) => {
+                    root.detail-copy-field(i);
+                }
+                close => {
+                    root.detail-close();
+                }
+            }
+        }
+    }
+}

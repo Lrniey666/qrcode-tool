@@ -1,0 +1,50 @@
+// Visual effects for the scan overlay.
+
+import { Theme } from "theme.slint";
+
+// A sweeping scan beam with a soft trailing glow and sparks, shown while the frozen screen
+// is being analysed. Purely decorative: it never blocks input (no TouchArea).
+export component ScanEffect inherits Rectangle {
+    // Beam position, 0 = top, 1 = bottom.
+    in property <float> progress;
+    // Overall visibility 0..1 (used to fade out).
+    in property <float> fade: 1;
+
+    property <length> beam-y: root.height * root.progress;
+    property <color> glow: Theme.accent.brighter(0.7);
+
+    // Trailing glow above the beam.
+    Rectangle {
+        y: root.beam-y - self.height;
+        height: 220px;
+        background: @linear-gradient(180deg, root.glow.with-alpha(0) 0%, root.glow.with-alpha(0.14 * root.fade) 70%, root.glow.with-alpha(0.38 * root.fade) 100%);
+    }
+
+    // The beam: a coloured line with a bright white core in the middle of the screen.
+    Rectangle {
+        y: root.beam-y - 4px;
+        height: 8px;
+        background: @linear-gradient(90deg, root.glow.with-alpha(0) 0%, root.glow.with-alpha(0.75 * root.fade) 25%, root.glow.with-alpha(0.75 * root.fade) 75%, root.glow.with-alpha(0) 100%);
+    }
+    Rectangle {
+        y: root.beam-y - 1.5px;
+        height: 3px;
+        background: @linear-gradient(90deg, rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 0.95 * root.fade) 50%, rgba(255, 255, 255, 0) 90%);
+    }
+
+    // Sparks trail the beam. Positions come from `progress` only — `animation-tick()`
+    // would redraw this full-screen layer on its own clock.
+    for i in 18: Rectangle {
+        property <float> s1: abs(sin(i * 97.31deg + 13deg));
+        property <float> s2: abs(sin(i * 57.71deg + 71deg));
+        property <float> trail: 0.015 + s2 * 0.09;
+        property <length> size: (2 + s1 * 3) * 1px;
+        width: self.size;
+        height: self.size;
+        border-radius: self.size / 2;
+        x: abs(sin(i * 41.93deg + 3deg)) * (root.width - self.size);
+        y: root.beam-y - self.trail * root.height;
+        background: s1 > 0.72 ? #ffffff : root.glow;
+        opacity: root.fade * (1 - self.trail / 0.12) * min(1, root.progress * 4);
+    }
+}

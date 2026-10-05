@@ -1,0 +1,20 @@
+[Desktop Entry]
+Type=Application
+Name=QRcode tool
+GenericName=QR Code Scanner
+Comment=Scan QR codes on your computer as easily as on your phone
+Exec=qrcode-tool
+Icon=io.github.lrniey666.qrcode-tool
+Terminal=false
+Categories=Utility;Graphics;
+Keywords=QR;barcode;scan;scanner;screen;webcam;
+StartupNotify=false
+Actions=ScanScreen;ScanCamera;
+
+[Desktop Action ScanScreen]
+Name=Scan screen
+Exec=qrcode-tool scan-screen
+
+[Desktop Action ScanCamera]
+Name=Scan with camera
+Exec=qrcode-tool scan-camera

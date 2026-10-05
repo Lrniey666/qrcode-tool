@@ -1,0 +1,116 @@
+// System tray icon and its menu. Left-click scans the whole screen (Windows, Linux).
+
+import { Icons } from "icons.slint";
+
+export component AppTray inherits SystemTrayIcon {
+    // On macOS a template (black) icon is used so the menu bar can tint it.
+    in property <bool> template-icon: false;
+    in property <bool> camera-available: true;
+    in property <bool> toolbar-visible: false;
+    in property <bool> bubble-visible: false;
+    in property <string> hotkey-screen;
+    in property <string> hotkey-camera;
+
+    // scan-screen | scan-region | scan-camera | scan-clipboard | open-image | generate | toolbar | bubble |
+    // history | settings | check-updates | quit
+    callback action(string);
+
+    icon: root.template-icon ? @image-url("icons/tray-template.png") : @image-url("icons/tray.png");
+    tooltip: root.hotkey-screen != "" ? @tr("QRcode tool — {} to scan", root.hotkey-screen) : "QRcode tool";
+    title: "QRcode tool";
+
+    clicked => {
+        root.action("scan-screen");
+    }
+
+    Menu {
+        MenuItem {
+            title: @tr("Scan whole screen");
+            icon: Icons.fullscreen;
+            activated => {
+                root.action("scan-screen");
+            }
+        }
+        MenuItem {
+            title: @tr("Select area");
+            icon: Icons.region;
+            activated => {
+                root.action("scan-region");
+            }
+        }
+        MenuItem {
+            title: @tr("Scan with camera");
+            icon: Icons.camera;
+            enabled: root.camera-available;
+            activated => {
+                root.action("scan-camera");
+            }
+        }
+        MenuItem {
+            title: @tr("Scan image from clipboard");
+            icon: Icons.clipboard;
+            activated => {
+                root.action("scan-clipboard");
+            }
+        }
+        MenuItem {
+            title: @tr("Open image…");
+            icon: Icons.image;
+            activated => {
+                root.action("open-image");
+            }
+        }
+        MenuSeparator { }
+        MenuItem {
+            title: @tr("Create QR code…");
+            icon: Icons.qr;
+            activated => {
+                root.action("generate");
+            }
+        }
+        MenuItem {
+            title: @tr("Floating toolbar");
+            checkable: true;
+            checked: root.toolbar-visible;
+            activated => {
+                root.action("toolbar");
+            }
+        }
+        MenuItem {
+            title: @tr("Floating bubble");
+            checkable: true;
+            checked: root.bubble-visible;
+            activated => {
+                root.action("bubble");
+            }
+        }
+        MenuSeparator { }
+        MenuItem {
+            title: @tr("History");
+            icon: Icons.history;
+            activated => {
+                root.action("history");
+            }
+        }
+        MenuItem {
+            title: @tr("Settings");
+            icon: Icons.settings;
+            activated => {
+                root.action("settings");
+            }
+        }
+        MenuItem {
+            title: @tr("Check for updates");
+            activated => {
+                root.action("check-updates");
+            }
+        }
+        MenuSeparator { }
+        MenuItem {
+            title: @tr("Quit");
+            activated => {
+                root.action("quit");
+            }
+        }
+    }
+}

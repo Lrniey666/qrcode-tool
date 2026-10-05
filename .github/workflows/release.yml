@@ -1,0 +1,168 @@
+name: Release
+
+# Push a tag like v0.1.0 to build the Windows installer and portable zip (x64 and ARM64) and
+# publish a GitHub release. Velopack creates Setup.exe, Portable.zip and the update feed.
+on:
+  push:
+    tags: ["v*.*.*"]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version without the v (e.g. 0.1.0)"
+        required: true
+
+permissions:
+  contents: write
+
+env:
+  CARGO_TERM_COLOR: always
+  PACK_ID: QRcodeTool
+  PACK_TITLE: QRcode tool
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            channel: win-x64
+            exe: qrcode-tool.exe
+          - os: windows-11-arm
+            target: aarch64-pc-windows-msvc
+            channel: win-arm64
+            exe: qrcode-tool.exe
+          # macOS and Linux packages are prepared below but not released yet (the
+          # Windows version comes first). Uncomment to enable:
+          # - os: macos-latest
+          #   target: aarch64-apple-darwin
+          #   channel: osx-arm64
+          #   exe: qrcode-tool
+          # - os: macos-15-intel
+          #   target: x86_64-apple-darwin
+          #   channel: osx-x64
+          #   exe: qrcode-tool
+          # - os: ubuntu-22.04
+          #   target: x86_64-unknown-linux-gnu
+          #   channel: linux-x64
+          #   exe: qrcode-tool
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Version
+        shell: bash
+        run: |
+          if [ -n "${{ github.event.inputs.version }}" ]; then V="${{ github.event.inputs.version }}"; else V="${GITHUB_REF_NAME#v}"; fi
+          echo "VERSION=$V" >> "$GITHUB_ENV"
+          grep -q "^version = \"$V\"" Cargo.toml || { echo "Cargo.toml version does not match $V"; exit 1; }
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+      - uses: Swatinem/rust-cache@v2
+        with:
+          key: ${{ matrix.target }}
+
+      - name: Linux packages
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake clang libclang-dev pkg-config \
+            libxcb1-dev libxcb-randr0-dev libxcb-shm0-dev libxkbcommon-dev libfontconfig-dev \
+            libwayland-dev libegl-dev libgbm-dev libdrm-dev libpipewire-0.3-dev libspa-0.2-dev
+
+      - name: Build
+        run: cargo build --release --locked -p qrcode-tool --target ${{ matrix.target }}
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+      - name: Install vpk
+        run: dotnet tool install -g vpk --version 1.2.161
+
+      - name: Stage files
+        shell: bash
+        run: |
+          mkdir -p dist
+          cp target/${{ matrix.target }}/release/${{ matrix.exe }} dist/
+          cp LICENSE-MIT LICENSE-APACHE THIRD_PARTY_NOTICES.md dist/
+
+      - name: Pack (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          vpk pack --packId $env:PACK_ID --packVersion $env:VERSION --packDir dist `
+            --mainExe ${{ matrix.exe }} --packTitle "$env:PACK_TITLE" --packAuthors "Lrniey666" `
+            --icon assets/icons/app.ico --channel ${{ matrix.channel }} --outputDir releases
+
+      - name: Pack (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          APP="dist/QRcode tool.app"
+          mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
+          cp dist/qrcode-tool "$APP/Contents/MacOS/"
+          sed "s/__VERSION__/$VERSION/g" packaging/macos/Info.plist > "$APP/Contents/Info.plist"
+          cp assets/icons/app.icns "$APP/Contents/Resources/app.icns"
+          codesign --force --deep --sign - "$APP"
+          vpk pack --packId $PACK_ID --packVersion $VERSION --packDir "$APP" \
+            --mainExe qrcode-tool --packTitle "$PACK_TITLE" --packAuthors "Lrniey666" \
+            --icon assets/icons/app.icns --channel ${{ matrix.channel }} --outputDir releases
+
+      - name: Pack (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          vpk pack --packId $PACK_ID --packVersion $VERSION --packDir dist \
+            --mainExe qrcode-tool --packTitle "$PACK_TITLE" --packAuthors "Lrniey666" \
+            --icon assets/icons/app-256.png --channel ${{ matrix.channel }} --outputDir releases
+
+      - name: Checksums
+        shell: bash
+        run: |
+          cd releases
+          for f in *Setup.exe *Portable.zip *.pkg *.AppImage; do
+            [ -f "$f" ] || continue
+            if command -v sha256sum >/dev/null; then sha256sum "$f"; else shasum -a 256 "$f"; fi
+          done > SHA256SUMS-${{ matrix.channel }}.txt
+          cat SHA256SUMS-${{ matrix.channel }}.txt
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-${{ matrix.channel }}
+          path: releases/
+
+  publish:
+    needs: build
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+      - run: dotnet tool install -g vpk --version 1.2.161
+      - name: Version
+        run: |
+          if [ -n "${{ github.event.inputs.version }}" ]; then V="${{ github.event.inputs.version }}"; else V="${GITHUB_REF_NAME#v}"; fi
+          echo "VERSION=$V" >> "$GITHUB_ENV"
+      - name: Upload to GitHub Releases (Velopack feed per channel)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          for dir in artifacts/release-*; do
+            channel="${dir#artifacts/release-}"
+            vpk upload github --repoUrl "https://github.com/${{ github.repository }}" \
+              --token "$GITHUB_TOKEN" --publish --merge --releaseName "QRcode tool $VERSION" \
+              --tag "v$VERSION" --channel "$channel" --outputDir "$dir"
+          done
+      - name: Checksums
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release upload "v$VERSION" artifacts/release-*/SHA256SUMS-*.txt --clobber

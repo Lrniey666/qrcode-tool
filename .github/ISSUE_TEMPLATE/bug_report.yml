@@ -1,0 +1,37 @@
+name: Bug report
+description: Something does not work as expected
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, what happened instead?
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: App version
+      description: Settings › About
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+      placeholder: "Windows 11 23H2, 2 monitors (100 % + 150 %)"
+    validations:
+      required: true
+  - type: textarea
+    id: log
+    attributes:
+      label: Log
+      description: Settings › About › Open the log folder. Logs never contain scanned content.
+      render: text
+  - type: textarea
+    id: image
+    attributes:
+      label: Code / screenshot
+      description: If a code was not detected, attach the image (without private data).

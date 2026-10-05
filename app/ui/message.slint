@@ -1,0 +1,122 @@
+// Small dialog for errors, permission hints and update prompts.
+
+import { Button, Palette } from "std-widgets.slint";
+import { Theme } from "theme.slint";
+import { Icons } from "icons.slint";
+import { Strings } from "strings.slint";
+
+export component MessageWindow inherits Window {
+    title: "QRcode tool";
+    icon: Icons.logo;
+    width: 460px;
+    height: content.preferred-height;
+    background: Theme.bg;
+    always-on-top: true;
+    property <bool> dark: Theme.dark;
+
+    // see Strings.msg-title for the list of kinds
+    in property <string> kind;
+    in property <string> arg;
+    // 0 info, 2 warning, 3 error
+    in property <int> level: 0;
+    in property <bool> busy: false;
+
+    callback primary();
+    callback secondary();
+
+    init => {
+        Palette.color-scheme = root.dark ? ColorScheme.dark : ColorScheme.light;
+        fs.focus();
+    }
+    changed dark => {
+        Palette.color-scheme = root.dark ? ColorScheme.dark : ColorScheme.light;
+    }
+
+    fs := FocusScope {
+        key-released(event) => {
+            if (event.text == Key.Escape) {
+                if (Strings.msg-secondary(root.kind) != "") {
+                    root.secondary();
+                } else {
+                    root.primary();
+                }
+                return accept;
+            }
+            reject
+        }
+        key-pressed(event) => {
+            // Escape acts on release: some input methods swallow the key-down.
+            if (event.text == Key.Escape) {
+                return accept;
+            }
+            if (event.text == Key.Return && !root.busy) {
+                root.primary();
+                return accept;
+            }
+            reject
+        }
+
+        content := VerticalLayout {
+            HorizontalLayout {
+                padding: 22px;
+                spacing: 16px;
+                Image {
+                    source: root.level >= 3 ? Icons.danger : root.level == 2 ? Icons.warning : Icons.info;
+                    width: 28px;
+                    height: 28px;
+                    colorize: root.level >= 3 ? Theme.danger : root.level == 2 ? Theme.warning : Theme.accent-fg;
+                }
+                VerticalLayout {
+                    spacing: 8px;
+                    horizontal-stretch: 1;
+                    Text {
+                        text: Strings.msg-title(root.kind, root.arg);
+                        color: Theme.text;
+                        font-size: Theme.subtitle;
+                        font-weight: 600;
+                        wrap: word-wrap;
+                    }
+                    Text {
+                        text: Strings.msg-body(root.kind, root.arg);
+                        color: Theme.text-secondary;
+                        font-size: Theme.body;
+                        wrap: word-wrap;
+                    }
+                }
+            }
+            Rectangle {
+                background: Theme.surface-alt;
+                height: 64px;
+                Rectangle {
+                    y: 0;
+                    height: 1px;
+                    background: Theme.stroke;
+                }
+                HorizontalLayout {
+                    padding-left: 22px;
+                    padding-right: 22px;
+                    padding-top: 14px;
+                    padding-bottom: 14px;
+                    spacing: 10px;
+                    alignment: end;
+                    if Strings.msg-secondary(root.kind) != "": Button {
+                        min-width: 110px;
+                        text: Strings.msg-secondary(root.kind);
+                        clicked => {
+                            root.secondary();
+                        }
+                    }
+                    Button {
+                        min-width: 110px;
+                        text: Strings.msg-primary(root.kind);
+                        primary: true;
+                        enabled: !root.busy;
+                        clicked => {
+                            root.primary();
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

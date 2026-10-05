@@ -1,0 +1,1670 @@
+# French translation of QRcode tool.
+# Copyright (C) 2026 Naritaroad (Lrniey666)
+# This file is distributed under the same license as QRcode tool (MIT OR Apache-2.0).
+# Machine translation, reviewed. Corrections welcome: see CONTRIBUTING.md.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: qrcode-tool 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/Lrniey666/qrcode-tool/issues\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: ui/floating.slint:51 ui/floating.slint:97
+msgctxt "ToolbarWindow"
+msgid "Scan whole screen"
+msgstr "Scanner tout l'écran"
+
+#: ui/floating.slint:52 ui/floating.slint:104
+msgctxt "ToolbarWindow"
+msgid "Select area"
+msgstr "Sélectionner une zone"
+
+#: ui/floating.slint:53 ui/floating.slint:112
+msgctxt "ToolbarWindow"
+msgid "Scan with camera"
+msgstr "Scanner avec la caméra"
+
+#: ui/floating.slint:54 ui/floating.slint:119
+msgctxt "ToolbarWindow"
+msgid "Scan image from clipboard"
+msgstr "Scanner l'image du Presse-papiers"
+
+#: ui/floating.slint:55 ui/floating.slint:126
+msgctxt "ToolbarWindow"
+msgid "Open image…"
+msgstr "Ouvrir une image…"
+
+#: ui/floating.slint:56 ui/floating.slint:136
+msgctxt "ToolbarWindow"
+msgid "Create QR code…"
+msgstr "Créer un code QR…"
+
+#: ui/floating.slint:57 ui/floating.slint:143
+msgctxt "ToolbarWindow"
+msgid "History"
+msgstr "Historique"
+
+#: ui/floating.slint:58 ui/floating.slint:150
+msgctxt "ToolbarWindow"
+msgid "Settings"
+msgstr "Paramètres"
+
+#: ui/floating.slint:59 ui/floating.slint:160
+msgctxt "ToolbarWindow"
+msgid "Collapse to bubble"
+msgstr "Réduire en bulle"
+
+#: ui/floating.slint:60 ui/floating.slint:167
+msgctxt "ToolbarWindow"
+msgid "Close toolbar"
+msgstr "Fermer la barre d'outils"
+
+#: ui/floating.slint:61
+msgctxt "ToolbarWindow"
+msgid "Drag to move"
+msgstr "Faites glisser pour déplacer"
+
+#: ui/floating.slint:282
+msgctxt "BubbleWindow"
+msgid "Scan whole screen"
+msgstr "Scanner tout l'écran"
+
+#: ui/floating.slint:288
+msgctxt "BubbleWindow"
+msgid "Select area"
+msgstr "Sélectionner une zone"
+
+#: ui/floating.slint:294
+msgctxt "BubbleWindow"
+msgid "Scan with camera"
+msgstr "Scanner avec la caméra"
+
+#: ui/floating.slint:301
+msgctxt "BubbleWindow"
+msgid "Scan image from clipboard"
+msgstr "Scanner l'image du Presse-papiers"
+
+#: ui/floating.slint:308
+msgctxt "BubbleWindow"
+msgid "Show toolbar"
+msgstr "Afficher la barre d'outils"
+
+#: ui/floating.slint:314
+msgctxt "BubbleWindow"
+msgid "Hide bubble"
+msgstr "Masquer la bulle"
+
+#: ui/generator.slint:8
+msgctxt "GeneratorWindow"
+msgid "QRcode tool — Create QR code"
+msgstr "QRcode tool — Créer un code QR"
+
+#: ui/generator.slint:66
+msgctxt "GeneratorWindow"
+msgid "Text or link"
+msgstr "Texte ou lien"
+
+#: ui/generator.slint:74
+msgctxt "GeneratorWindow"
+msgid ""
+"Type or paste what the code should contain, for example https://example.com"
+msgstr "Tapez ou collez le contenu du code, par exemple https://example.com"
+
+#: ui/generator.slint:83
+msgctxt "GeneratorWindow"
+msgid "Error correction"
+msgstr "Correction d'erreurs"
+
+#: ui/generator.slint:89
+msgctxt "GeneratorWindow"
+msgid "Low — smallest code"
+msgstr "Faible — code le plus petit"
+
+#: ui/generator.slint:89
+msgctxt "GeneratorWindow"
+msgid "Medium — recommended"
+msgstr "Moyenne — recommandée"
+
+#: ui/generator.slint:89
+msgctxt "GeneratorWindow"
+msgid "Quartile"
+msgstr "Quartile"
+
+#: ui/generator.slint:89
+msgctxt "GeneratorWindow"
+msgid "High — survives damage or a logo"
+msgstr "Élevée — résiste aux dégâts ou à un logo"
+
+#: ui/generator.slint:97
+msgctxt "GeneratorWindow"
+msgid "{} characters"
+msgstr "{} caractères"
+
+#: ui/generator.slint:119
+msgctxt "GeneratorWindow"
+msgid "QR code preview"
+msgstr "Aperçu du code QR"
+
+#: ui/generator.slint:132
+msgctxt "GeneratorWindow"
+msgid ""
+"Too much text for one QR code. Shorten it or choose a lower error correction."
+msgstr "Trop de texte pour un seul code QR. Raccourcissez-le ou choisissez une correction d'erreurs plus faible."
+
+#: ui/generator.slint:132
+msgctxt "GeneratorWindow"
+msgid "The QR code appears here."
+msgstr "Le code QR s'affiche ici."
+
+#: ui/generator.slint:140
+msgctxt "GeneratorWindow"
+msgid "{} × {} modules"
+msgstr "{} × {} modules"
+
+#: ui/generator.slint:149
+msgctxt "GeneratorWindow"
+msgid "Copy image"
+msgstr "Copier l'image"
+
+#: ui/generator.slint:163
+msgctxt "GeneratorWindow"
+msgid "Save PNG…"
+msgstr "Enregistrer en PNG…"
+
+#: ui/generator.slint:173
+msgctxt "GeneratorWindow"
+msgid "Save SVG…"
+msgstr "Enregistrer en SVG…"
+
+#: ui/overlay.slint:108
+msgctxt "OverlayWindow"
+msgid "Looking for codes…"
+msgstr "Recherche de codes…"
+
+#: ui/overlay.slint:109
+msgctxt "OverlayWindow"
+msgid "1 code found — press Enter to open, or click it"
+msgstr "1 code trouvé — appuyez sur Entrée pour l'ouvrir ou cliquez dessus"
+
+#: ui/overlay.slint:109
+msgctxt "OverlayWindow"
+msgid "{} codes found — click one, or use Tab and Enter"
+msgstr "{} codes trouvés — cliquez sur l'un d'eux ou utilisez Tab et Entrée"
+
+#: ui/overlay.slint:110
+msgctxt "OverlayWindow"
+msgid "No code found on the screen. Select an area to try again."
+msgstr "Aucun code trouvé à l'écran. Sélectionnez une zone pour réessayer."
+
+#: ui/overlay.slint:111
+msgctxt "OverlayWindow"
+msgid "No code in that area. Try selecting a little more around it."
+msgstr "Aucun code dans cette zone. Essayez de sélectionner un peu plus large autour."
+
+#: ui/overlay.slint:112
+msgctxt "OverlayWindow"
+msgid "Drag to select a QR code. Press Esc to cancel."
+msgstr "Faites glisser pour sélectionner un code QR. Appuyez sur Échap pour annuler."
+
+#: ui/overlay.slint:343
+msgctxt "OverlayWindow"
+msgid "Scan whole screen"
+msgstr "Scanner tout l'écran"
+
+#: ui/overlay.slint:345
+msgctxt "OverlayWindow"
+msgid "Look for codes on the entire screen again."
+msgstr "Rechercher à nouveau des codes sur tout l'écran."
+
+#: ui/overlay.slint:353
+msgctxt "OverlayWindow"
+msgid "Select area"
+msgstr "Sélectionner une zone"
+
+#: ui/overlay.slint:355
+msgctxt "OverlayWindow"
+msgid "Drag a box around the code you want to scan."
+msgstr "Faites glisser un cadre autour du code à scanner."
+
+#: ui/overlay.slint:366
+msgctxt "OverlayWindow"
+msgid "Scan with camera"
+msgstr "Scanner avec la caméra"
+
+#: ui/overlay.slint:368
+msgctxt "OverlayWindow"
+msgid "Hold a printed code or a phone screen up to your webcam."
+msgstr "Présentez un code imprimé ou l'écran d'un téléphone devant votre webcam."
+
+#: ui/overlay.slint:375
+msgctxt "OverlayWindow"
+msgid "Scan image from clipboard"
+msgstr "Scanner l'image du Presse-papiers"
+
+#: ui/overlay.slint:376
+msgctxt "OverlayWindow"
+msgid "Reads a screenshot or picture you copied."
+msgstr "Lit une capture d'écran ou une image que vous avez copiée."
+
+#: ui/overlay.slint:383
+msgctxt "OverlayWindow"
+msgid "Open image…"
+msgstr "Ouvrir une image…"
+
+#: ui/overlay.slint:384
+msgctxt "OverlayWindow"
+msgid "Scan a picture or screenshot file."
+msgstr "Scanner un fichier image ou une capture d'écran."
+
+#: ui/overlay.slint:394
+msgctxt "OverlayWindow"
+msgid "Create QR code…"
+msgstr "Créer un code QR…"
+
+#: ui/overlay.slint:395
+msgctxt "OverlayWindow"
+msgid "Turn a link or text into a QR code to scan with your phone."
+msgstr "Transformez un lien ou du texte en code QR à scanner avec votre téléphone."
+
+#: ui/overlay.slint:402
+msgctxt "OverlayWindow"
+msgid "Settings"
+msgstr "Paramètres"
+
+#: ui/overlay.slint:412
+msgctxt "OverlayWindow"
+msgid "Close"
+msgstr "Fermer"
+
+#: ui/preview.slint:10
+msgctxt "PreviewWindow"
+msgid "QRcode tool — Camera"
+msgstr "QRcode tool — Caméra"
+
+#: ui/preview.slint:10
+msgctxt "PreviewWindow"
+msgid "QRcode tool — Image"
+msgstr "QRcode tool — Image"
+
+#: ui/preview.slint:51
+msgctxt "PreviewWindow"
+msgid "Starting camera…"
+msgstr "Démarrage de la caméra…"
+
+#: ui/preview.slint:52
+msgctxt "PreviewWindow"
+msgid "Point the camera at a QR code"
+msgstr "Dirigez la caméra vers un code QR"
+
+#: ui/preview.slint:52
+msgctxt "PreviewWindow"
+msgid "Looking for codes…"
+msgstr "Recherche de codes…"
+
+#: ui/preview.slint:53
+msgctxt "PreviewWindow"
+msgid "Click a result to open it, or use Tab and Enter"
+msgstr "Cliquez sur un résultat pour l'ouvrir ou utilisez Tab et Entrée"
+
+#: ui/preview.slint:54
+msgctxt "PreviewWindow"
+msgid "No QR code found in this image"
+msgstr "Aucun code QR trouvé dans cette image"
+
+#: ui/preview.slint:55
+msgctxt "PreviewWindow"
+msgid "Camera unavailable"
+msgstr "Caméra indisponible"
+
+#: ui/preview.slint:236
+msgctxt "PreviewWindow"
+msgid "Mirror"
+msgstr "Miroir"
+
+#: ui/preview.slint:249
+msgctxt "PreviewWindow"
+msgid "Open another image…"
+msgstr "Ouvrir une autre image…"
+
+#: ui/preview.slint:257
+msgctxt "PreviewWindow"
+msgid "Scan clipboard"
+msgstr "Scanner le Presse-papiers"
+
+#: ui/preview.slint:264
+msgctxt "PreviewWindow"
+msgid "{} found"
+msgstr "{} trouvé(s)"
+
+#: ui/settings.slint:101
+msgctxt "HotkeyButton"
+msgid "Press the new shortcut"
+msgstr "Appuyez sur le nouveau raccourci"
+
+#: ui/settings.slint:117
+msgctxt "HotkeyButton"
+msgid "Press keys… (Esc to cancel)"
+msgstr "Appuyez sur des touches… (Échap pour annuler)"
+
+#: ui/settings.slint:117
+msgctxt "HotkeyButton"
+msgid "Not set"
+msgstr "Non défini"
+
+#: ui/settings.slint:132
+msgctxt "SettingsWindow"
+msgid "QRcode tool — Settings"
+msgstr "QRcode tool — Paramètres"
+
+#: ui/settings.slint:260 ui/settings.slint:322
+msgctxt "SettingsWindow"
+msgid "General"
+msgstr "Général"
+
+#: ui/settings.slint:268 ui/settings.slint:428
+msgctxt "SettingsWindow"
+msgid "Scanning"
+msgstr "Scan"
+
+#: ui/settings.slint:276 ui/settings.slint:554 ui/settings.slint:564
+msgctxt "SettingsWindow"
+msgid "Camera"
+msgstr "Caméra"
+
+#: ui/settings.slint:284 ui/settings.slint:616
+msgctxt "SettingsWindow"
+msgid "Shortcuts"
+msgstr "Raccourcis"
+
+#: ui/settings.slint:292 ui/settings.slint:729
+msgctxt "SettingsWindow"
+msgid "Privacy & history"
+msgstr "Confidentialité et historique"
+
+#: ui/settings.slint:300 ui/settings.slint:879
+msgctxt "SettingsWindow"
+msgid "About"
+msgstr "À propos"
+
+#: ui/settings.slint:329
+msgctxt "SettingsWindow"
+msgid "Language"
+msgstr "Langue"
+
+#: ui/settings.slint:330
+msgctxt "SettingsWindow"
+msgid "Language of menus and messages."
+msgstr "Langue des menus et des messages."
+
+#: ui/settings.slint:342
+msgctxt "SettingsWindow"
+msgid "Theme"
+msgstr "Thème"
+
+#: ui/settings.slint:343
+msgctxt "SettingsWindow"
+msgid "Follows Windows, macOS or your desktop by default."
+msgstr "Suit Windows, macOS ou votre bureau par défaut."
+
+#: ui/settings.slint:346
+msgctxt "SettingsWindow"
+msgid "Use system setting"
+msgstr "Utiliser le paramètre système"
+
+#: ui/settings.slint:346
+msgctxt "SettingsWindow"
+msgid "Light"
+msgstr "Clair"
+
+#: ui/settings.slint:346
+msgctxt "SettingsWindow"
+msgid "Dark"
+msgstr "Sombre"
+
+#: ui/settings.slint:355
+msgctxt "SettingsWindow"
+msgid "Start with the computer"
+msgstr "Démarrer avec l'ordinateur"
+
+#: ui/settings.slint:356
+msgctxt "SettingsWindow"
+msgid "QRcode tool waits quietly in the tray so the shortcut always works."
+msgstr "QRcode tool reste discrètement dans la zone de notification pour que le raccourci fonctionne toujours."
+
+#: ui/settings.slint:368
+msgctxt "SettingsWindow"
+msgid "Floating bubble"
+msgstr "Bulle flottante"
+
+#: ui/settings.slint:372
+msgctxt "SettingsWindow"
+msgid "Show the bubble when the app starts"
+msgstr "Afficher la bulle au démarrage de l'application"
+
+#: ui/settings.slint:373
+msgctxt "SettingsWindow"
+msgid "A small round button that stays on top. Click it to scan the screen."
+msgstr "Un petit bouton rond qui reste au premier plan. Cliquez dessus pour scanner l'écran."
+
+#: ui/settings.slint:383
+msgctxt "SettingsWindow"
+msgid "Hide during full-screen apps"
+msgstr "Masquer pendant les applications en plein écran"
+
+#: ui/settings.slint:384
+msgctxt "SettingsWindow"
+msgid ""
+"Hides the bubble and toolbar while you watch a video, present or play a game."
+msgstr "Masque la bulle et la barre d'outils lorsque vous regardez une vidéo, faites une présentation ou jouez."
+
+#: ui/settings.slint:384
+msgctxt "SettingsWindow"
+msgid "Not supported on this system."
+msgstr "Non pris en charge sur ce système."
+
+#: ui/settings.slint:397 ui/settings.slint:921
+msgctxt "SettingsWindow"
+msgid "Updates"
+msgstr "Mises à jour"
+
+#: ui/settings.slint:401
+msgctxt "SettingsWindow"
+msgid "Check for updates automatically"
+msgstr "Rechercher automatiquement les mises à jour"
+
+#: ui/settings.slint:402
+msgctxt "SettingsWindow"
+msgid ""
+"Asks GitHub once a day whether a new version exists. Nothing is installed "
+"without asking you."
+msgstr "Demande une fois par jour à GitHub si une nouvelle version existe. Rien n'est installé sans votre accord."
+
+#: ui/settings.slint:416
+msgctxt "SettingsWindow"
+msgid "Show the welcome screen again"
+msgstr "Afficher à nouveau l'écran d'accueil"
+
+#: ui/settings.slint:435
+msgctxt "SettingsWindow"
+msgid "Copy the result automatically"
+msgstr "Copier le résultat automatiquement"
+
+#: ui/settings.slint:436
+msgctxt "SettingsWindow"
+msgid "Puts the content of a single found code on the clipboard."
+msgstr "Place le contenu d'un code unique trouvé dans le Presse-papiers."
+
+#: ui/settings.slint:446
+msgctxt "SettingsWindow"
+msgid "Play a sound when a code is found"
+msgstr "Émettre un son lorsqu'un code est trouvé"
+
+#: ui/settings.slint:456
+msgctxt "SettingsWindow"
+msgid "Also read barcodes"
+msgstr "Lire aussi les codes-barres"
+
+#: ui/settings.slint:457
+msgctxt "SettingsWindow"
+msgid ""
+"EAN, UPC, Code 128, Data Matrix, PDF417, Aztec and more, in addition to QR "
+"codes."
+msgstr "EAN, UPC, Code 128, Data Matrix, PDF417, Aztec et plus encore, en plus des codes QR."
+
+#: ui/settings.slint:469
+msgctxt "SettingsWindow"
+msgid "Trusted sites"
+msgstr "Sites de confiance"
+
+#: ui/settings.slint:472
+msgctxt "SettingsWindow"
+msgid ""
+"Links to these sites open right away when they are the only code found and "
+"nothing looks suspicious. Every other link waits for you to press Enter or "
+"click it."
+msgstr "Les liens vers ces sites s'ouvrent immédiatement lorsqu'ils sont le seul code trouvé et que rien ne semble suspect. Tous les autres liens attendent que vous appuyiez sur Entrée ou cliquiez dessus."
+
+#: ui/settings.slint:476
+msgctxt "SettingsWindow"
+msgid "Open trusted sites without asking"
+msgstr "Ouvrir les sites de confiance sans demander"
+
+#: ui/settings.slint:496
+msgctxt "SettingsWindow"
+msgid "example.com"
+msgstr "example.com"
+
+#: ui/settings.slint:505
+msgctxt "SettingsWindow"
+msgid "Add"
+msgstr "Ajouter"
+
+#: ui/settings.slint:516
+msgctxt "SettingsWindow"
+msgid ""
+"No trusted sites yet. You can also add one from the details of a scanned "
+"link."
+msgstr "Aucun site de confiance pour l'instant. Vous pouvez aussi en ajouter un depuis les détails d'un lien scanné."
+
+#: ui/settings.slint:537
+msgctxt "SettingsWindow"
+msgid "Remove"
+msgstr "Supprimer"
+
+#: ui/settings.slint:560
+msgctxt "SettingsWindow"
+msgid ""
+"No camera was found. Connect a webcam to scan printed codes or codes on a "
+"phone."
+msgstr "Aucune caméra trouvée. Connectez une webcam pour scanner des codes imprimés ou affichés sur un téléphone."
+
+#: ui/settings.slint:577
+msgctxt "SettingsWindow"
+msgid "Mirror the picture"
+msgstr "Afficher l'image en miroir"
+
+#: ui/settings.slint:578
+msgctxt "SettingsWindow"
+msgid "Shows the camera like a mirror. Scanning works either way."
+msgstr "Affiche la caméra comme un miroir. Le scan fonctionne dans les deux cas."
+
+#: ui/settings.slint:588
+msgctxt "SettingsWindow"
+msgid "Keep results on screen (seconds)"
+msgstr "Garder les résultats à l'écran (secondes)"
+
+#: ui/settings.slint:589
+msgctxt "SettingsWindow"
+msgid ""
+"Codes stay in a fixed list this long after they leave the camera, so links "
+"don't jump around or disappear. 0 = only while visible."
+msgstr "Les codes restent dans une liste fixe pendant cette durée après avoir quitté la caméra, pour que les liens ne bougent pas ni ne disparaissent. 0 = seulement tant qu'ils sont visibles."
+
+#: ui/settings.slint:602
+msgctxt "SettingsWindow"
+msgid "Close the camera after a code is opened"
+msgstr "Fermer la caméra après l'ouverture d'un code"
+
+#: ui/settings.slint:622
+msgctxt "SettingsWindow"
+msgid ""
+"Click a shortcut, then press the new key combination. Use at least one of "
+"Ctrl, Alt, Shift or Win/Cmd."
+msgstr "Cliquez sur un raccourci, puis appuyez sur la nouvelle combinaison de touches. Utilisez au moins l'une des touches Ctrl, Alt, Shift ou Win/Cmd."
+
+#: ui/settings.slint:622
+msgctxt "SettingsWindow"
+msgid ""
+"Global shortcuts are not available on this desktop (for example Wayland). "
+"Bind the commands “qrcode-tool scan-screen”, “qrcode-tool scan-"
+"region”, “qrcode-tool scan-camera” or “qrcode-tool toolbar” to keys "
+"in your system’s keyboard settings."
+msgstr "Les raccourcis globaux ne sont pas disponibles sur ce bureau (par exemple Wayland). Associez les commandes « qrcode-tool scan-screen », « qrcode-tool scan-region », « qrcode-tool scan-camera » ou « qrcode-tool toolbar » à des touches dans les paramètres clavier de votre système."
+
+#: ui/settings.slint:626
+msgctxt "SettingsWindow"
+msgid "Scan whole screen"
+msgstr "Scanner tout l'écran"
+
+#: ui/settings.slint:626
+msgctxt "SettingsWindow"
+msgid "Select area"
+msgstr "Sélectionner une zone"
+
+#: ui/settings.slint:626
+msgctxt "SettingsWindow"
+msgid "Scan with camera"
+msgstr "Scanner avec la caméra"
+
+#: ui/settings.slint:626
+msgctxt "SettingsWindow"
+msgid "Show or hide the toolbar"
+msgstr "Afficher ou masquer la barre d'outils"
+
+#: ui/settings.slint:627
+msgctxt "SettingsWindow"
+msgid "Already used by another app — choose another one."
+msgstr "Déjà utilisé par une autre application — choisissez-en un autre."
+
+#: ui/settings.slint:627
+msgctxt "SettingsWindow"
+msgid "Not a valid shortcut."
+msgstr "Raccourci non valide."
+
+#: ui/settings.slint:645
+msgctxt "SettingsWindow"
+msgid "Restore defaults"
+msgstr "Rétablir les valeurs par défaut"
+
+#: ui/settings.slint:656
+msgctxt "SettingsWindow"
+msgid "While scanning"
+msgstr "Pendant le scan"
+
+#: ui/settings.slint:672
+msgctxt "SettingsWindow"
+msgid "Open the selected code"
+msgstr "Ouvrir le code sélectionné"
+
+#: ui/settings.slint:683
+msgctxt "SettingsWindow"
+msgid "Select the next code (Shift+Tab for the previous one)"
+msgstr "Sélectionner le code suivant (Shift+Tab pour le précédent)"
+
+#: ui/settings.slint:694
+msgctxt "SettingsWindow"
+msgid "Copy the selected code"
+msgstr "Copier le code sélectionné"
+
+#: ui/settings.slint:705
+msgctxt "SettingsWindow"
+msgid "Search the whole screen again"
+msgstr "Rechercher à nouveau sur tout l'écran"
+
+#: ui/settings.slint:716
+msgctxt "SettingsWindow"
+msgid "Cancel (right-click works too)"
+msgstr "Annuler (le clic droit fonctionne aussi)"
+
+#: ui/settings.slint:752
+msgctxt "SettingsWindow"
+msgid ""
+"Everything happens on this computer. QRcode tool sends no usage data and "
+"never checks links online. The only network request is the optional update "
+"check to GitHub."
+msgstr "Tout se passe sur cet ordinateur. QRcode tool n'envoie aucune donnée d'utilisation et ne vérifie jamais les liens en ligne. La seule requête réseau est la recherche facultative de mises à jour sur GitHub."
+
+#: ui/settings.slint:761
+msgctxt "SettingsWindow"
+msgid "Keep a scan history"
+msgstr "Conserver un historique des scans"
+
+#: ui/settings.slint:762
+msgctxt "SettingsWindow"
+msgid ""
+"Stored only on this computer. Wi-Fi passwords and 2-step verification keys "
+"are never saved."
+msgstr "Stocké uniquement sur cet ordinateur. Les mots de passe Wi-Fi et les clés de vérification en deux étapes ne sont jamais enregistrés."
+
+#: ui/settings.slint:772
+msgctxt "SettingsWindow"
+msgid "Number of entries to keep"
+msgstr "Nombre d'entrées à conserver"
+
+#: ui/settings.slint:790
+msgctxt "SettingsWindow"
+msgid "Recent scans"
+msgstr "Scans récents"
+
+#: ui/settings.slint:795
+msgctxt "SettingsWindow"
+msgid "Clear history"
+msgstr "Effacer l'historique"
+
+#: ui/settings.slint:813
+msgctxt "SettingsWindow"
+msgid "Nothing scanned yet."
+msgstr "Aucun scan pour l'instant."
+
+#: ui/settings.slint:813
+msgctxt "SettingsWindow"
+msgid "History is turned off."
+msgstr "L'historique est désactivé."
+
+#: ui/settings.slint:851
+msgctxt "SettingsWindow"
+msgid "Open"
+msgstr "Ouvrir"
+
+#: ui/settings.slint:862
+msgctxt "SettingsWindow"
+msgid "Copy"
+msgstr "Copier"
+
+#: ui/settings.slint:908
+msgctxt "SettingsWindow"
+msgid "Version {}"
+msgstr "Version {}"
+
+#: ui/settings.slint:912
+msgctxt "SettingsWindow"
+msgid "Scan QR codes on your computer as easily as on your phone."
+msgstr "Scannez des codes QR sur votre ordinateur aussi facilement que sur votre téléphone."
+
+#: ui/settings.slint:924
+msgctxt "SettingsWindow"
+msgid "Check for updates"
+msgstr "Rechercher des mises à jour"
+
+#: ui/settings.slint:943
+msgctxt "SettingsWindow"
+msgid "Source code on GitHub"
+msgstr "Code source sur GitHub"
+
+#: ui/settings.slint:949
+msgctxt "SettingsWindow"
+msgid "Report a problem or suggest an idea"
+msgstr "Signaler un problème ou proposer une idée"
+
+#: ui/settings.slint:955
+msgctxt "SettingsWindow"
+msgid "Support the project"
+msgstr "Soutenir le projet"
+
+#: ui/settings.slint:961
+msgctxt "SettingsWindow"
+msgid "Privacy statement"
+msgstr "Déclaration de confidentialité"
+
+#: ui/settings.slint:967
+msgctxt "SettingsWindow"
+msgid "Open-source licenses"
+msgstr "Licences open source"
+
+#: ui/settings.slint:973
+msgctxt "SettingsWindow"
+msgid "Open the settings folder"
+msgstr "Ouvrir le dossier des paramètres"
+
+#: ui/settings.slint:979
+msgctxt "SettingsWindow"
+msgid "Open the log folder"
+msgstr "Ouvrir le dossier des journaux"
+
+#: ui/settings.slint:990
+msgctxt "SettingsWindow"
+msgid "Free and open source under the MIT or Apache-2.0 license."
+msgstr "Gratuit et open source sous licence MIT ou Apache-2.0."
+
+#: ui/strings.slint:8
+msgctxt "Strings"
+msgid "Link"
+msgstr "Lien"
+
+#: ui/strings.slint:9
+msgctxt "Strings"
+msgid "Blocked link"
+msgstr "Lien bloqué"
+
+#: ui/strings.slint:10
+msgctxt "Strings"
+msgid "Wi-Fi network"
+msgstr "Réseau Wi-Fi"
+
+#: ui/strings.slint:11
+msgctxt "Strings"
+msgid "Contact"
+msgstr "Contact"
+
+#: ui/strings.slint:12 ui/strings.slint:65
+msgctxt "Strings"
+msgid "Email"
+msgstr "E-mail"
+
+#: ui/strings.slint:13
+msgctxt "Strings"
+msgid "Phone number"
+msgstr "Numéro de téléphone"
+
+#: ui/strings.slint:14
+msgctxt "Strings"
+msgid "Text message"
+msgstr "SMS"
+
+#: ui/strings.slint:15
+msgctxt "Strings"
+msgid "Location"
+msgstr "Position"
+
+#: ui/strings.slint:16
+msgctxt "Strings"
+msgid "2-step verification key"
+msgstr "Clé de vérification en deux étapes"
+
+#: ui/strings.slint:17
+msgctxt "Strings"
+msgid "Payment address"
+msgstr "Adresse de paiement"
+
+#: ui/strings.slint:18
+msgctxt "Strings"
+msgid "E-invoice"
+msgstr "Facture électronique"
+
+#: ui/strings.slint:19
+msgctxt "Strings"
+msgid "E-invoice items (right code)"
+msgstr "Articles de la facture électronique (code de droite)"
+
+#: ui/strings.slint:20
+msgctxt "Strings"
+msgid "Barcode"
+msgstr "Code-barres"
+
+#: ui/strings.slint:21
+msgctxt "Strings"
+msgid "Text"
+msgstr "Texte"
+
+#: ui/strings.slint:25
+msgctxt "Strings"
+msgid "Not encrypted (http)"
+msgstr "Non chiffré (http)"
+
+#: ui/strings.slint:26
+msgctxt "Strings"
+msgid "Disguised address — it really goes to {}"
+msgstr "Adresse déguisée — elle mène en réalité à {}"
+
+#: ui/strings.slint:27
+msgctxt "Strings"
+msgid "International domain name, real address: {}"
+msgstr "Nom de domaine international, adresse réelle : {}"
+
+#: ui/strings.slint:28
+msgctxt "Strings"
+msgid "Look-alike letters from different alphabets in “{}”"
+msgstr "Lettres similaires issues d'alphabets différents dans « {} »"
+
+#: ui/strings.slint:29
+msgctxt "Strings"
+msgid "Uses a raw IP address ({}) instead of a name"
+msgstr "Utilise une adresse IP brute ({}) au lieu d'un nom"
+
+#: ui/strings.slint:30
+msgctxt "Strings"
+msgid "Unusual port {}"
+msgstr "Port inhabituel {}"
+
+#: ui/strings.slint:31
+msgctxt "Strings"
+msgid "Short link — the real destination is hidden"
+msgstr "Lien raccourci — la vraie destination est masquée"
+
+#: ui/strings.slint:32
+msgctxt "Strings"
+msgid "Very long address ({} characters)"
+msgstr "Adresse très longue ({} caractères)"
+
+#: ui/strings.slint:33
+msgctxt "Strings"
+msgid "Contains many encoded characters"
+msgstr "Contient de nombreux caractères encodés"
+
+#: ui/strings.slint:34
+msgctxt "Strings"
+msgid "Unusually many subdomains ({})"
+msgstr "Nombre inhabituel de sous-domaines ({})"
+
+#: ui/strings.slint:39
+msgctxt "Strings"
+msgid "Open"
+msgstr "Ouvrir"
+
+#: ui/strings.slint:40
+msgctxt "Strings"
+msgid "Open anyway"
+msgstr "Ouvrir quand même"
+
+#: ui/strings.slint:41
+msgctxt "Strings"
+msgid "Copy"
+msgstr "Copier"
+
+#: ui/strings.slint:42
+msgctxt "Strings"
+msgid "Copy password"
+msgstr "Copier le mot de passe"
+
+#: ui/strings.slint:43
+msgctxt "Strings"
+msgid "Connect"
+msgstr "Se connecter"
+
+#: ui/strings.slint:44 ui/strings.slint:108
+msgctxt "Strings"
+msgid "Save contact"
+msgstr "Enregistrer le contact"
+
+#: ui/strings.slint:45
+msgctxt "Strings"
+msgid "Write email"
+msgstr "Écrire un e-mail"
+
+#: ui/strings.slint:46
+msgctxt "Strings"
+msgid "Call"
+msgstr "Appeler"
+
+#: ui/strings.slint:47
+msgctxt "Strings"
+msgid "Send message"
+msgstr "Envoyer un message"
+
+#: ui/strings.slint:48
+msgctxt "Strings"
+msgid "Open map"
+msgstr "Ouvrir la carte"
+
+#: ui/strings.slint:49
+msgctxt "Strings"
+msgid "Copy invoice number"
+msgstr "Copier le numéro de facture"
+
+#: ui/strings.slint:50
+msgctxt "Strings"
+msgid "Always allow this site"
+msgstr "Toujours autoriser ce site"
+
+#: ui/strings.slint:51 ui/strings.slint:179
+msgctxt "Strings"
+msgid "Close"
+msgstr "Fermer"
+
+#: ui/strings.slint:56
+msgctxt "Strings"
+msgid "Address"
+msgstr "Adresse"
+
+#: ui/strings.slint:57
+msgctxt "Strings"
+msgid "Site"
+msgstr "Site"
+
+#: ui/strings.slint:58
+msgctxt "Strings"
+msgid "Network name"
+msgstr "Nom du réseau"
+
+#: ui/strings.slint:59
+msgctxt "Strings"
+msgid "Security"
+msgstr "Sécurité"
+
+#: ui/strings.slint:60
+msgctxt "Strings"
+msgid "Password"
+msgstr "Mot de passe"
+
+#: ui/strings.slint:61
+msgctxt "Strings"
+msgid "Hidden network"
+msgstr "Réseau masqué"
+
+#: ui/strings.slint:62
+msgctxt "Strings"
+msgid "Name"
+msgstr "Nom"
+
+#: ui/strings.slint:63
+msgctxt "Strings"
+msgid "Organization"
+msgstr "Organisation"
+
+#: ui/strings.slint:64
+msgctxt "Strings"
+msgid "Phone"
+msgstr "Téléphone"
+
+#: ui/strings.slint:66
+msgctxt "Strings"
+msgid "Website"
+msgstr "Site web"
+
+#: ui/strings.slint:67
+msgctxt "Strings"
+msgid "Postal address"
+msgstr "Adresse postale"
+
+#: ui/strings.slint:68
+msgctxt "Strings"
+msgid "Note"
+msgstr "Remarque"
+
+#: ui/strings.slint:69
+msgctxt "Strings"
+msgid "Subject"
+msgstr "Objet"
+
+#: ui/strings.slint:70
+msgctxt "Strings"
+msgid "Message"
+msgstr "Message"
+
+#: ui/strings.slint:71
+msgctxt "Strings"
+msgid "Number"
+msgstr "Numéro"
+
+#: ui/strings.slint:72
+msgctxt "Strings"
+msgid "Coordinates"
+msgstr "Coordonnées"
+
+#: ui/strings.slint:73
+msgctxt "Strings"
+msgid "Issuer"
+msgstr "Émetteur"
+
+#: ui/strings.slint:74
+msgctxt "Strings"
+msgid "Account"
+msgstr "Compte"
+
+#: ui/strings.slint:75
+msgctxt "Strings"
+msgid "Amount"
+msgstr "Montant"
+
+#: ui/strings.slint:76
+msgctxt "Strings"
+msgid "Wallet address"
+msgstr "Adresse du portefeuille"
+
+#: ui/strings.slint:77
+msgctxt "Strings"
+msgid "Invoice number"
+msgstr "Numéro de facture"
+
+#: ui/strings.slint:78
+msgctxt "Strings"
+msgid "Date"
+msgstr "Date"
+
+#: ui/strings.slint:79
+msgctxt "Strings"
+msgid "Random code"
+msgstr "Code aléatoire"
+
+#: ui/strings.slint:80
+msgctxt "Strings"
+msgid "Total"
+msgstr "Total"
+
+#: ui/strings.slint:81
+msgctxt "Strings"
+msgid "Tax"
+msgstr "Taxe"
+
+#: ui/strings.slint:82
+msgctxt "Strings"
+msgid "Seller ID"
+msgstr "Identifiant fiscal du vendeur"
+
+#: ui/strings.slint:83
+msgctxt "Strings"
+msgid "Buyer ID"
+msgstr "Identifiant fiscal de l'acheteur"
+
+#: ui/strings.slint:84
+msgctxt "Strings"
+msgid "Items"
+msgstr "Articles"
+
+#: ui/strings.slint:85
+msgctxt "Strings"
+msgid "Type"
+msgstr "Type"
+
+#: ui/strings.slint:86
+msgctxt "Strings"
+msgid "Content"
+msgstr "Contenu"
+
+#: ui/strings.slint:87
+msgctxt "Strings"
+msgid "Barcode type"
+msgstr "Type de code-barres"
+
+#: ui/strings.slint:93
+msgctxt "Strings"
+msgid ""
+"This is a two-step verification secret. Anyone who has it can generate your "
+"login codes. It is never saved to history."
+msgstr "Ceci est un secret de vérification en deux étapes. Toute personne qui le possède peut générer vos codes de connexion. Il n'est jamais enregistré dans l'historique."
+
+#: ui/strings.slint:94
+msgctxt "Strings"
+msgid ""
+"This is not a web link. For your safety it can’t be opened here, only "
+"copied."
+msgstr "Ce n'est pas un lien web. Pour votre sécurité, il ne peut pas être ouvert ici, seulement copié."
+
+#: ui/strings.slint:95
+msgctxt "Strings"
+msgid ""
+"This is the right-hand code of an e-invoice. Scan both codes together to see "
+"all items."
+msgstr "Ceci est le code de droite d'une facture électronique. Scannez les deux codes ensemble pour voir tous les articles."
+
+#: ui/strings.slint:96
+msgctxt "Strings"
+msgid "Always double-check a payment address before sending money."
+msgstr "Vérifiez toujours soigneusement une adresse de paiement avant d'envoyer de l'argent."
+
+#: ui/strings.slint:97
+msgctxt "Strings"
+msgid ""
+"This link looks deceptive. Press “Open anyway” only if you are sure you "
+"trust it."
+msgstr "Ce lien semble trompeur. Appuyez sur « Ouvrir quand même » uniquement si vous êtes sûr de pouvoir lui faire confiance."
+
+#: ui/strings.slint:98
+msgctxt "Strings"
+msgid ""
+"This link looks deceptive. Check the real site name below before opening."
+msgstr "Ce lien semble trompeur. Vérifiez le vrai nom du site ci-dessous avant de l'ouvrir."
+
+#: ui/strings.slint:99
+msgctxt "Strings"
+msgid "Check the site name before opening."
+msgstr "Vérifiez le nom du site avant de l'ouvrir."
+
+#: ui/strings.slint:105
+msgctxt "Strings"
+msgid "Open an image with a QR code"
+msgstr "Ouvrir une image contenant un code QR"
+
+#: ui/strings.slint:106
+msgctxt "Strings"
+msgid "Save QR code as PNG"
+msgstr "Enregistrer le code QR en PNG"
+
+#: ui/strings.slint:107
+msgctxt "Strings"
+msgid "Save QR code as SVG"
+msgstr "Enregistrer le code QR en SVG"
+
+#: ui/strings.slint:109
+msgctxt "Strings"
+msgid "Images"
+msgstr "Images"
+
+#: ui/strings.slint:110
+msgctxt "Strings"
+msgid "Contact card"
+msgstr "Fiche de contact"
+
+#: ui/strings.slint:111
+msgctxt "Strings"
+msgid "Yes"
+msgstr "Oui"
+
+#: ui/strings.slint:112
+msgctxt "Strings"
+msgid "No"
+msgstr "Non"
+
+#: ui/strings.slint:113
+msgctxt "Strings"
+msgid "Open (no password)"
+msgstr "Ouvert (sans mot de passe)"
+
+#: ui/strings.slint:114
+msgctxt "Strings"
+msgid "Use system language"
+msgstr "Utiliser la langue du système"
+
+#: ui/strings.slint:115
+msgctxt "Strings"
+msgid "Copied to the clipboard"
+msgstr "Copié dans le Presse-papiers"
+
+#: ui/strings.slint:116 ui/strings.slint:144
+msgctxt "Strings"
+msgid "Saved"
+msgstr "Enregistré"
+
+#: ui/strings.slint:117
+msgctxt "Strings"
+msgid "Checking for updates…"
+msgstr "Recherche de mises à jour…"
+
+#: ui/strings.slint:118
+msgctxt "Strings"
+msgid "Not checked yet"
+msgstr "Pas encore vérifié"
+
+#: ui/strings.slint:119
+msgctxt "Strings"
+msgid "Default camera"
+msgstr "Caméra par défaut"
+
+#: ui/strings.slint:120 ui/strings.slint:136
+msgctxt "Strings"
+msgid "No camera found"
+msgstr "Aucune caméra trouvée"
+
+#: ui/strings.slint:121
+msgctxt "Strings"
+msgid "Scan the right-hand code too to see the items."
+msgstr "Scannez aussi le code de droite pour voir les articles."
+
+#: ui/strings.slint:127
+msgctxt "Strings"
+msgid "Update available"
+msgstr "Mise à jour disponible"
+
+#: ui/strings.slint:128
+msgctxt "Strings"
+msgid "You’re up to date"
+msgstr "Vous êtes à jour"
+
+#: ui/strings.slint:129
+msgctxt "Strings"
+msgid "Updates are not available"
+msgstr "Les mises à jour ne sont pas disponibles"
+
+#: ui/strings.slint:130
+msgctxt "Strings"
+msgid "Couldn’t check for updates"
+msgstr "Impossible de rechercher des mises à jour"
+
+#: ui/strings.slint:131
+msgctxt "Strings"
+msgid "Downloading update…"
+msgstr "Téléchargement de la mise à jour…"
+
+#: ui/strings.slint:132
+msgctxt "Strings"
+msgid "Couldn’t capture the screen"
+msgstr "Impossible de capturer l'écran"
+
+#: ui/strings.slint:133
+msgctxt "Strings"
+msgid "Screen recording permission needed"
+msgstr "Autorisation d'enregistrement de l'écran requise"
+
+#: ui/strings.slint:134
+msgctxt "Strings"
+msgid "Couldn’t start the camera"
+msgstr "Impossible de démarrer la caméra"
+
+#: ui/strings.slint:135
+msgctxt "Strings"
+msgid "Camera permission needed"
+msgstr "Autorisation d'accès à la caméra requise"
+
+#: ui/strings.slint:137
+msgctxt "Strings"
+msgid "Shortcut unavailable"
+msgstr "Raccourci indisponible"
+
+#: ui/strings.slint:138
+msgctxt "Strings"
+msgid "Connecting to Wi-Fi"
+msgstr "Connexion au Wi-Fi"
+
+#: ui/strings.slint:139
+msgctxt "Strings"
+msgid "Couldn’t connect to Wi-Fi"
+msgstr "Impossible de se connecter au Wi-Fi"
+
+#: ui/strings.slint:140
+msgctxt "Strings"
+msgid "Couldn’t open"
+msgstr "Impossible d'ouvrir"
+
+#: ui/strings.slint:141
+msgctxt "Strings"
+msgid "No QR code found"
+msgstr "Aucun code QR trouvé"
+
+#: ui/strings.slint:142
+msgctxt "Strings"
+msgid "No image on the clipboard"
+msgstr "Aucune image dans le Presse-papiers"
+
+#: ui/strings.slint:143
+msgctxt "Strings"
+msgid "Couldn’t open the image"
+msgstr "Impossible d'ouvrir l'image"
+
+#: ui/strings.slint:149
+msgctxt "Strings"
+msgid "Version {} is ready to download. The app restarts after the update."
+msgstr "La version {} est prête à être téléchargée. L'application redémarre après la mise à jour."
+
+#: ui/strings.slint:150
+msgctxt "Strings"
+msgid "QRcode tool {} is the latest version."
+msgstr "QRcode tool {} est la dernière version."
+
+#: ui/strings.slint:151
+msgctxt "Strings"
+msgid ""
+"This copy was not installed with the setup program (portable or developer "
+"build), so it can’t update itself. Download new versions from GitHub."
+msgstr "Cette copie n'a pas été installée avec le programme d'installation (version portable ou de développement) : elle ne peut donc pas se mettre à jour elle-même. Téléchargez les nouvelles versions sur GitHub."
+
+#: ui/strings.slint:152
+msgctxt "Strings"
+msgid "Check your internet connection and try again later. ({})"
+msgstr "Vérifiez votre connexion Internet et réessayez plus tard. ({})"
+
+#: ui/strings.slint:153
+msgctxt "Strings"
+msgid "Version {} is being downloaded. QRcode tool will restart when it’s done."
+msgstr "La version {} est en cours de téléchargement. QRcode tool redémarrera une fois terminé."
+
+#: ui/strings.slint:154
+msgctxt "Strings"
+msgid ""
+"The screen could not be captured. On Linux with Wayland, bind “qrcode-tool "
+"scan-screen” to a shortcut or use “Scan image from clipboard”. Details: "
+"{}"
+msgstr "Impossible de capturer l'écran. Sous Linux avec Wayland, associez « qrcode-tool scan-screen » à un raccourci ou utilisez « Scanner l'image du Presse-papiers ». Détails : {}"
+
+#: ui/strings.slint:155
+msgctxt "Strings"
+msgid ""
+"Allow QRcode tool under System Settings › Privacy & Security › Screen "
+"Recording, then try again."
+msgstr "Autorisez QRcode tool dans Réglages Système › Confidentialité et sécurité › Enregistrement de l'écran, puis réessayez."
+
+#: ui/strings.slint:156
+msgctxt "Strings"
+msgid "The camera may be in use by another app. Details: {}"
+msgstr "La caméra est peut-être utilisée par une autre application. Détails : {}"
+
+#: ui/strings.slint:157
+msgctxt "Strings"
+msgid ""
+"Allow QRcode tool to use the camera in your system’s privacy settings, "
+"then try again."
+msgstr "Autorisez QRcode tool à utiliser la caméra dans les paramètres de confidentialité de votre système, puis réessayez."
+
+#: ui/strings.slint:158
+msgctxt "Strings"
+msgid "Connect a webcam and try again."
+msgstr "Connectez une webcam et réessayez."
+
+#: ui/strings.slint:159
+msgctxt "Strings"
+msgid ""
+"“{}” is already used by another app. Choose another shortcut in Settings "
+"› Shortcuts."
+msgstr "« {} » est déjà utilisé par une autre application. Choisissez un autre raccourci dans Paramètres › Raccourcis."
+
+#: ui/strings.slint:160
+msgctxt "Strings"
+msgid "Your system is connecting to “{}”."
+msgstr "Votre système se connecte à « {} »."
+
+#: ui/strings.slint:161
+msgctxt "Strings"
+msgid "Copy the password and connect manually. Details: {}"
+msgstr "Copiez le mot de passe et connectez-vous manuellement. Détails : {}"
+
+#: ui/strings.slint:162
+msgctxt "Strings"
+msgid "Details: {}"
+msgstr "Détails : {}"
+
+#: ui/strings.slint:163
+msgctxt "Strings"
+msgid "No QR code or barcode was found in the image."
+msgstr "Aucun code QR ni code-barres n'a été trouvé dans l'image."
+
+#: ui/strings.slint:164
+msgctxt "Strings"
+msgid ""
+"Copy a screenshot or picture first (for example with Win+Shift+S), then try "
+"again."
+msgstr "Copiez d'abord une capture d'écran ou une image (par exemple avec Win+Shift+S), puis réessayez."
+
+#: ui/strings.slint:165
+msgctxt "Strings"
+msgid "The file is not a supported image. Details: {}"
+msgstr "Le fichier n'est pas une image prise en charge. Détails : {}"
+
+#: ui/strings.slint:171
+msgctxt "Strings"
+msgid "Update now"
+msgstr "Mettre à jour"
+
+#: ui/strings.slint:172
+msgctxt "Strings"
+msgid "Open settings"
+msgstr "Ouvrir les paramètres"
+
+#: ui/strings.slint:173
+msgctxt "Strings"
+msgid "Change shortcut"
+msgstr "Modifier le raccourci"
+
+#: ui/strings.slint:174
+msgctxt "Strings"
+msgid "OK"
+msgstr "OK"
+
+#: ui/strings.slint:178
+msgctxt "Strings"
+msgid "Later"
+msgstr "Plus tard"
+
+#: ui/tray.slint:20
+msgctxt "AppTray"
+msgid "QRcode tool — {} to scan"
+msgstr "QRcode tool — {} pour scanner"
+
+#: ui/tray.slint:29
+msgctxt "AppTray"
+msgid "Scan whole screen"
+msgstr "Scanner tout l'écran"
+
+#: ui/tray.slint:36
+msgctxt "AppTray"
+msgid "Select area"
+msgstr "Sélectionner une zone"
+
+#: ui/tray.slint:43
+msgctxt "AppTray"
+msgid "Scan with camera"
+msgstr "Scanner avec la caméra"
+
+#: ui/tray.slint:51
+msgctxt "AppTray"
+msgid "Scan image from clipboard"
+msgstr "Scanner l'image du Presse-papiers"
+
+#: ui/tray.slint:58
+msgctxt "AppTray"
+msgid "Open image…"
+msgstr "Ouvrir une image…"
+
+#: ui/tray.slint:66
+msgctxt "AppTray"
+msgid "Create QR code…"
+msgstr "Créer un code QR…"
+
+#: ui/tray.slint:73
+msgctxt "AppTray"
+msgid "Floating toolbar"
+msgstr "Barre d'outils flottante"
+
+#: ui/tray.slint:81
+msgctxt "AppTray"
+msgid "Floating bubble"
+msgstr "Bulle flottante"
+
+#: ui/tray.slint:90
+msgctxt "AppTray"
+msgid "History"
+msgstr "Historique"
+
+#: ui/tray.slint:97
+msgctxt "AppTray"
+msgid "Settings"
+msgstr "Paramètres"
+
+#: ui/tray.slint:104
+msgctxt "AppTray"
+msgid "Check for updates"
+msgstr "Rechercher des mises à jour"
+
+#: ui/tray.slint:111
+msgctxt "AppTray"
+msgid "Quit"
+msgstr "Quitter"
+
+#: ui/welcome.slint:45 ui/welcome.slint:96
+msgctxt "WelcomeWindow"
+msgid "Welcome to QRcode tool"
+msgstr "Bienvenue dans QRcode tool"
+
+#: ui/welcome.slint:120
+msgctxt "WelcomeWindow"
+msgid "Language"
+msgstr "Langue"
+
+#: ui/welcome.slint:137
+msgctxt "WelcomeWindow"
+msgid "Press {} to scan the whole screen"
+msgstr "Appuyez sur {} pour scanner tout l'écran"
+
+#: ui/welcome.slint:137
+msgctxt "WelcomeWindow"
+msgid "Click the tray icon to scan the whole screen"
+msgstr "Cliquez sur l'icône de la zone de notification pour scanner tout l'écran"
+
+#: ui/welcome.slint:138
+msgctxt "WelcomeWindow"
+msgid "Every code on the screen is marked. Press Enter or click one to open it."
+msgstr "Chaque code à l'écran est indiqué. Appuyez sur Entrée ou cliquez sur l'un d'eux pour l'ouvrir."
+
+#: ui/welcome.slint:142
+msgctxt "WelcomeWindow"
+msgid "Press {} to select an area"
+msgstr "Appuyez sur {} pour sélectionner une zone"
+
+#: ui/welcome.slint:142
+msgctxt "WelcomeWindow"
+msgid "Select an area from the tray menu"
+msgstr "Sélectionnez une zone dans le menu de la zone de notification"
+
+#: ui/welcome.slint:143
+msgctxt "WelcomeWindow"
+msgid ""
+"Drag a box around a small, blurry or tilted code. Only that area is scanned."
+msgstr "Faites glisser un cadre autour d'un code petit, flou ou incliné. Seule cette zone est scannée."
+
+#: ui/welcome.slint:147
+msgctxt "WelcomeWindow"
+msgid "Press {} to use the webcam"
+msgstr "Appuyez sur {} pour utiliser la webcam"
+
+#: ui/welcome.slint:147
+msgctxt "WelcomeWindow"
+msgid "Use the webcam from the tray menu"
+msgstr "Utilisez la webcam depuis le menu de la zone de notification"
+
+#: ui/welcome.slint:148
+msgctxt "WelcomeWindow"
+msgid "Hold a printed code or a phone screen up to the camera."
+msgstr "Présentez un code imprimé ou l'écran d'un téléphone devant la caméra."
+
+#: ui/welcome.slint:152
+msgctxt "WelcomeWindow"
+msgid "Links never open by surprise"
+msgstr "Les liens ne s'ouvrent jamais par surprise"
+
+#: ui/welcome.slint:153
+msgctxt "WelcomeWindow"
+msgid ""
+"Every link shows its real site name first. Suspicious links are marked and "
+"always ask before opening."
+msgstr "Chaque lien affiche d'abord le vrai nom du site. Les liens suspects sont signalés et demandent toujours confirmation avant de s'ouvrir."
+
+#: ui/welcome.slint:168
+msgctxt "WelcomeWindow"
+msgid "Start with the computer"
+msgstr "Démarrer avec l'ordinateur"
+
+#: ui/welcome.slint:173
+msgctxt "WelcomeWindow"
+msgid ""
+"QRcode tool starts hidden in the tray so the shortcut is always ready. It "
+"uses very little memory. You can change this any time in Settings."
+msgstr "QRcode tool démarre masqué dans la zone de notification pour que le raccourci soit toujours prêt. Il utilise très peu de mémoire. Vous pouvez modifier ce choix à tout moment dans Paramètres."
+
+#: ui/welcome.slint:196
+msgctxt "WelcomeWindow"
+msgid "Close"
+msgstr "Fermer"
+
+#: ui/welcome.slint:202
+msgctxt "WelcomeWindow"
+msgid "Try it now"
+msgstr "Essayer maintenant"
+
+#: ui/widgets.slint:298
+msgctxt "Pill"
+msgid "Details"
+msgstr "Détails"
+
+#: ui/widgets.slint:381
+msgctxt "DetailCard"
+msgid "Close"
+msgstr "Fermer"
+
+#: ui/widgets.slint:462
+msgctxt "DetailCard"
+msgid "Hide"
+msgstr "Masquer"
+
+#: ui/widgets.slint:462
+msgctxt "DetailCard"
+msgid "Show"
+msgstr "Afficher"
+
+#: ui/widgets.slint:472
+msgctxt "DetailCard"
+msgid "Copy"
+msgstr "Copier"
+
+#: ui/settings.slint:368
+msgctxt "SettingsWindow"
+msgid "Right-click menu"
+msgstr "Menu contextuel"
+
+#: ui/settings.slint:369
+msgctxt "SettingsWindow"
+msgid ""
+"Adds QRcode tool to the desktop right-click menu and to image files. On "
+"Windows 11, open Show more options."
+msgstr "Ajoute QRcode tool au menu contextuel du bureau et aux fichiers image. Sous Windows 11, ouvrez Afficher plus d’options."
+
+#: ui/strings.slint:122
+msgctxt "Strings"
+msgid "QRcode tool Scan screen"
+msgstr "QRcode tool Analyser l’écran"
+
+#: ui/strings.slint:123
+msgctxt "Strings"
+msgid "QRcode tool Scan selection"
+msgstr "QRcode tool Analyser une zone"
+
+#: ui/strings.slint:124
+msgctxt "Strings"
+msgid "QRcode tool Scan with camera"
+msgstr "QRcode tool Analyser avec la caméra"
+
+#: ui/strings.slint:125
+msgctxt "Strings"
+msgid "QRcode tool Toolbar"
+msgstr "QRcode tool Barre d’outils"
+
+#: ui/strings.slint:126
+msgctxt "Strings"
+msgid "QRcode tool Open image"
+msgstr "QRcode tool Ouvrir l’image"
+
+#: ui/strings.slint:127
+msgctxt "Strings"
+msgid "That file cannot be opened."
+msgstr "Impossible d’ouvrir ce fichier."

@@ -1,0 +1,67 @@
+// Icon registry. All icons are monochrome SVGs (stroke = black) recoloured with `colorize`.
+
+export global Icons {
+    out property <image> logo: @image-url("icons/logo.svg");
+    out property <image> region: @image-url("icons/region.svg");
+    out property <image> fullscreen: @image-url("icons/fullscreen.svg");
+    out property <image> camera: @image-url("icons/camera.svg");
+    out property <image> clipboard: @image-url("icons/clipboard.svg");
+    out property <image> image: @image-url("icons/image.svg");
+    out property <image> qr: @image-url("icons/qr.svg");
+    out property <image> settings: @image-url("icons/settings.svg");
+    out property <image> close: @image-url("icons/close.svg");
+    out property <image> globe: @image-url("icons/globe.svg");
+    out property <image> wifi: @image-url("icons/wifi.svg");
+    out property <image> contact: @image-url("icons/contact.svg");
+    out property <image> mail: @image-url("icons/mail.svg");
+    out property <image> phone: @image-url("icons/phone.svg");
+    out property <image> sms: @image-url("icons/sms.svg");
+    out property <image> geo: @image-url("icons/geo.svg");
+    out property <image> key: @image-url("icons/key.svg");
+    out property <image> coin: @image-url("icons/coin.svg");
+    out property <image> receipt: @image-url("icons/receipt.svg");
+    out property <image> text: @image-url("icons/text.svg");
+    out property <image> warning: @image-url("icons/warning.svg");
+    out property <image> danger: @image-url("icons/danger.svg");
+    out property <image> copy: @image-url("icons/copy.svg");
+    out property <image> open: @image-url("icons/open.svg");
+    out property <image> check: @image-url("icons/check.svg");
+    out property <image> info: @image-url("icons/info.svg");
+    out property <image> chevron-right: @image-url("icons/chevron-right.svg");
+    out property <image> chevron-down: @image-url("icons/chevron-down.svg");
+    out property <image> collapse: @image-url("icons/collapse.svg");
+    out property <image> grip: @image-url("icons/grip.svg");
+    out property <image> history: @image-url("icons/history.svg");
+    out property <image> trash: @image-url("icons/trash.svg");
+    out property <image> plus: @image-url("icons/plus.svg");
+    out property <image> blocked: @image-url("icons/blocked.svg");
+    out property <image> save: @image-url("icons/save.svg");
+    out property <image> refresh: @image-url("icons/refresh.svg");
+    out property <image> toolbar: @image-url("icons/toolbar.svg");
+    out property <image> shield: @image-url("icons/shield.svg");
+    out property <image> keyboard: @image-url("icons/keyboard.svg");
+    out property <image> palette: @image-url("icons/palette.svg");
+    out property <image> lock: @image-url("icons/lock.svg");
+    out property <image> bubble: @image-url("icons/bubble.svg");
+
+    public pure function for-kind(kind: string) -> image {
+        if (kind == "url") { return globe; }
+        if (kind == "other-scheme") { return blocked; }
+        if (kind == "wifi") { return wifi; }
+        if (kind == "contact") { return contact; }
+        if (kind == "email") { return mail; }
+        if (kind == "phone") { return phone; }
+        if (kind == "sms") { return sms; }
+        if (kind == "geo") { return geo; }
+        if (kind == "otp") { return key; }
+        if (kind == "crypto") { return coin; }
+        if (kind == "einvoice" || kind == "einvoice-cont") { return receipt; }
+        return text;
+    }
+
+    public pure function for-level(level: int) -> image {
+        if (level >= 3) { return danger; }
+        if (level == 2) { return warning; }
+        return info;
+    }
+}

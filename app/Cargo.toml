@@ -1,0 +1,74 @@
+[package]
+name = "qrcode-tool"
+description = "Scan QR codes on your computer as easily as on your phone — screen region or webcam, with built-in link safety checks."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+homepage.workspace = true
+readme = "../README.md"
+keywords = ["qr-code", "qr-scanner", "barcode", "screen-capture", "webcam"]
+categories = ["gui", "multimedia::images"]
+publish = false
+build = "build.rs"
+
+[[bin]]
+name = "qrcode-tool"
+path = "src/main.rs"
+
+[features]
+default = ["camera", "updater"]
+# Webcam scanning (nokhwa).
+camera = ["dep:qrtool-camera"]
+# In-app updates through Velopack (GitHub Releases). Disable for store / distro packages.
+updater = ["dep:velopack"]
+
+[dependencies]
+qrtool-core.workspace = true
+qrtool-decode.workspace = true
+qrtool-capture.workspace = true
+qrtool-platform.workspace = true
+qrtool-camera = { workspace = true, optional = true }
+
+# Slint is pinned to the 1.18 minor series because the `unstable-winit-030` API we use for
+# per-monitor full-screen overlays may change in minor releases.
+slint = { version = "~1.18", default-features = false, features = [
+    "std",
+    "compat-1-2",
+    "backend-winit",
+    "renderer-femtovg",
+    "renderer-software",
+    "accessibility",
+    "system-tray",
+    "unstable-winit-030",
+] }
+global-hotkey = "0.8"
+rfd = { version = "0.17", default-features = false, features = ["xdg-portal", "wayland"] }
+clap = { version = "4.6", features = ["derive"] }
+anyhow.workspace = true
+image.workspace = true
+serde_json.workspace = true
+idna.workspace = true
+time.workspace = true
+tracing.workspace = true
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+tracing-appender = "0.2"
+velopack = { version = "1.2", optional = true }
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.61", features = ["Win32_System_Console", "Win32_Foundation", "Win32_System_Threading", "Win32_UI_Input_KeyboardAndMouse", "Win32_UI_WindowsAndMessaging"] }
+
+[build-dependencies]
+slint-build = "~1.18"
+
+# Embeds the icon, version info and manifest into Windows executables (also when
+# cross-compiling with mingw-w64's windres).
+winresource = "0.1"
+
+[package.metadata.winresource]
+ProductName = "QRcode tool"
+FileDescription = "QRcode tool"
+LegalCopyright = "Copyright (c) 2026 Naritaroad (Lrniey666). MIT OR Apache-2.0"
+OriginalFilename = "qrcode-tool.exe"

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>CFBundleName</key><string>QRcode tool</string>
+  <key>CFBundleDisplayName</key><string>QRcode tool</string>
+  <key>CFBundleIdentifier</key><string>io.github.lrniey666.qrcode-tool</string>
+  <key>CFBundleExecutable</key><string>qrcode-tool</string>
+  <key>CFBundleIconFile</key><string>app.icns</string>
+  <key>CFBundlePackageType</key><string>APPL</string>
+  <key>CFBundleShortVersionString</key><string>__VERSION__</string>
+  <key>CFBundleVersion</key><string>__VERSION__</string>
+  <key>LSMinimumSystemVersion</key><string>13.0</string>
+  <!-- Menu-bar app: no Dock icon. -->
+  <key>LSUIElement</key><true/>
+  <key>NSHighResolutionCapable</key><true/>
+  <key>NSCameraUsageDescription</key><string>QRcode tool uses the camera only while the camera window is open, to read QR codes you hold up to it.</string>
+  <key>NSHumanReadableCopyright</key><string>© 2026 Lrniey666. MIT OR Apache-2.0.</string>
+</dict>
+</plist>

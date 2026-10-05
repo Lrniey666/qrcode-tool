@@ -1,0 +1,1670 @@
+# Korean translation of QRcode tool.
+# Copyright (C) 2026 Naritaroad (Lrniey666)
+# This file is distributed under the same license as QRcode tool (MIT OR Apache-2.0).
+# Machine translation, reviewed. Corrections welcome: see CONTRIBUTING.md.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: qrcode-tool 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/Lrniey666/qrcode-tool/issues\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ui/floating.slint:51 ui/floating.slint:97
+msgctxt "ToolbarWindow"
+msgid "Scan whole screen"
+msgstr "전체 화면 스캔"
+
+#: ui/floating.slint:52 ui/floating.slint:104
+msgctxt "ToolbarWindow"
+msgid "Select area"
+msgstr "영역 선택"
+
+#: ui/floating.slint:53 ui/floating.slint:112
+msgctxt "ToolbarWindow"
+msgid "Scan with camera"
+msgstr "카메라로 스캔"
+
+#: ui/floating.slint:54 ui/floating.slint:119
+msgctxt "ToolbarWindow"
+msgid "Scan image from clipboard"
+msgstr "클립보드 이미지 스캔"
+
+#: ui/floating.slint:55 ui/floating.slint:126
+msgctxt "ToolbarWindow"
+msgid "Open image…"
+msgstr "이미지 열기…"
+
+#: ui/floating.slint:56 ui/floating.slint:136
+msgctxt "ToolbarWindow"
+msgid "Create QR code…"
+msgstr "QR 코드 만들기…"
+
+#: ui/floating.slint:57 ui/floating.slint:143
+msgctxt "ToolbarWindow"
+msgid "History"
+msgstr "기록"
+
+#: ui/floating.slint:58 ui/floating.slint:150
+msgctxt "ToolbarWindow"
+msgid "Settings"
+msgstr "설정"
+
+#: ui/floating.slint:59 ui/floating.slint:160
+msgctxt "ToolbarWindow"
+msgid "Collapse to bubble"
+msgstr "버블로 접기"
+
+#: ui/floating.slint:60 ui/floating.slint:167
+msgctxt "ToolbarWindow"
+msgid "Close toolbar"
+msgstr "도구 모음 닫기"
+
+#: ui/floating.slint:61
+msgctxt "ToolbarWindow"
+msgid "Drag to move"
+msgstr "끌어서 이동"
+
+#: ui/floating.slint:282
+msgctxt "BubbleWindow"
+msgid "Scan whole screen"
+msgstr "전체 화면 스캔"
+
+#: ui/floating.slint:288
+msgctxt "BubbleWindow"
+msgid "Select area"
+msgstr "영역 선택"
+
+#: ui/floating.slint:294
+msgctxt "BubbleWindow"
+msgid "Scan with camera"
+msgstr "카메라로 스캔"
+
+#: ui/floating.slint:301
+msgctxt "BubbleWindow"
+msgid "Scan image from clipboard"
+msgstr "클립보드 이미지 스캔"
+
+#: ui/floating.slint:308
+msgctxt "BubbleWindow"
+msgid "Show toolbar"
+msgstr "도구 모음 표시"
+
+#: ui/floating.slint:314
+msgctxt "BubbleWindow"
+msgid "Hide bubble"
+msgstr "버블 숨기기"
+
+#: ui/generator.slint:8
+msgctxt "GeneratorWindow"
+msgid "QRcode tool — Create QR code"
+msgstr "QRcode tool — QR 코드 만들기"
+
+#: ui/generator.slint:66
+msgctxt "GeneratorWindow"
+msgid "Text or link"
+msgstr "텍스트 또는 링크"
+
+#: ui/generator.slint:74
+msgctxt "GeneratorWindow"
+msgid ""
+"Type or paste what the code should contain, for example https://example.com"
+msgstr "코드에 담을 내용을 입력하거나 붙여 넣으세요(예: https://example.com)"
+
+#: ui/generator.slint:83
+msgctxt "GeneratorWindow"
+msgid "Error correction"
+msgstr "오류 정정"
+
+#: ui/generator.slint:89
+msgctxt "GeneratorWindow"
+msgid "Low — smallest code"
+msgstr "낮음 — 가장 작은 코드"
+
+#: ui/generator.slint:89
+msgctxt "GeneratorWindow"
+msgid "Medium — recommended"
+msgstr "중간 — 권장"
+
+#: ui/generator.slint:89
+msgctxt "GeneratorWindow"
+msgid "Quartile"
+msgstr "높음(25%)"
+
+#: ui/generator.slint:89
+msgctxt "GeneratorWindow"
+msgid "High — survives damage or a logo"
+msgstr "매우 높음 — 손상이나 로고에도 인식"
+
+#: ui/generator.slint:97
+msgctxt "GeneratorWindow"
+msgid "{} characters"
+msgstr "{}자"
+
+#: ui/generator.slint:119
+msgctxt "GeneratorWindow"
+msgid "QR code preview"
+msgstr "QR 코드 미리 보기"
+
+#: ui/generator.slint:132
+msgctxt "GeneratorWindow"
+msgid ""
+"Too much text for one QR code. Shorten it or choose a lower error correction."
+msgstr "QR 코드 하나에 담기에는 텍스트가 너무 깁니다. 줄이거나 더 낮은 오류 정정을 선택하세요."
+
+#: ui/generator.slint:132
+msgctxt "GeneratorWindow"
+msgid "The QR code appears here."
+msgstr "여기에 QR 코드가 표시됩니다."
+
+#: ui/generator.slint:140
+msgctxt "GeneratorWindow"
+msgid "{} × {} modules"
+msgstr "{} × {} 모듈"
+
+#: ui/generator.slint:149
+msgctxt "GeneratorWindow"
+msgid "Copy image"
+msgstr "이미지 복사"
+
+#: ui/generator.slint:163
+msgctxt "GeneratorWindow"
+msgid "Save PNG…"
+msgstr "PNG 저장…"
+
+#: ui/generator.slint:173
+msgctxt "GeneratorWindow"
+msgid "Save SVG…"
+msgstr "SVG 저장…"
+
+#: ui/overlay.slint:108
+msgctxt "OverlayWindow"
+msgid "Looking for codes…"
+msgstr "코드를 찾는 중…"
+
+#: ui/overlay.slint:109
+msgctxt "OverlayWindow"
+msgid "1 code found — press Enter to open, or click it"
+msgstr "코드 1개를 찾았습니다 — Enter 키를 누르거나 클릭하여 여세요"
+
+#: ui/overlay.slint:109
+msgctxt "OverlayWindow"
+msgid "{} codes found — click one, or use Tab and Enter"
+msgstr "코드 {}개를 찾았습니다 — 하나를 클릭하거나 Tab 및 Enter 키를 사용하세요"
+
+#: ui/overlay.slint:110
+msgctxt "OverlayWindow"
+msgid "No code found on the screen. Select an area to try again."
+msgstr "화면에서 코드를 찾지 못했습니다. 영역을 선택하여 다시 시도하세요."
+
+#: ui/overlay.slint:111
+msgctxt "OverlayWindow"
+msgid "No code in that area. Try selecting a little more around it."
+msgstr "해당 영역에 코드가 없습니다. 주변을 조금 더 넓게 선택해 보세요."
+
+#: ui/overlay.slint:112
+msgctxt "OverlayWindow"
+msgid "Drag to select a QR code. Press Esc to cancel."
+msgstr "끌어서 QR 코드를 선택하세요. 취소하려면 Esc 키를 누르세요."
+
+#: ui/overlay.slint:343
+msgctxt "OverlayWindow"
+msgid "Scan whole screen"
+msgstr "전체 화면 스캔"
+
+#: ui/overlay.slint:345
+msgctxt "OverlayWindow"
+msgid "Look for codes on the entire screen again."
+msgstr "전체 화면에서 코드를 다시 찾습니다."
+
+#: ui/overlay.slint:353
+msgctxt "OverlayWindow"
+msgid "Select area"
+msgstr "영역 선택"
+
+#: ui/overlay.slint:355
+msgctxt "OverlayWindow"
+msgid "Drag a box around the code you want to scan."
+msgstr "스캔할 코드 주위를 끌어서 선택하세요."
+
+#: ui/overlay.slint:366
+msgctxt "OverlayWindow"
+msgid "Scan with camera"
+msgstr "카메라로 스캔"
+
+#: ui/overlay.slint:368
+msgctxt "OverlayWindow"
+msgid "Hold a printed code or a phone screen up to your webcam."
+msgstr "인쇄된 코드나 휴대폰 화면을 웹캠에 비추세요."
+
+#: ui/overlay.slint:375
+msgctxt "OverlayWindow"
+msgid "Scan image from clipboard"
+msgstr "클립보드 이미지 스캔"
+
+#: ui/overlay.slint:376
+msgctxt "OverlayWindow"
+msgid "Reads a screenshot or picture you copied."
+msgstr "복사한 스크린샷이나 사진을 읽습니다."
+
+#: ui/overlay.slint:383
+msgctxt "OverlayWindow"
+msgid "Open image…"
+msgstr "이미지 열기…"
+
+#: ui/overlay.slint:384
+msgctxt "OverlayWindow"
+msgid "Scan a picture or screenshot file."
+msgstr "사진 또는 스크린샷 파일을 스캔합니다."
+
+#: ui/overlay.slint:394
+msgctxt "OverlayWindow"
+msgid "Create QR code…"
+msgstr "QR 코드 만들기…"
+
+#: ui/overlay.slint:395
+msgctxt "OverlayWindow"
+msgid "Turn a link or text into a QR code to scan with your phone."
+msgstr "링크나 텍스트를 휴대폰으로 스캔할 수 있는 QR 코드로 만듭니다."
+
+#: ui/overlay.slint:402
+msgctxt "OverlayWindow"
+msgid "Settings"
+msgstr "설정"
+
+#: ui/overlay.slint:412
+msgctxt "OverlayWindow"
+msgid "Close"
+msgstr "닫기"
+
+#: ui/preview.slint:10
+msgctxt "PreviewWindow"
+msgid "QRcode tool — Camera"
+msgstr "QRcode tool — 카메라"
+
+#: ui/preview.slint:10
+msgctxt "PreviewWindow"
+msgid "QRcode tool — Image"
+msgstr "QRcode tool — 이미지"
+
+#: ui/preview.slint:51
+msgctxt "PreviewWindow"
+msgid "Starting camera…"
+msgstr "카메라를 시작하는 중…"
+
+#: ui/preview.slint:52
+msgctxt "PreviewWindow"
+msgid "Point the camera at a QR code"
+msgstr "카메라를 QR 코드에 맞추세요"
+
+#: ui/preview.slint:52
+msgctxt "PreviewWindow"
+msgid "Looking for codes…"
+msgstr "코드를 찾는 중…"
+
+#: ui/preview.slint:53
+msgctxt "PreviewWindow"
+msgid "Click a result to open it, or use Tab and Enter"
+msgstr "결과를 클릭하여 열거나 Tab 및 Enter 키를 사용하세요"
+
+#: ui/preview.slint:54
+msgctxt "PreviewWindow"
+msgid "No QR code found in this image"
+msgstr "이 이미지에서 QR 코드를 찾지 못했습니다"
+
+#: ui/preview.slint:55
+msgctxt "PreviewWindow"
+msgid "Camera unavailable"
+msgstr "카메라를 사용할 수 없음"
+
+#: ui/preview.slint:236
+msgctxt "PreviewWindow"
+msgid "Mirror"
+msgstr "좌우 반전"
+
+#: ui/preview.slint:249
+msgctxt "PreviewWindow"
+msgid "Open another image…"
+msgstr "다른 이미지 열기…"
+
+#: ui/preview.slint:257
+msgctxt "PreviewWindow"
+msgid "Scan clipboard"
+msgstr "클립보드 스캔"
+
+#: ui/preview.slint:264
+msgctxt "PreviewWindow"
+msgid "{} found"
+msgstr "{}개 찾음"
+
+#: ui/settings.slint:101
+msgctxt "HotkeyButton"
+msgid "Press the new shortcut"
+msgstr "새 바로 가기 키를 누르세요"
+
+#: ui/settings.slint:117
+msgctxt "HotkeyButton"
+msgid "Press keys… (Esc to cancel)"
+msgstr "키를 누르세요… (취소하려면 Esc)"
+
+#: ui/settings.slint:117
+msgctxt "HotkeyButton"
+msgid "Not set"
+msgstr "설정 안 됨"
+
+#: ui/settings.slint:132
+msgctxt "SettingsWindow"
+msgid "QRcode tool — Settings"
+msgstr "QRcode tool — 설정"
+
+#: ui/settings.slint:260 ui/settings.slint:322
+msgctxt "SettingsWindow"
+msgid "General"
+msgstr "일반"
+
+#: ui/settings.slint:268 ui/settings.slint:428
+msgctxt "SettingsWindow"
+msgid "Scanning"
+msgstr "스캔"
+
+#: ui/settings.slint:276 ui/settings.slint:554 ui/settings.slint:564
+msgctxt "SettingsWindow"
+msgid "Camera"
+msgstr "카메라"
+
+#: ui/settings.slint:284 ui/settings.slint:616
+msgctxt "SettingsWindow"
+msgid "Shortcuts"
+msgstr "바로 가기 키"
+
+#: ui/settings.slint:292 ui/settings.slint:729
+msgctxt "SettingsWindow"
+msgid "Privacy & history"
+msgstr "개인정보 및 기록"
+
+#: ui/settings.slint:300 ui/settings.slint:879
+msgctxt "SettingsWindow"
+msgid "About"
+msgstr "정보"
+
+#: ui/settings.slint:329
+msgctxt "SettingsWindow"
+msgid "Language"
+msgstr "언어"
+
+#: ui/settings.slint:330
+msgctxt "SettingsWindow"
+msgid "Language of menus and messages."
+msgstr "메뉴와 메시지에 사용할 언어입니다."
+
+#: ui/settings.slint:342
+msgctxt "SettingsWindow"
+msgid "Theme"
+msgstr "테마"
+
+#: ui/settings.slint:343
+msgctxt "SettingsWindow"
+msgid "Follows Windows, macOS or your desktop by default."
+msgstr "기본적으로 Windows, macOS 또는 데스크톱 설정을 따릅니다."
+
+#: ui/settings.slint:346
+msgctxt "SettingsWindow"
+msgid "Use system setting"
+msgstr "시스템 설정 사용"
+
+#: ui/settings.slint:346
+msgctxt "SettingsWindow"
+msgid "Light"
+msgstr "밝게"
+
+#: ui/settings.slint:346
+msgctxt "SettingsWindow"
+msgid "Dark"
+msgstr "어둡게"
+
+#: ui/settings.slint:355
+msgctxt "SettingsWindow"
+msgid "Start with the computer"
+msgstr "시작 시 실행"
+
+#: ui/settings.slint:356
+msgctxt "SettingsWindow"
+msgid "QRcode tool waits quietly in the tray so the shortcut always works."
+msgstr "QRcode tool이 시스템 트레이에서 조용히 대기하므로 바로 가기 키를 언제든 사용할 수 있습니다."
+
+#: ui/settings.slint:368
+msgctxt "SettingsWindow"
+msgid "Floating bubble"
+msgstr "플로팅 버블"
+
+#: ui/settings.slint:372
+msgctxt "SettingsWindow"
+msgid "Show the bubble when the app starts"
+msgstr "앱 시작 시 버블 표시"
+
+#: ui/settings.slint:373
+msgctxt "SettingsWindow"
+msgid "A small round button that stays on top. Click it to scan the screen."
+msgstr "항상 위에 표시되는 작은 원형 단추입니다. 클릭하면 화면을 스캔합니다."
+
+#: ui/settings.slint:383
+msgctxt "SettingsWindow"
+msgid "Hide during full-screen apps"
+msgstr "전체 화면 앱 사용 중 숨기기"
+
+#: ui/settings.slint:384
+msgctxt "SettingsWindow"
+msgid ""
+"Hides the bubble and toolbar while you watch a video, present or play a game."
+msgstr "동영상 시청, 프레젠테이션 또는 게임 중에는 버블과 도구 모음을 숨깁니다."
+
+#: ui/settings.slint:384
+msgctxt "SettingsWindow"
+msgid "Not supported on this system."
+msgstr "이 시스템에서는 지원되지 않습니다."
+
+#: ui/settings.slint:397 ui/settings.slint:921
+msgctxt "SettingsWindow"
+msgid "Updates"
+msgstr "업데이트"
+
+#: ui/settings.slint:401
+msgctxt "SettingsWindow"
+msgid "Check for updates automatically"
+msgstr "자동으로 업데이트 확인"
+
+#: ui/settings.slint:402
+msgctxt "SettingsWindow"
+msgid ""
+"Asks GitHub once a day whether a new version exists. Nothing is installed "
+"without asking you."
+msgstr "하루에 한 번 GitHub에서 새 버전이 있는지 확인합니다. 사용자에게 묻지 않고는 아무것도 설치하지 않습니다."
+
+#: ui/settings.slint:416
+msgctxt "SettingsWindow"
+msgid "Show the welcome screen again"
+msgstr "시작 화면 다시 보기"
+
+#: ui/settings.slint:435
+msgctxt "SettingsWindow"
+msgid "Copy the result automatically"
+msgstr "자동으로 결과 복사"
+
+#: ui/settings.slint:436
+msgctxt "SettingsWindow"
+msgid "Puts the content of a single found code on the clipboard."
+msgstr "코드를 하나만 찾은 경우 그 내용을 클립보드에 복사합니다."
+
+#: ui/settings.slint:446
+msgctxt "SettingsWindow"
+msgid "Play a sound when a code is found"
+msgstr "코드를 찾으면 소리 재생"
+
+#: ui/settings.slint:456
+msgctxt "SettingsWindow"
+msgid "Also read barcodes"
+msgstr "바코드도 읽기"
+
+#: ui/settings.slint:457
+msgctxt "SettingsWindow"
+msgid ""
+"EAN, UPC, Code 128, Data Matrix, PDF417, Aztec and more, in addition to QR "
+"codes."
+msgstr "QR 코드 외에 EAN, UPC, Code 128, Data Matrix, PDF417, Aztec 등도 읽습니다."
+
+#: ui/settings.slint:469
+msgctxt "SettingsWindow"
+msgid "Trusted sites"
+msgstr "신뢰할 수 있는 사이트"
+
+#: ui/settings.slint:472
+msgctxt "SettingsWindow"
+msgid ""
+"Links to these sites open right away when they are the only code found and "
+"nothing looks suspicious. Every other link waits for you to press Enter or "
+"click it."
+msgstr "이 사이트의 링크는 유일하게 찾은 코드이고 의심스러운 점이 없으면 바로 열립니다. 다른 모든 링크는 Enter 키를 누르거나 클릭할 때까지 기다립니다."
+
+#: ui/settings.slint:476
+msgctxt "SettingsWindow"
+msgid "Open trusted sites without asking"
+msgstr "신뢰할 수 있는 사이트는 묻지 않고 열기"
+
+#: ui/settings.slint:496
+msgctxt "SettingsWindow"
+msgid "example.com"
+msgstr "example.com"
+
+#: ui/settings.slint:505
+msgctxt "SettingsWindow"
+msgid "Add"
+msgstr "추가"
+
+#: ui/settings.slint:516
+msgctxt "SettingsWindow"
+msgid ""
+"No trusted sites yet. You can also add one from the details of a scanned "
+"link."
+msgstr "아직 신뢰할 수 있는 사이트가 없습니다. 스캔한 링크의 세부 정보에서도 추가할 수 있습니다."
+
+#: ui/settings.slint:537
+msgctxt "SettingsWindow"
+msgid "Remove"
+msgstr "제거"
+
+#: ui/settings.slint:560
+msgctxt "SettingsWindow"
+msgid ""
+"No camera was found. Connect a webcam to scan printed codes or codes on a "
+"phone."
+msgstr "카메라를 찾을 수 없습니다. 인쇄된 코드나 휴대폰의 코드를 스캔하려면 웹캠을 연결하세요."
+
+#: ui/settings.slint:577
+msgctxt "SettingsWindow"
+msgid "Mirror the picture"
+msgstr "화면 좌우 반전"
+
+#: ui/settings.slint:578
+msgctxt "SettingsWindow"
+msgid "Shows the camera like a mirror. Scanning works either way."
+msgstr "카메라 화면을 거울처럼 보여 줍니다. 어느 쪽이든 스캔은 정상적으로 작동합니다."
+
+#: ui/settings.slint:588
+msgctxt "SettingsWindow"
+msgid "Keep results on screen (seconds)"
+msgstr "결과 유지 시간(초)"
+
+#: ui/settings.slint:589
+msgctxt "SettingsWindow"
+msgid ""
+"Codes stay in a fixed list this long after they leave the camera, so links "
+"don't jump around or disappear. 0 = only while visible."
+msgstr "코드가 카메라를 벗어난 후에도 이 시간 동안 고정 목록에 남아 링크가 움직이거나 사라지지 않습니다. 0 = 보일 때만 표시."
+
+#: ui/settings.slint:602
+msgctxt "SettingsWindow"
+msgid "Close the camera after a code is opened"
+msgstr "코드를 연 후 카메라 닫기"
+
+#: ui/settings.slint:622
+msgctxt "SettingsWindow"
+msgid ""
+"Click a shortcut, then press the new key combination. Use at least one of "
+"Ctrl, Alt, Shift or Win/Cmd."
+msgstr "바로 가기 키를 클릭한 다음 새 키 조합을 누르세요. Ctrl, Alt, Shift, Win/Cmd 중 하나 이상을 사용하세요."
+
+#: ui/settings.slint:622
+msgctxt "SettingsWindow"
+msgid ""
+"Global shortcuts are not available on this desktop (for example Wayland). "
+"Bind the commands “qrcode-tool scan-screen”, “qrcode-tool scan-"
+"region”, “qrcode-tool scan-camera” or “qrcode-tool toolbar” to keys "
+"in your system’s keyboard settings."
+msgstr "이 데스크톱(예: Wayland)에서는 전역 바로 가기 키를 사용할 수 없습니다. 시스템의 키보드 설정에서 “qrcode-tool scan-screen”, “qrcode-tool scan-region”, “qrcode-tool scan-camera” 또는 “qrcode-tool toolbar” 명령을 키에 지정하세요."
+
+#: ui/settings.slint:626
+msgctxt "SettingsWindow"
+msgid "Scan whole screen"
+msgstr "전체 화면 스캔"
+
+#: ui/settings.slint:626
+msgctxt "SettingsWindow"
+msgid "Select area"
+msgstr "영역 선택"
+
+#: ui/settings.slint:626
+msgctxt "SettingsWindow"
+msgid "Scan with camera"
+msgstr "카메라로 스캔"
+
+#: ui/settings.slint:626
+msgctxt "SettingsWindow"
+msgid "Show or hide the toolbar"
+msgstr "도구 모음 표시/숨기기"
+
+#: ui/settings.slint:627
+msgctxt "SettingsWindow"
+msgid "Already used by another app — choose another one."
+msgstr "다른 앱에서 이미 사용 중입니다. 다른 키를 선택하세요."
+
+#: ui/settings.slint:627
+msgctxt "SettingsWindow"
+msgid "Not a valid shortcut."
+msgstr "올바른 바로 가기 키가 아닙니다."
+
+#: ui/settings.slint:645
+msgctxt "SettingsWindow"
+msgid "Restore defaults"
+msgstr "기본값 복원"
+
+#: ui/settings.slint:656
+msgctxt "SettingsWindow"
+msgid "While scanning"
+msgstr "스캔 중"
+
+#: ui/settings.slint:672
+msgctxt "SettingsWindow"
+msgid "Open the selected code"
+msgstr "선택한 코드 열기"
+
+#: ui/settings.slint:683
+msgctxt "SettingsWindow"
+msgid "Select the next code (Shift+Tab for the previous one)"
+msgstr "다음 코드 선택(이전 코드는 Shift+Tab)"
+
+#: ui/settings.slint:694
+msgctxt "SettingsWindow"
+msgid "Copy the selected code"
+msgstr "선택한 코드 복사"
+
+#: ui/settings.slint:705
+msgctxt "SettingsWindow"
+msgid "Search the whole screen again"
+msgstr "전체 화면 다시 검색"
+
+#: ui/settings.slint:716
+msgctxt "SettingsWindow"
+msgid "Cancel (right-click works too)"
+msgstr "취소(마우스 오른쪽 클릭도 가능)"
+
+#: ui/settings.slint:752
+msgctxt "SettingsWindow"
+msgid ""
+"Everything happens on this computer. QRcode tool sends no usage data and "
+"never checks links online. The only network request is the optional update "
+"check to GitHub."
+msgstr "모든 작업은 이 컴퓨터에서 이루어집니다. QRcode tool은 사용 데이터를 보내지 않으며 링크를 온라인으로 확인하지 않습니다. 유일한 네트워크 요청은 선택 사항인 GitHub 업데이트 확인뿐입니다."
+
+#: ui/settings.slint:761
+msgctxt "SettingsWindow"
+msgid "Keep a scan history"
+msgstr "스캔 기록 보관"
+
+#: ui/settings.slint:762
+msgctxt "SettingsWindow"
+msgid ""
+"Stored only on this computer. Wi-Fi passwords and 2-step verification keys "
+"are never saved."
+msgstr "이 컴퓨터에만 저장됩니다. Wi-Fi 암호와 2단계 인증 키는 절대 저장되지 않습니다."
+
+#: ui/settings.slint:772
+msgctxt "SettingsWindow"
+msgid "Number of entries to keep"
+msgstr "보관할 항목 수"
+
+#: ui/settings.slint:790
+msgctxt "SettingsWindow"
+msgid "Recent scans"
+msgstr "최근 스캔"
+
+#: ui/settings.slint:795
+msgctxt "SettingsWindow"
+msgid "Clear history"
+msgstr "기록 지우기"
+
+#: ui/settings.slint:813
+msgctxt "SettingsWindow"
+msgid "Nothing scanned yet."
+msgstr "아직 스캔한 항목이 없습니다."
+
+#: ui/settings.slint:813
+msgctxt "SettingsWindow"
+msgid "History is turned off."
+msgstr "기록이 꺼져 있습니다."
+
+#: ui/settings.slint:851
+msgctxt "SettingsWindow"
+msgid "Open"
+msgstr "열기"
+
+#: ui/settings.slint:862
+msgctxt "SettingsWindow"
+msgid "Copy"
+msgstr "복사"
+
+#: ui/settings.slint:908
+msgctxt "SettingsWindow"
+msgid "Version {}"
+msgstr "버전 {}"
+
+#: ui/settings.slint:912
+msgctxt "SettingsWindow"
+msgid "Scan QR codes on your computer as easily as on your phone."
+msgstr "휴대폰처럼 쉽게 컴퓨터에서 QR 코드를 스캔하세요."
+
+#: ui/settings.slint:924
+msgctxt "SettingsWindow"
+msgid "Check for updates"
+msgstr "업데이트 확인"
+
+#: ui/settings.slint:943
+msgctxt "SettingsWindow"
+msgid "Source code on GitHub"
+msgstr "GitHub의 소스 코드"
+
+#: ui/settings.slint:949
+msgctxt "SettingsWindow"
+msgid "Report a problem or suggest an idea"
+msgstr "문제 신고 또는 아이디어 제안"
+
+#: ui/settings.slint:955
+msgctxt "SettingsWindow"
+msgid "Support the project"
+msgstr "프로젝트 후원"
+
+#: ui/settings.slint:961
+msgctxt "SettingsWindow"
+msgid "Privacy statement"
+msgstr "개인정보 처리방침"
+
+#: ui/settings.slint:967
+msgctxt "SettingsWindow"
+msgid "Open-source licenses"
+msgstr "오픈 소스 라이선스"
+
+#: ui/settings.slint:973
+msgctxt "SettingsWindow"
+msgid "Open the settings folder"
+msgstr "설정 폴더 열기"
+
+#: ui/settings.slint:979
+msgctxt "SettingsWindow"
+msgid "Open the log folder"
+msgstr "로그 폴더 열기"
+
+#: ui/settings.slint:990
+msgctxt "SettingsWindow"
+msgid "Free and open source under the MIT or Apache-2.0 license."
+msgstr "MIT 또는 Apache-2.0 라이선스에 따른 무료 오픈 소스입니다."
+
+#: ui/strings.slint:8
+msgctxt "Strings"
+msgid "Link"
+msgstr "링크"
+
+#: ui/strings.slint:9
+msgctxt "Strings"
+msgid "Blocked link"
+msgstr "차단된 링크"
+
+#: ui/strings.slint:10
+msgctxt "Strings"
+msgid "Wi-Fi network"
+msgstr "Wi-Fi 네트워크"
+
+#: ui/strings.slint:11
+msgctxt "Strings"
+msgid "Contact"
+msgstr "연락처"
+
+#: ui/strings.slint:12 ui/strings.slint:65
+msgctxt "Strings"
+msgid "Email"
+msgstr "이메일"
+
+#: ui/strings.slint:13
+msgctxt "Strings"
+msgid "Phone number"
+msgstr "전화번호"
+
+#: ui/strings.slint:14
+msgctxt "Strings"
+msgid "Text message"
+msgstr "문자 메시지"
+
+#: ui/strings.slint:15
+msgctxt "Strings"
+msgid "Location"
+msgstr "위치"
+
+#: ui/strings.slint:16
+msgctxt "Strings"
+msgid "2-step verification key"
+msgstr "2단계 인증 키"
+
+#: ui/strings.slint:17
+msgctxt "Strings"
+msgid "Payment address"
+msgstr "결제 주소"
+
+#: ui/strings.slint:18
+msgctxt "Strings"
+msgid "E-invoice"
+msgstr "전자 영수증(대만)"
+
+#: ui/strings.slint:19
+msgctxt "Strings"
+msgid "E-invoice items (right code)"
+msgstr "전자 영수증 품목(오른쪽 코드)"
+
+#: ui/strings.slint:20
+msgctxt "Strings"
+msgid "Barcode"
+msgstr "바코드"
+
+#: ui/strings.slint:21
+msgctxt "Strings"
+msgid "Text"
+msgstr "텍스트"
+
+#: ui/strings.slint:25
+msgctxt "Strings"
+msgid "Not encrypted (http)"
+msgstr "암호화되지 않음(http)"
+
+#: ui/strings.slint:26
+msgctxt "Strings"
+msgid "Disguised address — it really goes to {}"
+msgstr "위장된 주소 — 실제로는 {}(으)로 이동합니다"
+
+#: ui/strings.slint:27
+msgctxt "Strings"
+msgid "International domain name, real address: {}"
+msgstr "국제화 도메인 이름, 실제 주소: {}"
+
+#: ui/strings.slint:28
+msgctxt "Strings"
+msgid "Look-alike letters from different alphabets in “{}”"
+msgstr "“{}”에 다른 문자 체계의 비슷한 글자가 있습니다"
+
+#: ui/strings.slint:29
+msgctxt "Strings"
+msgid "Uses a raw IP address ({}) instead of a name"
+msgstr "이름 대신 IP 주소({})를 직접 사용합니다"
+
+#: ui/strings.slint:30
+msgctxt "Strings"
+msgid "Unusual port {}"
+msgstr "비정상적인 포트 {}"
+
+#: ui/strings.slint:31
+msgctxt "Strings"
+msgid "Short link — the real destination is hidden"
+msgstr "단축 링크 — 실제 목적지가 숨겨져 있습니다"
+
+#: ui/strings.slint:32
+msgctxt "Strings"
+msgid "Very long address ({} characters)"
+msgstr "매우 긴 주소({}자)"
+
+#: ui/strings.slint:33
+msgctxt "Strings"
+msgid "Contains many encoded characters"
+msgstr "인코딩된 문자가 많이 포함되어 있습니다"
+
+#: ui/strings.slint:34
+msgctxt "Strings"
+msgid "Unusually many subdomains ({})"
+msgstr "하위 도메인이 비정상적으로 많습니다({})"
+
+#: ui/strings.slint:39
+msgctxt "Strings"
+msgid "Open"
+msgstr "열기"
+
+#: ui/strings.slint:40
+msgctxt "Strings"
+msgid "Open anyway"
+msgstr "그래도 열기"
+
+#: ui/strings.slint:41
+msgctxt "Strings"
+msgid "Copy"
+msgstr "복사"
+
+#: ui/strings.slint:42
+msgctxt "Strings"
+msgid "Copy password"
+msgstr "암호 복사"
+
+#: ui/strings.slint:43
+msgctxt "Strings"
+msgid "Connect"
+msgstr "연결"
+
+#: ui/strings.slint:44 ui/strings.slint:108
+msgctxt "Strings"
+msgid "Save contact"
+msgstr "연락처 저장"
+
+#: ui/strings.slint:45
+msgctxt "Strings"
+msgid "Write email"
+msgstr "이메일 쓰기"
+
+#: ui/strings.slint:46
+msgctxt "Strings"
+msgid "Call"
+msgstr "전화 걸기"
+
+#: ui/strings.slint:47
+msgctxt "Strings"
+msgid "Send message"
+msgstr "메시지 보내기"
+
+#: ui/strings.slint:48
+msgctxt "Strings"
+msgid "Open map"
+msgstr "지도 열기"
+
+#: ui/strings.slint:49
+msgctxt "Strings"
+msgid "Copy invoice number"
+msgstr "영수증 번호 복사"
+
+#: ui/strings.slint:50
+msgctxt "Strings"
+msgid "Always allow this site"
+msgstr "이 사이트 항상 허용"
+
+#: ui/strings.slint:51 ui/strings.slint:179
+msgctxt "Strings"
+msgid "Close"
+msgstr "닫기"
+
+#: ui/strings.slint:56
+msgctxt "Strings"
+msgid "Address"
+msgstr "주소"
+
+#: ui/strings.slint:57
+msgctxt "Strings"
+msgid "Site"
+msgstr "사이트"
+
+#: ui/strings.slint:58
+msgctxt "Strings"
+msgid "Network name"
+msgstr "네트워크 이름"
+
+#: ui/strings.slint:59
+msgctxt "Strings"
+msgid "Security"
+msgstr "보안"
+
+#: ui/strings.slint:60
+msgctxt "Strings"
+msgid "Password"
+msgstr "암호"
+
+#: ui/strings.slint:61
+msgctxt "Strings"
+msgid "Hidden network"
+msgstr "숨겨진 네트워크"
+
+#: ui/strings.slint:62
+msgctxt "Strings"
+msgid "Name"
+msgstr "이름"
+
+#: ui/strings.slint:63
+msgctxt "Strings"
+msgid "Organization"
+msgstr "조직"
+
+#: ui/strings.slint:64
+msgctxt "Strings"
+msgid "Phone"
+msgstr "전화"
+
+#: ui/strings.slint:66
+msgctxt "Strings"
+msgid "Website"
+msgstr "웹 사이트"
+
+#: ui/strings.slint:67
+msgctxt "Strings"
+msgid "Postal address"
+msgstr "우편 주소"
+
+#: ui/strings.slint:68
+msgctxt "Strings"
+msgid "Note"
+msgstr "메모"
+
+#: ui/strings.slint:69
+msgctxt "Strings"
+msgid "Subject"
+msgstr "제목"
+
+#: ui/strings.slint:70
+msgctxt "Strings"
+msgid "Message"
+msgstr "메시지"
+
+#: ui/strings.slint:71
+msgctxt "Strings"
+msgid "Number"
+msgstr "번호"
+
+#: ui/strings.slint:72
+msgctxt "Strings"
+msgid "Coordinates"
+msgstr "좌표"
+
+#: ui/strings.slint:73
+msgctxt "Strings"
+msgid "Issuer"
+msgstr "발급자"
+
+#: ui/strings.slint:74
+msgctxt "Strings"
+msgid "Account"
+msgstr "계정"
+
+#: ui/strings.slint:75
+msgctxt "Strings"
+msgid "Amount"
+msgstr "금액"
+
+#: ui/strings.slint:76
+msgctxt "Strings"
+msgid "Wallet address"
+msgstr "지갑 주소"
+
+#: ui/strings.slint:77
+msgctxt "Strings"
+msgid "Invoice number"
+msgstr "영수증 번호"
+
+#: ui/strings.slint:78
+msgctxt "Strings"
+msgid "Date"
+msgstr "날짜"
+
+#: ui/strings.slint:79
+msgctxt "Strings"
+msgid "Random code"
+msgstr "랜덤 코드"
+
+#: ui/strings.slint:80
+msgctxt "Strings"
+msgid "Total"
+msgstr "합계"
+
+#: ui/strings.slint:81
+msgctxt "Strings"
+msgid "Tax"
+msgstr "세금"
+
+#: ui/strings.slint:82
+msgctxt "Strings"
+msgid "Seller ID"
+msgstr "판매자 사업자 번호"
+
+#: ui/strings.slint:83
+msgctxt "Strings"
+msgid "Buyer ID"
+msgstr "구매자 사업자 번호"
+
+#: ui/strings.slint:84
+msgctxt "Strings"
+msgid "Items"
+msgstr "품목"
+
+#: ui/strings.slint:85
+msgctxt "Strings"
+msgid "Type"
+msgstr "유형"
+
+#: ui/strings.slint:86
+msgctxt "Strings"
+msgid "Content"
+msgstr "내용"
+
+#: ui/strings.slint:87
+msgctxt "Strings"
+msgid "Barcode type"
+msgstr "바코드 유형"
+
+#: ui/strings.slint:93
+msgctxt "Strings"
+msgid ""
+"This is a two-step verification secret. Anyone who has it can generate your "
+"login codes. It is never saved to history."
+msgstr "2단계 인증 비밀 키입니다. 이 키를 가진 사람은 누구나 로그인 코드를 생성할 수 있습니다. 기록에는 절대 저장되지 않습니다."
+
+#: ui/strings.slint:94
+msgctxt "Strings"
+msgid ""
+"This is not a web link. For your safety it can’t be opened here, only "
+"copied."
+msgstr "웹 링크가 아닙니다. 안전을 위해 여기서 열 수 없으며 복사만 할 수 있습니다."
+
+#: ui/strings.slint:95
+msgctxt "Strings"
+msgid ""
+"This is the right-hand code of an e-invoice. Scan both codes together to see "
+"all items."
+msgstr "전자 영수증의 오른쪽 코드입니다. 모든 품목을 보려면 두 코드를 함께 스캔하세요."
+
+#: ui/strings.slint:96
+msgctxt "Strings"
+msgid "Always double-check a payment address before sending money."
+msgstr "송금하기 전에 항상 결제 주소를 다시 확인하세요."
+
+#: ui/strings.slint:97
+msgctxt "Strings"
+msgid ""
+"This link looks deceptive. Press “Open anyway” only if you are sure you "
+"trust it."
+msgstr "이 링크는 속임수일 수 있습니다. 신뢰할 수 있다고 확신하는 경우에만 “그래도 열기”를 누르세요."
+
+#: ui/strings.slint:98
+msgctxt "Strings"
+msgid ""
+"This link looks deceptive. Check the real site name below before opening."
+msgstr "이 링크는 속임수일 수 있습니다. 열기 전에 아래의 실제 사이트 이름을 확인하세요."
+
+#: ui/strings.slint:99
+msgctxt "Strings"
+msgid "Check the site name before opening."
+msgstr "열기 전에 사이트 이름을 확인하세요."
+
+#: ui/strings.slint:105
+msgctxt "Strings"
+msgid "Open an image with a QR code"
+msgstr "QR 코드가 있는 이미지 열기"
+
+#: ui/strings.slint:106
+msgctxt "Strings"
+msgid "Save QR code as PNG"
+msgstr "QR 코드를 PNG로 저장"
+
+#: ui/strings.slint:107
+msgctxt "Strings"
+msgid "Save QR code as SVG"
+msgstr "QR 코드를 SVG로 저장"
+
+#: ui/strings.slint:109
+msgctxt "Strings"
+msgid "Images"
+msgstr "이미지"
+
+#: ui/strings.slint:110
+msgctxt "Strings"
+msgid "Contact card"
+msgstr "연락처 카드"
+
+#: ui/strings.slint:111
+msgctxt "Strings"
+msgid "Yes"
+msgstr "예"
+
+#: ui/strings.slint:112
+msgctxt "Strings"
+msgid "No"
+msgstr "아니요"
+
+#: ui/strings.slint:113
+msgctxt "Strings"
+msgid "Open (no password)"
+msgstr "개방(암호 없음)"
+
+#: ui/strings.slint:114
+msgctxt "Strings"
+msgid "Use system language"
+msgstr "시스템 언어 사용"
+
+#: ui/strings.slint:115
+msgctxt "Strings"
+msgid "Copied to the clipboard"
+msgstr "클립보드에 복사됨"
+
+#: ui/strings.slint:116 ui/strings.slint:144
+msgctxt "Strings"
+msgid "Saved"
+msgstr "저장됨"
+
+#: ui/strings.slint:117
+msgctxt "Strings"
+msgid "Checking for updates…"
+msgstr "업데이트 확인 중…"
+
+#: ui/strings.slint:118
+msgctxt "Strings"
+msgid "Not checked yet"
+msgstr "아직 확인 안 함"
+
+#: ui/strings.slint:119
+msgctxt "Strings"
+msgid "Default camera"
+msgstr "기본 카메라"
+
+#: ui/strings.slint:120 ui/strings.slint:136
+msgctxt "Strings"
+msgid "No camera found"
+msgstr "카메라를 찾을 수 없음"
+
+#: ui/strings.slint:121
+msgctxt "Strings"
+msgid "Scan the right-hand code too to see the items."
+msgstr "품목을 보려면 오른쪽 코드도 스캔하세요."
+
+#: ui/strings.slint:127
+msgctxt "Strings"
+msgid "Update available"
+msgstr "업데이트 사용 가능"
+
+#: ui/strings.slint:128
+msgctxt "Strings"
+msgid "You’re up to date"
+msgstr "최신 버전입니다"
+
+#: ui/strings.slint:129
+msgctxt "Strings"
+msgid "Updates are not available"
+msgstr "업데이트를 사용할 수 없음"
+
+#: ui/strings.slint:130
+msgctxt "Strings"
+msgid "Couldn’t check for updates"
+msgstr "업데이트를 확인할 수 없음"
+
+#: ui/strings.slint:131
+msgctxt "Strings"
+msgid "Downloading update…"
+msgstr "업데이트 다운로드 중…"
+
+#: ui/strings.slint:132
+msgctxt "Strings"
+msgid "Couldn’t capture the screen"
+msgstr "화면을 캡처할 수 없음"
+
+#: ui/strings.slint:133
+msgctxt "Strings"
+msgid "Screen recording permission needed"
+msgstr "화면 기록 권한 필요"
+
+#: ui/strings.slint:134
+msgctxt "Strings"
+msgid "Couldn’t start the camera"
+msgstr "카메라를 시작할 수 없음"
+
+#: ui/strings.slint:135
+msgctxt "Strings"
+msgid "Camera permission needed"
+msgstr "카메라 권한 필요"
+
+#: ui/strings.slint:137
+msgctxt "Strings"
+msgid "Shortcut unavailable"
+msgstr "바로 가기 키를 사용할 수 없음"
+
+#: ui/strings.slint:138
+msgctxt "Strings"
+msgid "Connecting to Wi-Fi"
+msgstr "Wi-Fi에 연결하는 중"
+
+#: ui/strings.slint:139
+msgctxt "Strings"
+msgid "Couldn’t connect to Wi-Fi"
+msgstr "Wi-Fi에 연결할 수 없음"
+
+#: ui/strings.slint:140
+msgctxt "Strings"
+msgid "Couldn’t open"
+msgstr "열 수 없음"
+
+#: ui/strings.slint:141
+msgctxt "Strings"
+msgid "No QR code found"
+msgstr "QR 코드를 찾을 수 없음"
+
+#: ui/strings.slint:142
+msgctxt "Strings"
+msgid "No image on the clipboard"
+msgstr "클립보드에 이미지가 없음"
+
+#: ui/strings.slint:143
+msgctxt "Strings"
+msgid "Couldn’t open the image"
+msgstr "이미지를 열 수 없음"
+
+#: ui/strings.slint:149
+msgctxt "Strings"
+msgid "Version {} is ready to download. The app restarts after the update."
+msgstr "버전 {}을(를) 다운로드할 수 있습니다. 업데이트 후 앱이 다시 시작됩니다."
+
+#: ui/strings.slint:150
+msgctxt "Strings"
+msgid "QRcode tool {} is the latest version."
+msgstr "QRcode tool {}이(가) 최신 버전입니다."
+
+#: ui/strings.slint:151
+msgctxt "Strings"
+msgid ""
+"This copy was not installed with the setup program (portable or developer "
+"build), so it can’t update itself. Download new versions from GitHub."
+msgstr "이 사본은 설치 프로그램으로 설치되지 않았기 때문에(포터블 또는 개발자 빌드) 자동으로 업데이트할 수 없습니다. GitHub에서 새 버전을 다운로드하세요."
+
+#: ui/strings.slint:152
+msgctxt "Strings"
+msgid "Check your internet connection and try again later. ({})"
+msgstr "인터넷 연결을 확인하고 나중에 다시 시도하세요. ({})"
+
+#: ui/strings.slint:153
+msgctxt "Strings"
+msgid "Version {} is being downloaded. QRcode tool will restart when it’s done."
+msgstr "버전 {}을(를) 다운로드하는 중입니다. 완료되면 QRcode tool이 다시 시작됩니다."
+
+#: ui/strings.slint:154
+msgctxt "Strings"
+msgid ""
+"The screen could not be captured. On Linux with Wayland, bind “qrcode-tool "
+"scan-screen” to a shortcut or use “Scan image from clipboard”. Details: "
+"{}"
+msgstr "화면을 캡처할 수 없습니다. Wayland를 사용하는 Linux에서는 “qrcode-tool scan-screen”을 바로 가기 키에 지정하거나 “클립보드 이미지 스캔”을 사용하세요. 세부 정보: {}"
+
+#: ui/strings.slint:155
+msgctxt "Strings"
+msgid ""
+"Allow QRcode tool under System Settings › Privacy & Security › Screen "
+"Recording, then try again."
+msgstr "시스템 설정 › 개인정보 보호 및 보안 › 화면 기록에서 QRcode tool을 허용한 후 다시 시도하세요."
+
+#: ui/strings.slint:156
+msgctxt "Strings"
+msgid "The camera may be in use by another app. Details: {}"
+msgstr "다른 앱에서 카메라를 사용 중일 수 있습니다. 세부 정보: {}"
+
+#: ui/strings.slint:157
+msgctxt "Strings"
+msgid ""
+"Allow QRcode tool to use the camera in your system’s privacy settings, "
+"then try again."
+msgstr "시스템의 개인정보 보호 설정에서 QRcode tool의 카메라 사용을 허용한 후 다시 시도하세요."
+
+#: ui/strings.slint:158
+msgctxt "Strings"
+msgid "Connect a webcam and try again."
+msgstr "웹캠을 연결한 후 다시 시도하세요."
+
+#: ui/strings.slint:159
+msgctxt "Strings"
+msgid ""
+"“{}” is already used by another app. Choose another shortcut in Settings "
+"› Shortcuts."
+msgstr "“{}”은(는) 다른 앱에서 이미 사용 중입니다. 설정 › 바로 가기 키에서 다른 바로 가기 키를 선택하세요."
+
+#: ui/strings.slint:160
+msgctxt "Strings"
+msgid "Your system is connecting to “{}”."
+msgstr "시스템이 “{}”에 연결하는 중입니다."
+
+#: ui/strings.slint:161
+msgctxt "Strings"
+msgid "Copy the password and connect manually. Details: {}"
+msgstr "암호를 복사하여 직접 연결하세요. 세부 정보: {}"
+
+#: ui/strings.slint:162
+msgctxt "Strings"
+msgid "Details: {}"
+msgstr "세부 정보: {}"
+
+#: ui/strings.slint:163
+msgctxt "Strings"
+msgid "No QR code or barcode was found in the image."
+msgstr "이미지에서 QR 코드나 바코드를 찾지 못했습니다."
+
+#: ui/strings.slint:164
+msgctxt "Strings"
+msgid ""
+"Copy a screenshot or picture first (for example with Win+Shift+S), then try "
+"again."
+msgstr "먼저 스크린샷이나 사진을 복사한 후(예: Win+Shift+S) 다시 시도하세요."
+
+#: ui/strings.slint:165
+msgctxt "Strings"
+msgid "The file is not a supported image. Details: {}"
+msgstr "지원되는 이미지 파일이 아닙니다. 세부 정보: {}"
+
+#: ui/strings.slint:171
+msgctxt "Strings"
+msgid "Update now"
+msgstr "지금 업데이트"
+
+#: ui/strings.slint:172
+msgctxt "Strings"
+msgid "Open settings"
+msgstr "설정 열기"
+
+#: ui/strings.slint:173
+msgctxt "Strings"
+msgid "Change shortcut"
+msgstr "바로 가기 키 변경"
+
+#: ui/strings.slint:174
+msgctxt "Strings"
+msgid "OK"
+msgstr "확인"
+
+#: ui/strings.slint:178
+msgctxt "Strings"
+msgid "Later"
+msgstr "나중에"
+
+#: ui/tray.slint:20
+msgctxt "AppTray"
+msgid "QRcode tool — {} to scan"
+msgstr "QRcode tool — {}(으)로 스캔"
+
+#: ui/tray.slint:29
+msgctxt "AppTray"
+msgid "Scan whole screen"
+msgstr "전체 화면 스캔"
+
+#: ui/tray.slint:36
+msgctxt "AppTray"
+msgid "Select area"
+msgstr "영역 선택"
+
+#: ui/tray.slint:43
+msgctxt "AppTray"
+msgid "Scan with camera"
+msgstr "카메라로 스캔"
+
+#: ui/tray.slint:51
+msgctxt "AppTray"
+msgid "Scan image from clipboard"
+msgstr "클립보드 이미지 스캔"
+
+#: ui/tray.slint:58
+msgctxt "AppTray"
+msgid "Open image…"
+msgstr "이미지 열기…"
+
+#: ui/tray.slint:66
+msgctxt "AppTray"
+msgid "Create QR code…"
+msgstr "QR 코드 만들기…"
+
+#: ui/tray.slint:73
+msgctxt "AppTray"
+msgid "Floating toolbar"
+msgstr "플로팅 도구 모음"
+
+#: ui/tray.slint:81
+msgctxt "AppTray"
+msgid "Floating bubble"
+msgstr "플로팅 버블"
+
+#: ui/tray.slint:90
+msgctxt "AppTray"
+msgid "History"
+msgstr "기록"
+
+#: ui/tray.slint:97
+msgctxt "AppTray"
+msgid "Settings"
+msgstr "설정"
+
+#: ui/tray.slint:104
+msgctxt "AppTray"
+msgid "Check for updates"
+msgstr "업데이트 확인"
+
+#: ui/tray.slint:111
+msgctxt "AppTray"
+msgid "Quit"
+msgstr "끝내기"
+
+#: ui/welcome.slint:45 ui/welcome.slint:96
+msgctxt "WelcomeWindow"
+msgid "Welcome to QRcode tool"
+msgstr "QRcode tool에 오신 것을 환영합니다"
+
+#: ui/welcome.slint:120
+msgctxt "WelcomeWindow"
+msgid "Language"
+msgstr "언어"
+
+#: ui/welcome.slint:137
+msgctxt "WelcomeWindow"
+msgid "Press {} to scan the whole screen"
+msgstr "{} 키를 눌러 화면 전체 스캔"
+
+#: ui/welcome.slint:137
+msgctxt "WelcomeWindow"
+msgid "Click the tray icon to scan the whole screen"
+msgstr "트레이 아이콘을 클릭하여 화면 전체를 스캔"
+
+#: ui/welcome.slint:138
+msgctxt "WelcomeWindow"
+msgid "Every code on the screen is marked. Press Enter or click one to open it."
+msgstr "화면의 모든 코드가 표시됩니다. Enter 키를 누르거나 클릭하면 열립니다."
+
+#: ui/welcome.slint:142
+msgctxt "WelcomeWindow"
+msgid "Press {} to select an area"
+msgstr "{} 키를 눌러 영역 선택"
+
+#: ui/welcome.slint:142
+msgctxt "WelcomeWindow"
+msgid "Select an area from the tray menu"
+msgstr "트레이 메뉴에서 영역을 선택"
+
+#: ui/welcome.slint:143
+msgctxt "WelcomeWindow"
+msgid ""
+"Drag a box around a small, blurry or tilted code. Only that area is scanned."
+msgstr "작거나 흐리거나 기울어진 코드 주위를 끌어서 선택하세요. 그 영역만 스캔합니다."
+
+#: ui/welcome.slint:147
+msgctxt "WelcomeWindow"
+msgid "Press {} to use the webcam"
+msgstr "{} 키를 눌러 웹캠 사용"
+
+#: ui/welcome.slint:147
+msgctxt "WelcomeWindow"
+msgid "Use the webcam from the tray menu"
+msgstr "트레이 메뉴에서 웹캠 사용"
+
+#: ui/welcome.slint:148
+msgctxt "WelcomeWindow"
+msgid "Hold a printed code or a phone screen up to the camera."
+msgstr "인쇄된 코드나 휴대폰 화면을 카메라에 비추세요."
+
+#: ui/welcome.slint:152
+msgctxt "WelcomeWindow"
+msgid "Links never open by surprise"
+msgstr "링크가 갑자기 열리지 않습니다"
+
+#: ui/welcome.slint:153
+msgctxt "WelcomeWindow"
+msgid ""
+"Every link shows its real site name first. Suspicious links are marked and "
+"always ask before opening."
+msgstr "모든 링크는 실제 사이트 이름을 먼저 보여 줍니다. 의심스러운 링크는 표시되며 열기 전에 항상 확인을 요청합니다."
+
+#: ui/welcome.slint:168
+msgctxt "WelcomeWindow"
+msgid "Start with the computer"
+msgstr "시작 시 실행"
+
+#: ui/welcome.slint:173
+msgctxt "WelcomeWindow"
+msgid ""
+"QRcode tool starts hidden in the tray so the shortcut is always ready. It "
+"uses very little memory. You can change this any time in Settings."
+msgstr "QRcode tool은 시스템 트레이에 숨겨진 상태로 시작되므로 바로 가기 키를 언제든 사용할 수 있습니다. 메모리를 거의 사용하지 않습니다. 설정에서 언제든지 변경할 수 있습니다."
+
+#: ui/welcome.slint:196
+msgctxt "WelcomeWindow"
+msgid "Close"
+msgstr "닫기"
+
+#: ui/welcome.slint:202
+msgctxt "WelcomeWindow"
+msgid "Try it now"
+msgstr "지금 사용해 보기"
+
+#: ui/widgets.slint:298
+msgctxt "Pill"
+msgid "Details"
+msgstr "세부 정보"
+
+#: ui/widgets.slint:381
+msgctxt "DetailCard"
+msgid "Close"
+msgstr "닫기"
+
+#: ui/widgets.slint:462
+msgctxt "DetailCard"
+msgid "Hide"
+msgstr "숨기기"
+
+#: ui/widgets.slint:462
+msgctxt "DetailCard"
+msgid "Show"
+msgstr "표시"
+
+#: ui/widgets.slint:472
+msgctxt "DetailCard"
+msgid "Copy"
+msgstr "복사"
+
+#: ui/settings.slint:368
+msgctxt "SettingsWindow"
+msgid "Right-click menu"
+msgstr "오른쪽 클릭 메뉴"
+
+#: ui/settings.slint:369
+msgctxt "SettingsWindow"
+msgid ""
+"Adds QRcode tool to the desktop right-click menu and to image files. On "
+"Windows 11, open Show more options."
+msgstr "바탕 화면 오른쪽 클릭 메뉴와 이미지 파일에 QRcode tool을 추가합니다. Windows 11에서는 더 많은 옵션 표시를 여세요."
+
+#: ui/strings.slint:122
+msgctxt "Strings"
+msgid "QRcode tool Scan screen"
+msgstr "QRcode tool 화면 스캔"
+
+#: ui/strings.slint:123
+msgctxt "Strings"
+msgid "QRcode tool Scan selection"
+msgstr "QRcode tool 영역 스캔"
+
+#: ui/strings.slint:124
+msgctxt "Strings"
+msgid "QRcode tool Scan with camera"
+msgstr "QRcode tool 카메라 스캔"
+
+#: ui/strings.slint:125
+msgctxt "Strings"
+msgid "QRcode tool Toolbar"
+msgstr "QRcode tool 도구 모음"
+
+#: ui/strings.slint:126
+msgctxt "Strings"
+msgid "QRcode tool Open image"
+msgstr "QRcode tool 이미지 열기"
+
+#: ui/strings.slint:127
+msgctxt "Strings"
+msgid "That file cannot be opened."
+msgstr "이 파일을 열 수 없습니다."

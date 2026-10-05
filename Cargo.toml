@@ -1,0 +1,66 @@
+[workspace]
+resolver = "2"
+members = [
+    "app",
+    "crates/qrtool-core",
+    "crates/qrtool-decode",
+    "crates/qrtool-capture",
+    "crates/qrtool-camera",
+    "crates/qrtool-platform",
+]
+default-members = ["app"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85"
+license = "MIT OR Apache-2.0"
+authors = ["Naritaroad (Lrniey666)"]
+repository = "https://github.com/Lrniey666/qrcode-tool"
+homepage = "https://github.com/Lrniey666/qrcode-tool"
+
+[workspace.dependencies]
+# internal crates
+qrtool-core = { path = "crates/qrtool-core" }
+qrtool-decode = { path = "crates/qrtool-decode" }
+qrtool-capture = { path = "crates/qrtool-capture" }
+qrtool-camera = { path = "crates/qrtool-camera" }
+qrtool-platform = { path = "crates/qrtool-platform" }
+
+# shared third-party crates
+anyhow = "1"
+thiserror = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "1"
+url = "2.5"
+idna = "1"
+image = { version = "0.25", default-features = false, features = ["png", "jpeg", "bmp", "gif", "webp"] }
+tracing = "0.1"
+base64 = "0.22"
+encoding_rs = "0.8"
+time = { version = "0.3", features = ["formatting", "local-offset", "macros"] }
+
+[profile.release]
+# Size matters for the installer (< 15 MB goal): optimise for size in general and for
+# speed only where it counts (decoding and image processing, below).
+lto = "fat"
+codegen-units = 1
+opt-level = "s"
+strip = "symbols"
+panic = "unwind"
+
+[profile.release.package.zxing-cpp]
+opt-level = 3
+[profile.release.package.qrtool-decode]
+opt-level = 3
+[profile.release.package.image]
+opt-level = 3
+[profile.release.package.zune-jpeg]
+opt-level = 3
+
+# Keep the C++ decoder optimized even in debug builds: unoptimized zxing-cpp is very slow.
+[profile.dev.package.zxing-cpp]
+opt-level = 3
+[profile.dev.package.image]
+opt-level = 3

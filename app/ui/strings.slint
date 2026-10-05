@@ -1,0 +1,188 @@
+// Translatable strings that are selected by an id at runtime.
+// All user-visible text lives in .slint files so the translation extractor finds it.
+// Rust calls `Strings.t(...)` (as `invoke_t`) for the few texts it needs itself,
+// e.g. file dialog titles.
+
+export global Strings {
+    public pure function kind-label(kind: string) -> string {
+        if (kind == "url") { return @tr("Link"); }
+        if (kind == "other-scheme") { return @tr("Blocked link"); }
+        if (kind == "wifi") { return @tr("Wi-Fi network"); }
+        if (kind == "contact") { return @tr("Contact"); }
+        if (kind == "email") { return @tr("Email"); }
+        if (kind == "phone") { return @tr("Phone number"); }
+        if (kind == "sms") { return @tr("Text message"); }
+        if (kind == "geo") { return @tr("Location"); }
+        if (kind == "otp") { return @tr("2-step verification key"); }
+        if (kind == "crypto") { return @tr("Payment address"); }
+        if (kind == "einvoice") { return @tr("E-invoice"); }
+        if (kind == "einvoice-cont") { return @tr("E-invoice items (right code)"); }
+        if (kind == "barcode") { return @tr("Barcode"); }
+        return @tr("Text");
+    }
+
+    public pure function finding(code: string, detail: string) -> string {
+        if (code == "not-encrypted") { return @tr("Not encrypted (http)"); }
+        if (code == "user-info") { return @tr("Disguised address — it really goes to {}", detail); }
+        if (code == "idn") { return @tr("International domain name, real address: {}", detail); }
+        if (code == "mixed-script") { return @tr("Look-alike letters from different alphabets in “{}”", detail); }
+        if (code == "ip-address") { return @tr("Uses a raw IP address ({}) instead of a name", detail); }
+        if (code == "port") { return @tr("Unusual port {}", detail); }
+        if (code == "shortener") { return @tr("Short link — the real destination is hidden"); }
+        if (code == "very-long") { return @tr("Very long address ({} characters)", detail); }
+        if (code == "encoded") { return @tr("Contains many encoded characters"); }
+        if (code == "deep-subdomain") { return @tr("Unusually many subdomains ({})", detail); }
+        return code;
+    }
+
+    public pure function action-label(id: string) -> string {
+        if (id == "open") { return @tr("Open"); }
+        if (id == "open-anyway") { return @tr("Open anyway"); }
+        if (id == "copy") { return @tr("Copy"); }
+        if (id == "copy-password") { return @tr("Copy password"); }
+        if (id == "connect-wifi") { return @tr("Connect"); }
+        if (id == "save-contact") { return @tr("Save contact"); }
+        if (id == "send-email") { return @tr("Write email"); }
+        if (id == "call") { return @tr("Call"); }
+        if (id == "send-sms") { return @tr("Send message"); }
+        if (id == "open-map") { return @tr("Open map"); }
+        if (id == "copy-number") { return @tr("Copy invoice number"); }
+        if (id == "trust") { return @tr("Always allow this site"); }
+        if (id == "close") { return @tr("Close"); }
+        return id;
+    }
+
+    public pure function field-label(key: string) -> string {
+        if (key == "url") { return @tr("Address"); }
+        if (key == "host") { return @tr("Site"); }
+        if (key == "ssid") { return @tr("Network name"); }
+        if (key == "security") { return @tr("Security"); }
+        if (key == "password") { return @tr("Password"); }
+        if (key == "hidden") { return @tr("Hidden network"); }
+        if (key == "name") { return @tr("Name"); }
+        if (key == "organization") { return @tr("Organization"); }
+        if (key == "phone") { return @tr("Phone"); }
+        if (key == "email") { return @tr("Email"); }
+        if (key == "website") { return @tr("Website"); }
+        if (key == "postal") { return @tr("Postal address"); }
+        if (key == "note") { return @tr("Note"); }
+        if (key == "subject") { return @tr("Subject"); }
+        if (key == "body") { return @tr("Message"); }
+        if (key == "number") { return @tr("Number"); }
+        if (key == "coords") { return @tr("Coordinates"); }
+        if (key == "issuer") { return @tr("Issuer"); }
+        if (key == "account") { return @tr("Account"); }
+        if (key == "amount") { return @tr("Amount"); }
+        if (key == "wallet") { return @tr("Wallet address"); }
+        if (key == "invoice-number") { return @tr("Invoice number"); }
+        if (key == "date") { return @tr("Date"); }
+        if (key == "random-code") { return @tr("Random code"); }
+        if (key == "total") { return @tr("Total"); }
+        if (key == "tax") { return @tr("Tax"); }
+        if (key == "seller") { return @tr("Seller ID"); }
+        if (key == "buyer") { return @tr("Buyer ID"); }
+        if (key == "items") { return @tr("Items"); }
+        if (key == "scheme") { return @tr("Type"); }
+        if (key == "content") { return @tr("Content"); }
+        if (key == "format") { return @tr("Barcode type"); }
+        return key;
+    }
+
+    // Explanations shown at the top of the detail card for some kinds.
+    public pure function notice(kind: string, level: int, confirm-danger: bool) -> string {
+        if (kind == "otp") { return @tr("This is a two-step verification secret. Anyone who has it can generate your login codes. It is never saved to history."); }
+        if (kind == "other-scheme") { return @tr("This is not a web link. For your safety it can’t be opened here, only copied."); }
+        if (kind == "einvoice-cont") { return @tr("This is the right-hand code of an e-invoice. Scan both codes together to see all items."); }
+        if (kind == "crypto") { return @tr("Always double-check a payment address before sending money."); }
+        if (confirm-danger) { return @tr("This link looks deceptive. Press “Open anyway” only if you are sure you trust it."); }
+        if (level >= 3) { return @tr("This link looks deceptive. Check the real site name below before opening."); }
+        if (level == 2) { return @tr("Check the site name before opening."); }
+        return "";
+    }
+
+    // Texts needed by Rust (file dialogs, tray tooltip, …).
+    public pure function t(key: string) -> string {
+        if (key == "dialog-open-image") { return @tr("Open an image with a QR code"); }
+        if (key == "dialog-save-png") { return @tr("Save QR code as PNG"); }
+        if (key == "dialog-save-svg") { return @tr("Save QR code as SVG"); }
+        if (key == "dialog-save-contact") { return @tr("Save contact"); }
+        if (key == "filter-images") { return @tr("Images"); }
+        if (key == "filter-contact") { return @tr("Contact card"); }
+        if (key == "yes") { return @tr("Yes"); }
+        if (key == "no") { return @tr("No"); }
+        if (key == "open-network") { return @tr("Open (no password)"); }
+        if (key == "system-language") { return @tr("Use system language"); }
+        if (key == "copied") { return @tr("Copied to the clipboard"); }
+        if (key == "saved") { return @tr("Saved"); }
+        if (key == "update-checking") { return @tr("Checking for updates…"); }
+        if (key == "update-never") { return @tr("Not checked yet"); }
+        if (key == "default-camera") { return @tr("Default camera"); }
+        if (key == "no-camera") { return @tr("No camera found"); }
+        if (key == "einvoice-items-hint") { return @tr("Scan the right-hand code too to see the items."); }
+        if (key == "shell-scan-screen") { return @tr("QRcode tool Scan screen"); }
+        if (key == "shell-scan-region") { return @tr("QRcode tool Scan selection"); }
+        if (key == "shell-scan-camera") { return @tr("QRcode tool Scan with camera"); }
+        if (key == "shell-toolbar") { return @tr("QRcode tool Toolbar"); }
+        if (key == "shell-open-image") { return @tr("QRcode tool Open image"); }
+        if (key == "shell-bad-path") { return @tr("That file cannot be opened."); }
+        return key;
+    }
+
+    // Generic message dialog texts.
+    public pure function msg-title(kind: string, arg: string) -> string {
+        if (kind == "update-available") { return @tr("Update available"); }
+        if (kind == "update-none") { return @tr("You’re up to date"); }
+        if (kind == "update-not-installed") { return @tr("Updates are not available"); }
+        if (kind == "update-error") { return @tr("Couldn’t check for updates"); }
+        if (kind == "update-downloading") { return @tr("Downloading update…"); }
+        if (kind == "capture-failed") { return @tr("Couldn’t capture the screen"); }
+        if (kind == "capture-permission") { return @tr("Screen recording permission needed"); }
+        if (kind == "camera-failed") { return @tr("Couldn’t start the camera"); }
+        if (kind == "camera-permission") { return @tr("Camera permission needed"); }
+        if (kind == "camera-none") { return @tr("No camera found"); }
+        if (kind == "hotkey-failed") { return @tr("Shortcut unavailable"); }
+        if (kind == "wifi-connected") { return @tr("Connecting to Wi-Fi"); }
+        if (kind == "wifi-failed") { return @tr("Couldn’t connect to Wi-Fi"); }
+        if (kind == "open-failed") { return @tr("Couldn’t open"); }
+        if (kind == "no-code") { return @tr("No QR code found"); }
+        if (kind == "clipboard-empty") { return @tr("No image on the clipboard"); }
+        if (kind == "image-failed") { return @tr("Couldn’t open the image"); }
+        if (kind == "saved") { return @tr("Saved"); }
+        return kind;
+    }
+
+    public pure function msg-body(kind: string, arg: string) -> string {
+        if (kind == "update-available") { return @tr("Version {} is ready to download. The app restarts after the update.", arg); }
+        if (kind == "update-none") { return @tr("QRcode tool {} is the latest version.", arg); }
+        if (kind == "update-not-installed") { return @tr("This copy was not installed with the setup program (portable or developer build), so it can’t update itself. Download new versions from GitHub."); }
+        if (kind == "update-error") { return @tr("Check your internet connection and try again later. ({})", arg); }
+        if (kind == "update-downloading") { return @tr("Version {} is being downloaded. QRcode tool will restart when it’s done.", arg); }
+        if (kind == "capture-failed") { return @tr("The screen could not be captured. On Linux with Wayland, bind “qrcode-tool scan-screen” to a shortcut or use “Scan image from clipboard”. Details: {}", arg); }
+        if (kind == "capture-permission") { return @tr("Allow QRcode tool under System Settings › Privacy & Security › Screen Recording, then try again."); }
+        if (kind == "camera-failed") { return @tr("The camera may be in use by another app. Details: {}", arg); }
+        if (kind == "camera-permission") { return @tr("Allow QRcode tool to use the camera in your system’s privacy settings, then try again."); }
+        if (kind == "camera-none") { return @tr("Connect a webcam and try again."); }
+        if (kind == "hotkey-failed") { return @tr("“{}” is already used by another app. Choose another shortcut in Settings › Shortcuts.", arg); }
+        if (kind == "wifi-connected") { return @tr("Your system is connecting to “{}”.", arg); }
+        if (kind == "wifi-failed") { return @tr("Copy the password and connect manually. Details: {}", arg); }
+        if (kind == "open-failed") { return @tr("Details: {}", arg); }
+        if (kind == "no-code") { return @tr("No QR code or barcode was found in the image."); }
+        if (kind == "clipboard-empty") { return @tr("Copy a screenshot or picture first (for example with Win+Shift+S), then try again."); }
+        if (kind == "image-failed") { return @tr("The file is not a supported image. Details: {}", arg); }
+        if (kind == "saved") { return arg; }
+        return arg;
+    }
+
+    public pure function msg-primary(kind: string) -> string {
+        if (kind == "update-available") { return @tr("Update now"); }
+        if (kind == "capture-permission" || kind == "camera-permission") { return @tr("Open settings"); }
+        if (kind == "hotkey-failed") { return @tr("Change shortcut"); }
+        return @tr("OK");
+    }
+
+    public pure function msg-secondary(kind: string) -> string {
+        if (kind == "update-available") { return @tr("Later"); }
+        if (kind == "capture-permission" || kind == "camera-permission" || kind == "hotkey-failed") { return @tr("Close"); }
+        return "";
+    }
+}

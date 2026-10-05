@@ -1,0 +1,563 @@
+// Reusable building blocks.
+
+import { Button, ScrollView } from "std-widgets.slint";
+import { Theme, Levels } from "theme.slint";
+import { Icons } from "icons.slint";
+import { Strings } from "strings.slint";
+import { PillData, DetailData, FieldRow } from "types.slint";
+
+// Small keyboard key cap, e.g. [Ctrl] [Alt] [Q].
+export component KeyCap inherits Rectangle {
+    in property <string> text;
+    in property <bool> on-dark: false;
+    height: 22px;
+    min-width: 22px;
+    border-radius: Theme.radius-sm;
+    border-width: 1px;
+    border-color: on-dark ? #ffffff40 : Theme.stroke-strong;
+    background: on-dark ? #ffffff1a : Theme.surface-alt;
+    HorizontalLayout {
+        padding-left: 6px;
+        padding-right: 6px;
+        Text {
+            text: root.text;
+            font-size: 11px;
+            font-weight: 600;
+            color: on-dark ? #ffffff : Theme.text-secondary;
+            vertical-alignment: center;
+            horizontal-alignment: center;
+        }
+    }
+}
+
+// Tooltip card: title, optional shortcut and description.
+export component Tooltip inherits Rectangle {
+    in property <string> title;
+    in property <string> shortcut;
+    in property <string> description;
+    width: min(self.preferred-width, 300px);
+    background: Theme.surface;
+    border-radius: Theme.radius;
+    border-width: 1px;
+    border-color: Theme.stroke-strong;
+    drop-shadow-blur: 12px;
+    drop-shadow-offset-y: 4px;
+    drop-shadow-color: Theme.shadow;
+    VerticalLayout {
+        padding: 10px;
+        spacing: 4px;
+        HorizontalLayout {
+            spacing: 8px;
+            Text {
+                text: root.title;
+                font-size: Theme.body;
+                font-weight: 600;
+                color: Theme.text;
+                vertical-alignment: center;
+            }
+            if root.shortcut != "": KeyCap {
+                text: root.shortcut;
+            }
+        }
+        if root.description != "": Text {
+            text: root.description;
+            font-size: Theme.caption;
+            color: Theme.text-secondary;
+            wrap: word-wrap;
+        }
+    }
+}
+
+// Square icon button with an optional delayed tooltip below it.
+export component IconButton inherits Rectangle {
+    in property <image> icon;
+    in property <string> label;
+    in property <string> shortcut;
+    in property <string> description;
+    in property <bool> active;
+    in property <bool> enabled: true;
+    in property <bool> show-tooltip: true;
+    in property <length> size: 36px;
+    in property <length> icon-size: 20px;
+    in property <color> icon-color: Theme.text;
+    in property <bool> tooltip-above: false;
+    out property <bool> hovered: ta.has-hover;
+    callback clicked();
+
+    property <bool> show-tip;
+
+    width: size;
+    height: size;
+    border-radius: Theme.radius-sm + 2px;
+    background: !enabled ? transparent : ta.pressed ? Theme.pressed : active ? Theme.selected : ta.has-hover ? Theme.hover : transparent;
+    accessible-role: button;
+    accessible-label: label;
+    accessible-description: description;
+    accessible-action-default => {
+        root.clicked();
+    }
+
+    Image {
+        source: root.icon;
+        width: root.icon-size;
+        height: root.icon-size;
+        colorize: !root.enabled ? Theme.text-tertiary : root.active ? Theme.accent-fg : root.icon-color;
+    }
+
+    if root.active: Rectangle {
+        y: root.height - 3px;
+        width: 16px;
+        height: 3px;
+        border-radius: 1.5px;
+        background: Theme.accent-fg;
+    }
+
+    ta := TouchArea {
+        enabled: root.enabled;
+        clicked => {
+            root.show-tip = false;
+            root.clicked();
+        }
+    }
+
+    Timer {
+        interval: 550ms;
+        running: ta.has-hover && root.show-tooltip && root.label != "" && !root.show-tip;
+        triggered => {
+            root.show-tip = true;
+        }
+    }
+
+    changed hovered => {
+        if (!self.hovered) {
+            self.show-tip = false;
+        }
+    }
+
+    if root.show-tip && ta.has-hover: tip := Tooltip {
+        title: root.label;
+        shortcut: root.shortcut;
+        description: root.description;
+        x: (root.width - self.width) / 2;
+        y: root.tooltip-above ? -self.height - 8px : root.height + 8px;
+    }
+}
+
+// Thin vertical separator for toolbars.
+export component ToolbarSeparator inherits Rectangle {
+    width: 1px;
+    height: 20px;
+    background: Theme.stroke-strong;
+}
+
+// Four rounded corner brackets around a detected code (Google Lens style).
+export component CornerBrackets inherits Rectangle {
+    in property <color> stroke: #ffffff;
+    in property <length> thickness: 3px;
+    property <length> len: min(26px, min(self.width, self.height) / 2.5);
+    property <length> radius: min(12px, self.len * 0.6);
+
+    // top-left
+    Rectangle {
+        x: 0;
+        y: 0;
+        width: root.len;
+        height: root.len;
+        clip: true;
+        Rectangle {
+            x: 0;
+            y: 0;
+            width: root.len * 2;
+            height: root.len * 2;
+            border-width: root.thickness;
+            border-radius: root.radius;
+            border-color: root.stroke;
+        }
+    }
+    // top-right
+    Rectangle {
+        x: root.width - root.len;
+        y: 0;
+        width: root.len;
+        height: root.len;
+        clip: true;
+        Rectangle {
+            x: -root.len;
+            y: 0;
+            width: root.len * 2;
+            height: root.len * 2;
+            border-width: root.thickness;
+            border-radius: root.radius;
+            border-color: root.stroke;
+        }
+    }
+    // bottom-left
+    Rectangle {
+        x: 0;
+        y: root.height - root.len;
+        width: root.len;
+        height: root.len;
+        clip: true;
+        Rectangle {
+            x: 0;
+            y: -root.len;
+            width: root.len * 2;
+            height: root.len * 2;
+            border-width: root.thickness;
+            border-radius: root.radius;
+            border-color: root.stroke;
+        }
+    }
+    // bottom-right
+    Rectangle {
+        x: root.width - root.len;
+        y: root.height - root.len;
+        width: root.len;
+        height: root.len;
+        clip: true;
+        Rectangle {
+            x: -root.len;
+            y: -root.len;
+            width: root.len * 2;
+            height: root.len * 2;
+            border-width: root.thickness;
+            border-radius: root.radius;
+            border-color: root.stroke;
+        }
+    }
+}
+
+// Lens-style result capsule shown on top of a detected code.
+export component Pill inherits Rectangle {
+    in property <PillData> data;
+    callback clicked();
+    callback details();
+
+    property <color> ring: data.selected ? Theme.accent-fill : Levels.pill-ring(data.level);
+
+    height: 48px;
+    width: min(layout.preferred-width, 420px);
+    border-radius: self.height / 2;
+    background: main-ta.has-hover ? Theme.pill-hover : Theme.pill-bg;
+    border-width: (data.selected || data.level >= 2) ? 2px : 0px;
+    border-color: ring;
+    drop-shadow-blur: 16px;
+    drop-shadow-offset-y: 4px;
+    drop-shadow-color: #00000066;
+    accessible-role: button;
+    accessible-label: Strings.kind-label(data.kind) + ": " + data.label;
+    accessible-action-default => {
+        root.clicked();
+    }
+
+    main-ta := TouchArea {
+        mouse-cursor: pointer;
+        clicked => {
+            root.clicked();
+        }
+    }
+
+    layout := HorizontalLayout {
+        padding-left: 16px;
+        padding-right: 6px;
+        spacing: 10px;
+        alignment: start;
+        Image {
+            source: data.level >= 2 ? Icons.for-level(data.level) : Icons.for-kind(data.kind);
+            width: 22px;
+            height: 22px;
+            y: (parent.height - self.height) / 2;
+            colorize: data.level >= 2 ? Levels.pill-ring(data.level) : Theme.pill-text;
+        }
+        VerticalLayout {
+            alignment: center;
+            spacing: 0px;
+            Text {
+                text: data.label;
+                color: Theme.pill-text;
+                font-size: 15px;
+                font-weight: 600;
+                overflow: elide;
+                max-width: 300px;
+            }
+            if data.sublabel != "": Text {
+                text: data.sublabel;
+                color: Theme.pill-subtext;
+                font-size: 11px;
+                overflow: elide;
+                max-width: 300px;
+            }
+        }
+        Rectangle {
+            width: 36px;
+            height: 36px;
+            y: (parent.height - self.height) / 2;
+            border-radius: 18px;
+            background: details-ta.has-hover ? #ffffff26 : #ffffff12;
+            accessible-role: button;
+            accessible-label: @tr("Details");
+            accessible-action-default => {
+                root.details();
+            }
+            Image {
+                source: Icons.chevron-right;
+                width: 18px;
+                height: 18px;
+                colorize: Theme.pill-text;
+            }
+            details-ta := TouchArea {
+                mouse-cursor: pointer;
+                clicked => {
+                    root.details();
+                }
+            }
+        }
+    }
+}
+
+// Card showing everything about one decoded code, with actions.
+export component DetailCard inherits Rectangle {
+    in property <DetailData> data;
+    callback action(string);
+    callback copy-field(int);
+    callback close();
+
+    property <bool> reveal: false;
+    property <string> notice: Strings.notice(data.kind, data.level, data.confirm-danger);
+    property <color> notice-fg: data.level >= 3 || data.confirm-danger ? Theme.danger : data.level == 2 || data.kind == "otp" || data.kind == "crypto" ? Theme.warning : Theme.info;
+    property <color> notice-bg: data.level >= 3 || data.confirm-danger ? Theme.danger-bg : data.level == 2 || data.kind == "otp" || data.kind == "crypto" ? Theme.warning-bg : Theme.selected;
+
+    background: Theme.surface;
+    border-radius: Theme.radius-lg;
+    border-width: 1px;
+    border-color: Theme.stroke;
+    drop-shadow-blur: 32px;
+    drop-shadow-offset-y: 8px;
+    drop-shadow-color: Theme.shadow;
+    accessible-role: groupbox;
+    accessible-label: Strings.kind-label(data.kind);
+
+    // swallow clicks so they do not reach the scrim behind the card
+    TouchArea { }
+
+    VerticalLayout {
+        padding: 20px;
+        spacing: 14px;
+
+        HorizontalLayout {
+            spacing: 12px;
+            Rectangle {
+                width: 40px;
+                height: 40px;
+                border-radius: 20px;
+                background: data.level >= 3 ? Theme.danger-bg : data.level == 2 ? Theme.warning-bg : Theme.selected;
+                Image {
+                    source: data.level >= 2 ? Icons.for-level(data.level) : Icons.for-kind(data.kind);
+                    width: 22px;
+                    height: 22px;
+                    colorize: data.level >= 2 ? Levels.fg(data.level) : Theme.accent-fg;
+                }
+            }
+            VerticalLayout {
+                alignment: center;
+                spacing: 2px;
+                Text {
+                    text: Strings.kind-label(data.kind);
+                    font-size: Theme.caption;
+                    color: Theme.text-secondary;
+                }
+                Text {
+                    text: data.title;
+                    font-size: 18px;
+                    font-weight: 600;
+                    color: Theme.text;
+                    wrap: word-wrap;
+                    max-height: 72px;
+                    overflow: elide;
+                }
+            }
+            IconButton {
+                icon: Icons.close;
+                label: @tr("Close");
+                show-tooltip: false;
+                size: 32px;
+                clicked => {
+                    root.close();
+                }
+            }
+        }
+
+        if root.notice != "": Rectangle {
+            border-radius: Theme.radius;
+            background: root.notice-bg;
+            HorizontalLayout {
+                padding: 10px;
+                spacing: 8px;
+                Image {
+                    source: Icons.for-level(data.confirm-danger ? 3 : data.level >= 2 ? data.level : 1);
+                    width: 18px;
+                    height: 18px;
+                    colorize: root.notice-fg;
+                }
+                Text {
+                    text: root.notice;
+                    color: Theme.text;
+                    font-size: 13px;
+                    wrap: word-wrap;
+                }
+            }
+        }
+
+        if data.findings.length > 0: VerticalLayout {
+            spacing: 6px;
+            for f in data.findings: HorizontalLayout {
+                spacing: 8px;
+                Image {
+                    source: Icons.for-level(f.level);
+                    width: 16px;
+                    height: 16px;
+                    colorize: Levels.fg(f.level);
+                }
+                Text {
+                    text: Strings.finding(f.code, f.detail);
+                    font-size: 13px;
+                    color: f.level >= 2 ? Levels.fg(f.level) : Theme.text-secondary;
+                    wrap: word-wrap;
+                }
+            }
+        }
+
+        ScrollView {
+            max-height: 260px;
+            min-height: min(fields-box.preferred-height, 120px);
+            preferred-height: fields-box.preferred-height;
+            fields-box := VerticalLayout {
+                spacing: 2px;
+                for f[i] in data.fields: Rectangle {
+                    border-radius: Theme.radius-sm;
+                    background: field-ta.has-hover ? Theme.hover : transparent;
+                    field-ta := TouchArea { }
+                    HorizontalLayout {
+                        padding: 6px;
+                        spacing: 8px;
+                        VerticalLayout {
+                            spacing: 2px;
+                            Text {
+                                text: Strings.field-label(f.key);
+                                font-size: Theme.caption;
+                                color: Theme.text-secondary;
+                            }
+                            TextInput {
+                                text: f.secret && !root.reveal ? "••••••••" : f.value;
+                                read-only: true;
+                                wrap: word-wrap;
+                                single-line: false;
+                                font-size: Theme.body;
+                                color: Theme.text;
+                                selection-background-color: Theme.accent-fill.with-alpha(0.35);
+                            }
+                        }
+                        if f.secret: IconButton {
+                            icon: Icons.lock;
+                            label: root.reveal ? @tr("Hide") : @tr("Show");
+                            size: 30px;
+                            icon-size: 16px;
+                            show-tooltip: false;
+                            clicked => {
+                                root.reveal = !root.reveal;
+                            }
+                        }
+                        if f.copyable: IconButton {
+                            icon: Icons.copy;
+                            label: @tr("Copy");
+                            size: 30px;
+                            icon-size: 16px;
+                            show-tooltip: false;
+                            clicked => {
+                                root.copy-field(i);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        HorizontalLayout {
+            spacing: 8px;
+            alignment: end;
+            if data.can-trust: Button {
+                text: Strings.action-label("trust");
+                clicked => {
+                    root.action("trust");
+                }
+            }
+            for a in data.actions: Button {
+                text: Strings.action-label(data.confirm-danger && a.id == "open" ? "open-anyway" : a.id);
+                primary: a.primary && !data.confirm-danger;
+                clicked => {
+                    root.action(a.id);
+                }
+            }
+        }
+    }
+}
+
+// A settings row: title + description on the left, control on the right.
+export component SettingRow inherits Rectangle {
+    in property <string> title;
+    in property <string> description;
+    in property <image> icon;
+    min-height: 64px;
+    background: Theme.card;
+    border-radius: Theme.radius;
+    border-width: 1px;
+    border-color: Theme.stroke;
+    HorizontalLayout {
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        spacing: 14px;
+        if root.icon.width > 0: VerticalLayout {
+            alignment: center;
+            Image {
+                source: root.icon;
+                width: 20px;
+                height: 20px;
+                colorize: Theme.text;
+            }
+        }
+        VerticalLayout {
+            alignment: center;
+            horizontal-stretch: 1;
+            spacing: 2px;
+            Text {
+                text: root.title;
+                color: Theme.text;
+                font-size: Theme.body;
+                wrap: word-wrap;
+            }
+            if root.description != "": Text {
+                text: root.description;
+                color: Theme.text-secondary;
+                font-size: Theme.caption;
+                wrap: word-wrap;
+            }
+        }
+        VerticalLayout {
+            alignment: center;
+            HorizontalLayout {
+                alignment: end;
+                spacing: 8px;
+                @children
+            }
+        }
+    }
+}
+
+// Section heading inside settings pages.
+export component SectionTitle inherits Text {
+    font-size: Theme.body;
+    font-weight: 600;
+    color: Theme.text;
+}

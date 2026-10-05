@@ -1,0 +1,37 @@
+[package]
+name = "qrtool-platform"
+description = "Operating-system integration for QRcode tool: opening links safely, autostart, theme, clipboard, IPC, Wi-Fi, Windows right-click menu."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+publish = false
+
+[dependencies]
+qrtool-core.workspace = true
+image.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+url.workspace = true
+thiserror.workspace = true
+tracing.workspace = true
+webbrowser = "1.2"
+open = "5.4"
+auto-launch = "0.6"
+dark-light = "3"
+directories = "6"
+interprocess = "2.4"
+arboard = { version = "3.6", default-features = false, features = ["image-data"] }
+sys-locale = "0.3"
+
+[target.'cfg(windows)'.dependencies]
+winreg = "0.56"
+windows-sys = { version = "0.61", features = [
+    "Win32_Foundation",
+    "Win32_UI_Shell",
+    "Win32_UI_Accessibility",
+    "Win32_UI_WindowsAndMessaging",
+    "Win32_System_Diagnostics_Debug",
+] }

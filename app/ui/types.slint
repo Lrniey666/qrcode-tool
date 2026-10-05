@@ -1,0 +1,70 @@
+// Data structures exchanged between Rust and the UI.
+
+// A detected code shown as a Lens-style pill.
+// Overlay windows: x/y/w/h are logical pixels of the window.
+// Preview windows: x/y/w/h are pixels of the source frame (scaled in the UI).
+export struct PillData {
+    x: float,
+    y: float,
+    w: float,
+    h: float,
+    // payload kind id (url, wifi, contact, …), see Rust `PayloadKind::id`
+    kind: string,
+    label: string,
+    sublabel: string,
+    // 0 ok, 1 info, 2 warning, 3 danger
+    level: int,
+    selected: bool,
+    // The code is in view right now (camera). Held results stay listed but are not.
+    live: bool,
+}
+
+export struct FieldRow {
+    // translation key, see Strings.field-label
+    key: string,
+    value: string,
+    copyable: bool,
+    secret: bool,
+}
+
+export struct FindingRow {
+    code: string,
+    detail: string,
+    level: int,
+}
+
+export struct ActionRow {
+    // action id, see Strings.action-label
+    id: string,
+    primary: bool,
+    danger: bool,
+}
+
+export struct DetailData {
+    kind: string,
+    title: string,
+    content: string,
+    level: int,
+    fields: [FieldRow],
+    findings: [FindingRow],
+    actions: [ActionRow],
+    // the user pressed "Open" on a dangerous link once; the next press really opens it
+    confirm-danger: bool,
+    can-trust: bool,
+    trust-domain: string,
+}
+
+export struct HistoryRow {
+    time: string,
+    kind: string,
+    text: string,
+    openable: bool,
+}
+
+export struct HotkeyRow {
+    // screen | region | camera | toolbar
+    id: string,
+    value: string,
+    // 0 ok, 1 failed to register, 2 invalid
+    state: int,
+}

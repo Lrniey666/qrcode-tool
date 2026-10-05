@@ -1,0 +1,19 @@
+[package]
+name = "qrtool-camera"
+description = "Webcam capture and live decoding for QRcode tool (wraps nokhwa)."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+publish = false
+
+[dependencies]
+# Default features are off: they pull in mozjpeg (C). MJPEG frames are decoded with the
+# pure-Rust decoder of the `image` crate instead.
+nokhwa = { version = "0.10", default-features = false, features = ["input-native"] }
+qrtool-decode.workspace = true
+image.workspace = true
+thiserror.workspace = true
+tracing.workspace = true

@@ -1,0 +1,23 @@
+[package]
+name = "qrtool-decode"
+description = "Barcode decoding (zxing-cpp) with preprocessing, plus QR code generation, for QRcode tool."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+publish = false
+
+[dependencies]
+# zxing-cpp: the most robust open-source barcode reader. `bundled` compiles the C++ core
+# with CMake and links it statically (needs a C++ compiler + CMake at build time).
+zxing-cpp = { version = "0.5", features = ["bundled"] }
+qrcode = { version = "0.14", default-features = false, features = ["svg"] }
+image.workspace = true
+thiserror.workspace = true
+tracing.workspace = true
+
+
+[dev-dependencies]
+qrtool-core.workspace = true

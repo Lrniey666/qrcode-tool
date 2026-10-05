@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  MSIX manifest template for the Microsoft Store.
+  Replace the Identity Name/Publisher with the values from Partner Center and the version.
+  Build: see packaging/windows/README.md.
+-->
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:uap5="http://schemas.microsoft.com/appx/manifest/uap/windows10/5"
+  xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+  IgnorableNamespaces="uap uap5 desktop rescap">
+
+  <Identity Name="__STORE_IDENTITY_NAME__"
+            Publisher="__STORE_PUBLISHER__"
+            Version="__VERSION__.0"
+            ProcessorArchitecture="__ARCH__" />
+
+  <Properties>
+    <DisplayName>QRcode tool</DisplayName>
+    <PublisherDisplayName>Lrniey666</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+    <Description>Scan QR codes on your computer as easily as on your phone.</Description>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.19044.0" MaxVersionTested="10.0.26100.0" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="en-us" />
+    <Resource Language="zh-tw" />
+    <Resource Language="zh-cn" />
+    <Resource Language="es-es" />
+    <Resource Language="pt-br" />
+    <Resource Language="ja-jp" />
+    <Resource Language="ko-kr" />
+    <Resource Language="fr-fr" />
+    <Resource Language="de-de" />
+    <Resource Language="ru-ru" />
+  </Resources>
+
+  <Applications>
+    <Application Id="QRcodeTool" Executable="qrcode-tool.exe" EntryPoint="Windows.FullTrustApplication">
+      <uap:VisualElements DisplayName="QRcode tool"
+                          Description="Scan QR codes on your computer as easily as on your phone."
+                          BackgroundColor="transparent"
+                          Square150x150Logo="Assets\Square150x150Logo.png"
+                          Square44x44Logo="Assets\Square44x44Logo.png" />
+      <Extensions>
+        <!-- Start at sign-in (the user can turn it off in Settings › Apps › Startup). -->
+        <uap5:Extension Category="windows.startupTask">
+          <uap5:StartupTask TaskId="QRcodeToolStartup" Enabled="true" DisplayName="QRcode tool" />
+        </uap5:Extension>
+      </Extensions>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <rescap:Capability Name="runFullTrust" />
+    <DeviceCapability Name="webcam" />
+  </Capabilities>
+</Package>

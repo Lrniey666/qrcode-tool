@@ -1,0 +1,321 @@
+// Floating toolbar (mode C) and the collapsed floating bubble.
+
+import { Palette } from "std-widgets.slint";
+import { Theme } from "theme.slint";
+import { Icons } from "icons.slint";
+import { IconButton, ToolbarSeparator } from "widgets.slint";
+
+// Hover text for the toolbar's hint row: the toolbar window is too small for pop-up
+// tooltips, so the description of the hovered button is shown in a second row instead.
+component BarButton inherits IconButton {
+    show-tooltip: false;
+    size: 38px;
+}
+
+export component ToolbarWindow inherits Window {
+    no-frame: true;
+    always-on-top: true;
+    title: "QRcode tool";
+    icon: Icons.logo;
+    // Transparent window with a rounded card inside (falls back to square corners on
+    // systems without a compositor).
+    background: transparent;
+    // Do not bind `width` to `layout.preferred-width`: that cycles with the hint text and
+    // can shrink the window until the bubble and close buttons are clipped or stacked.
+    // Floor is the button strip (grip 22 + 10×38 + 2 separators + 12×2 gaps = 428)
+    // plus padding so the last two controls stay inside the card.
+    min-width: 460px;
+    min-height: 80px;
+    preferred-width: max(layout.preferred-width, 460px);
+    preferred-height: max(layout.preferred-height, 80px);
+
+    in property <bool> camera-available: true;
+    in property <string> hotkey-screen;
+    in property <string> hotkey-region;
+    in property <string> hotkey-camera;
+    property <bool> dark: Theme.dark;
+
+    // scan-screen | scan-region | camera | clipboard | image | generate | history | settings | collapse | close
+    // `collapse` switches to the bubble. `close` dismisses the floating UI and must not
+    // bring the bubble back.
+    callback action(string);
+    callback drag-start();
+
+    init => {
+        Palette.color-scheme = root.dark ? ColorScheme.dark : ColorScheme.light;
+    }
+    changed dark => {
+        Palette.color-scheme = root.dark ? ColorScheme.dark : ColorScheme.light;
+    }
+
+    property <string> hint-title: b1.hovered ? @tr("Scan whole screen")
+        : b2.hovered ? @tr("Select area")
+        : b3.hovered ? @tr("Scan with camera")
+        : b4.hovered ? @tr("Scan image from clipboard")
+        : b5.hovered ? @tr("Open image…")
+        : b6.hovered ? @tr("Create QR code…")
+        : b7.hovered ? @tr("History")
+        : b8.hovered ? @tr("Settings")
+        : b9.hovered ? @tr("Collapse to bubble")
+        : b10.hovered ? @tr("Close toolbar")
+        : grip-ta.has-hover ? @tr("Drag to move")
+        : "QRcode tool";
+    property <string> hint-key: b1.hovered ? root.hotkey-screen : b2.hovered ? root.hotkey-region : b3.hovered ? root.hotkey-camera : "";
+
+    Rectangle {
+        background: Theme.surface;
+        border-radius: Theme.radius;
+        border-width: 1px;
+        border-color: Theme.stroke-strong;
+    }
+
+    layout := VerticalLayout {
+        padding: 6px;
+        spacing: 2px;
+        HorizontalLayout {
+            spacing: 2px;
+            min-width: 428px;
+            Rectangle {
+                width: 22px;
+                Image {
+                    source: Icons.grip;
+                    width: 18px;
+                    height: 18px;
+                    colorize: Theme.text-tertiary;
+                }
+                grip-ta := TouchArea {
+                    mouse-cursor: move;
+                    pointer-event(e) => {
+                        if (e.kind == PointerEventKind.down && e.button == PointerEventButton.left) {
+                            root.drag-start();
+                        }
+                    }
+                }
+            }
+            b1 := BarButton {
+                icon: Icons.fullscreen;
+                label: @tr("Scan whole screen");
+                clicked => {
+                    root.action("scan-screen");
+                }
+            }
+            b2 := BarButton {
+                icon: Icons.region;
+                label: @tr("Select area");
+                clicked => {
+                    root.action("scan-region");
+                }
+            }
+            b3 := BarButton {
+                icon: Icons.camera;
+                enabled: root.camera-available;
+                label: @tr("Scan with camera");
+                clicked => {
+                    root.action("camera");
+                }
+            }
+            b4 := BarButton {
+                icon: Icons.clipboard;
+                label: @tr("Scan image from clipboard");
+                clicked => {
+                    root.action("clipboard");
+                }
+            }
+            b5 := BarButton {
+                icon: Icons.image;
+                label: @tr("Open image…");
+                clicked => {
+                    root.action("image");
+                }
+            }
+            ToolbarSeparator {
+                y: (parent.height - self.height) / 2;
+            }
+            b6 := BarButton {
+                icon: Icons.qr;
+                label: @tr("Create QR code…");
+                clicked => {
+                    root.action("generate");
+                }
+            }
+            b7 := BarButton {
+                icon: Icons.history;
+                label: @tr("History");
+                clicked => {
+                    root.action("history");
+                }
+            }
+            b8 := BarButton {
+                icon: Icons.settings;
+                label: @tr("Settings");
+                clicked => {
+                    root.action("settings");
+                }
+            }
+            ToolbarSeparator {
+                y: (parent.height - self.height) / 2;
+            }
+            b9 := BarButton {
+                icon: Icons.bubble;
+                label: @tr("Collapse to bubble");
+                clicked => {
+                    root.action("collapse");
+                }
+            }
+            b10 := BarButton {
+                icon: Icons.close;
+                label: @tr("Close toolbar");
+                clicked => {
+                    root.action("close");
+                }
+            }
+        }
+        HorizontalLayout {
+            padding-left: 8px;
+            padding-right: 8px;
+            height: 22px;
+            spacing: 6px;
+            Text {
+                text: root.hint-title;
+                font-size: Theme.caption;
+                color: Theme.text-secondary;
+                vertical-alignment: center;
+                // Cap the hint so a long translation cannot widen the row and push the
+                // bubble / close buttons past the window edge.
+                max-width: 280px;
+                overflow: elide;
+            }
+            if root.hint-key != "": Text {
+                text: root.hint-key;
+                font-size: Theme.caption;
+                color: Theme.text-tertiary;
+                vertical-alignment: center;
+            }
+        }
+    }
+}
+
+export component BubbleWindow inherits Window {
+    no-frame: true;
+    always-on-top: true;
+    title: "QRcode tool";
+    icon: Icons.logo;
+    background: transparent;
+    width: 48px;
+    height: 48px;
+
+    in property <bool> camera-available: true;
+    // click: toolbar. long-press: scan-screen.
+    // menu: scan-screen | scan-region | camera | clipboard | toolbar | hide
+    callback action(string);
+    callback drag-start();
+
+    property <length> press-x;
+    property <length> press-y;
+    property <bool> moved-far: false;
+    property <bool> holding: false;
+    // Set when the long-press already started a scan, so the release is not also a click.
+    property <bool> long-fired: false;
+
+    Rectangle {
+        x: 4px;
+        y: 4px;
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+        background: root.holding && !root.moved-far ? Theme.selected : ta.has-hover ? Theme.surface-alt : Theme.surface;
+        border-width: 2px;
+        border-color: root.holding && !root.moved-far ? Theme.accent-fg : ta.has-hover ? Theme.accent-fg : Theme.stroke-strong;
+        drop-shadow-blur: 4px;
+        drop-shadow-color: Theme.shadow;
+        Image {
+            source: Icons.logo;
+            width: 26px;
+            height: 26px;
+        }
+    }
+
+    // A short click opens the toolbar. Holding still scans the screen.
+    Timer {
+        interval: 500ms;
+        running: root.holding && !root.moved-far && !root.long-fired;
+        triggered => {
+            root.long-fired = true;
+            root.holding = false;
+            root.action("scan-screen");
+        }
+    }
+
+    ta := TouchArea {
+        mouse-cursor: pointer;
+        pointer-event(e) => {
+            if (e.kind == PointerEventKind.down && e.button == PointerEventButton.left) {
+                root.press-x = self.mouse-x;
+                root.press-y = self.mouse-y;
+                root.moved-far = false;
+                root.long-fired = false;
+                root.holding = true;
+            }
+        }
+        changed pressed => {
+            if (!self.pressed) {
+                root.holding = false;
+            }
+        }
+        moved => {
+            if (self.pressed && !root.moved-far && (abs(self.mouse-x - root.press-x) > 4px || abs(self.mouse-y - root.press-y) > 4px)) {
+                root.moved-far = true;
+                root.holding = false;
+                root.drag-start();
+            }
+        }
+        clicked => {
+            if (!root.moved-far && !root.long-fired) {
+                root.action("toolbar");
+            }
+        }
+    }
+
+    ContextMenuArea {
+        Menu {
+            MenuItem {
+                title: @tr("Scan whole screen");
+                activated => {
+                    root.action("scan-screen");
+                }
+            }
+            MenuItem {
+                title: @tr("Select area");
+                activated => {
+                    root.action("scan-region");
+                }
+            }
+            MenuItem {
+                title: @tr("Scan with camera");
+                enabled: root.camera-available;
+                activated => {
+                    root.action("camera");
+                }
+            }
+            MenuItem {
+                title: @tr("Scan image from clipboard");
+                activated => {
+                    root.action("clipboard");
+                }
+            }
+            MenuSeparator { }
+            MenuItem {
+                title: @tr("Show toolbar");
+                activated => {
+                    root.action("toolbar");
+                }
+            }
+            MenuItem {
+                title: @tr("Hide bubble");
+                activated => {
+                    root.action("hide");
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,484 @@
+// Full-screen scan overlay. One instance per monitor.
+// Shows the frozen screenshot, Lens-style pills on detected codes, a selection rectangle
+// and — on the primary monitor — a Snipping-Tool-like toolbar.
+
+import { Palette } from "std-widgets.slint";
+import { Theme } from "theme.slint";
+import { Icons } from "icons.slint";
+import { Strings } from "strings.slint";
+import { PillData, DetailData } from "types.slint";
+import { IconButton, ToolbarSeparator, Pill, CornerBrackets, DetailCard, KeyCap } from "widgets.slint";
+import { ScanEffect } from "effects.slint";
+
+export component OverlayWindow inherits Window {
+    no-frame: true;
+    always-on-top: true;
+    title: "QRcode tool";
+    icon: Icons.logo;
+    background: #000000;
+
+    in property <image> screenshot;
+    // Shows the toolbar and the status chip (primary monitor only).
+    in property <bool> primary: true;
+    // Size of the screenshot in pixels. Pills and the selection callback use these
+    // image coordinates, so DPI scaling is handled here and not in Rust.
+    in property <float> img-w: 1;
+    in property <float> img-h: 1;
+    in property <[PillData]> pills;
+    // 0 hint, 1 scanning, 2 found, 3 nothing on screen, 4 nothing in region
+    in property <int> status: 0;
+    in property <int> found-count: 0;
+    in property <bool> detail-visible: false;
+    in property <DetailData> detail;
+    in property <bool> camera-available: true;
+    in property <string> hotkey-screen;
+    in property <string> hotkey-region;
+    in property <string> hotkey-camera;
+    // Drag-to-select. Whole-screen search is the other mode and does not use the crosshair.
+    in property <bool> region-mode: false;
+    // Animations on (off when the system asks for reduced motion).
+    in property <bool> animate: true;
+    // dark-mode sync for std widgets
+    property <bool> dark: Theme.dark;
+
+    // x, y, width, height in screenshot pixels
+    callback region-selected(float, float, float, float);
+    callback pill-clicked(int);
+    callback pill-details(int);
+    callback empty-click();
+    // escape | enter | tab | backtab | copy | rescan
+    callback key(string);
+    callback toolbar(string);
+    callback detail-action(string);
+    callback detail-copy-field(int);
+    callback detail-close();
+
+    property <bool> dragging: false;
+    property <length> sel-x: 0;
+    property <length> sel-y: 0;
+    property <length> sel-w: 0;
+    property <length> sel-h: 0;
+    property <bool> has-selection: self.dragging && self.sel-w > 2px && self.sel-h > 2px;
+    // One sweep, then the overlay stays still and shows the result. A looping beam
+    // redraws the whole screenshot every frame (painful on the software renderer).
+    property <duration> sweep-dur: 0ms;
+    property <float> sweep: 1;
+    property <int> sweep-phase: 0;
+    animate sweep {
+        duration: root.sweep-dur;
+        easing: ease-in-out;
+    }
+    // Duration and the animated value are applied together, so a reset and a
+    // 650ms run have to be split across turns or the beam never moves.
+    sweep-arm := Timer {
+        interval: 16ms;
+        running: false;
+        triggered => {
+            self.running = false;
+            if (root.sweep-phase == 1) {
+                root.sweep = 0;
+                root.sweep-phase = 2;
+                self.running = true;
+            } else if (root.sweep-phase == 2) {
+                root.sweep-dur = 650ms;
+                root.sweep-phase = 3;
+                self.running = true;
+            } else if (root.sweep-phase == 3 && root.animate) {
+                root.sweep = 1;
+                root.sweep-phase = 0;
+            }
+        }
+    }
+    // Replay the single sweep (opening the overlay, or "scan whole screen").
+    public function play-sweep() {
+        sweep-arm.running = false;
+        root.sweep-dur = 0ms;
+        if (!root.animate) {
+            root.sweep = 1;
+            root.sweep-phase = 0;
+            return;
+        }
+        root.sweep-phase = 1;
+        sweep-arm.running = true;
+    }
+    property <float> kx: root.width / 1px / root.img-w;
+    property <float> ky: root.height / 1px / root.img-h;
+    property <float> dim: root.pills.length > 0 ? 0.30 : 0.42;
+
+    property <string> status-text: status == 1 ? @tr("Looking for codes…")
+        : status == 2 ? (found-count == 1 ? @tr("1 code found — press Enter to open, or click it") : @tr("{} codes found — click one, or use Tab and Enter", found-count))
+        : status == 3 ? @tr("No code found on the screen. Select an area to try again.")
+        : status == 4 ? @tr("No code in that area. Try selecting a little more around it.")
+        : @tr("Drag to select a QR code. Press Esc to cancel.");
+
+    init => {
+        Palette.color-scheme = root.dark ? ColorScheme.dark : ColorScheme.light;
+        fs.focus();
+    }
+
+    changed dark => {
+        Palette.color-scheme = root.dark ? ColorScheme.dark : ColorScheme.light;
+    }
+
+    fs := FocusScope {
+        key-released(event) => {
+            if (event.text == Key.Escape) {
+                root.key("escape");
+                return accept;
+            }
+            reject
+        }
+        key-pressed(event) => {
+            // Escape acts on release: some input methods swallow the key-down.
+            if (event.text == Key.Escape) {
+                return accept;
+            }
+            if (event.text == Key.Return) {
+                root.key("enter");
+                return accept;
+            }
+            if (event.text == Key.Tab) {
+                root.key(event.modifiers.shift ? "backtab" : "tab");
+                return accept;
+            }
+            if (event.text == Key.Backtab) {
+                root.key("backtab");
+                return accept;
+            }
+            if (event.text == Key.RightArrow || event.text == Key.DownArrow) {
+                root.key("tab");
+                return accept;
+            }
+            if (event.text == Key.LeftArrow || event.text == Key.UpArrow) {
+                root.key("backtab");
+                return accept;
+            }
+            if (event.text == "c" || event.text == "C") {
+                root.key("copy");
+                return accept;
+            }
+            if (event.text == "f" || event.text == "F" || event.text == Key.F5) {
+                root.key("rescan");
+                return accept;
+            }
+            reject
+        }
+
+        // Frozen screenshot
+        Image {
+            x: 0;
+            y: 0;
+            width: root.width;
+            height: root.height;
+            source: root.screenshot;
+            image-fit: fill;
+        }
+
+        // Dim everything except the current selection.
+        if !root.has-selection: Rectangle {
+            background: #000000;
+            opacity: root.dim;
+        }
+        if root.has-selection: Rectangle {
+            x: 0;
+            y: 0;
+            width: root.width;
+            height: root.sel-y;
+            background: #000000;
+            opacity: 0.45;
+        }
+        if root.has-selection: Rectangle {
+            x: 0;
+            y: root.sel-y + root.sel-h;
+            width: root.width;
+            height: root.height - root.sel-y - root.sel-h;
+            background: #000000;
+            opacity: 0.45;
+        }
+        if root.has-selection: Rectangle {
+            x: 0;
+            y: root.sel-y;
+            width: root.sel-x;
+            height: root.sel-h;
+            background: #000000;
+            opacity: 0.45;
+        }
+        if root.has-selection: Rectangle {
+            x: root.sel-x + root.sel-w;
+            y: root.sel-y;
+            width: root.width - root.sel-x - root.sel-w;
+            height: root.sel-h;
+            background: #000000;
+            opacity: 0.45;
+        }
+        if root.has-selection: Rectangle {
+            x: root.sel-x;
+            y: root.sel-y;
+            width: root.sel-w;
+            height: root.sel-h;
+            border-width: 2px;
+            border-color: #ffffff;
+            CornerBrackets {
+                x: -3px;
+                y: -3px;
+                width: parent.width + 6px;
+                height: parent.height + 6px;
+                stroke: Theme.accent.brighter(0.4);
+                thickness: 4px;
+            }
+        }
+        if root.has-selection: Rectangle {
+            x: root.sel-x;
+            y: root.sel-y + root.sel-h + 8px > root.height - 28px ? root.sel-y - 30px : root.sel-y + root.sel-h + 8px;
+            width: size-text.preferred-width + 16px;
+            height: 22px;
+            border-radius: 11px;
+            background: Theme.pill-bg;
+            size-text := Text {
+                text: round(root.sel-w / 1px) + " × " + round(root.sel-h / 1px);
+                color: #ffffff;
+                font-size: 11px;
+            }
+        }
+
+        // Selection gesture
+        ta := TouchArea {
+            mouse-cursor: root.region-mode ? crosshair : default;
+            moved => {
+                if (self.pressed && root.region-mode) {
+                    root.dragging = true;
+                    root.sel-x = min(self.pressed-x, self.mouse-x);
+                    root.sel-y = min(self.pressed-y, self.mouse-y);
+                    root.sel-w = abs(self.mouse-x - self.pressed-x);
+                    root.sel-h = abs(self.mouse-y - self.pressed-y);
+                }
+            }
+            pointer-event(event) => {
+                if (event.kind == PointerEventKind.down && event.button == PointerEventButton.right) {
+                    root.key("escape");
+                }
+                if (event.kind == PointerEventKind.up && event.button == PointerEventButton.left) {
+                    if (root.region-mode && root.dragging && root.sel-w > 6px && root.sel-h > 6px) {
+                        root.region-selected(root.sel-x / 1px / root.kx, root.sel-y / 1px / root.ky, root.sel-w / 1px / root.kx, root.sel-h / 1px / root.ky);
+                    } else {
+                        root.empty-click();
+                    }
+                    root.dragging = false;
+                }
+            }
+        }
+
+        // One pass of the beam. It is removed when the sweep finishes, so decoding
+        // no longer keeps the full-screen window animating.
+        if root.animate && !root.detail-visible && root.sweep < 1: ScanEffect {
+            width: root.width;
+            height: root.height;
+            progress: root.sweep;
+        }
+
+        // Detected codes (outlines "lock on", pills fade in)
+        for p[i] in root.pills: Rectangle {
+            x: p.x * root.kx * 1px;
+            y: p.y * root.ky * 1px;
+            width: p.w * root.kx * 1px;
+            height: p.h * root.ky * 1px;
+            CornerBrackets {
+                property <float> k: root.animate ? 1.5 : 1;
+                init => {
+                    self.k = 1;
+                }
+                animate k {
+                    duration: 280ms;
+                    easing: ease-out;
+                }
+                x: -8px - (self.k - 1) * parent.width / 2;
+                y: -8px - (self.k - 1) * parent.height / 2;
+                width: parent.width + 16px + (self.k - 1) * parent.width;
+                height: parent.height + 16px + (self.k - 1) * parent.height;
+                opacity: min(1, (1.5 - self.k) * 2);
+                stroke: p.selected ? Theme.accent.brighter(0.5) : p.level >= 3 ? #ff6b6b : p.level == 2 ? #ffc83d : #ffffff;
+                thickness: 4px;
+            }
+            Pill {
+                data: p;
+                x: (parent.width - self.width) / 2;
+                y: (parent.height - self.height) / 2;
+                opacity: root.animate ? 0 : 1;
+                init => {
+                    self.opacity = 1;
+                }
+                animate opacity {
+                    duration: 220ms;
+                    delay: 100ms;
+                    easing: ease-out;
+                }
+                clicked => {
+                    root.pill-clicked(i);
+                }
+                details => {
+                    root.pill-details(i);
+                }
+            }
+        }
+
+        // Toolbar (primary monitor). A fixed width, not `preferred-width`: that binding
+        // cycles and clips the last buttons. Content is 387px (9×36 + 3 separators + gaps).
+        if root.primary && !root.detail-visible: Rectangle {
+            x: (root.width - self.width) / 2;
+            y: 16px;
+            width: 448px;
+            height: 52px;
+            background: Theme.surface;
+            border-radius: Theme.radius;
+            border-width: 1px;
+            border-color: Theme.stroke-strong;
+            drop-shadow-blur: 20px;
+            drop-shadow-offset-y: 6px;
+            drop-shadow-color: Theme.shadow;
+            bar := HorizontalLayout {
+                padding: 8px;
+                spacing: 4px;
+                alignment: center;
+                IconButton {
+                    icon: Icons.fullscreen;
+                    active: !root.region-mode;
+                    label: @tr("Scan whole screen");
+                    shortcut: root.hotkey-screen != "" ? root.hotkey-screen : "F";
+                    description: @tr("Look for codes on the entire screen again.");
+                    clicked => {
+                        root.toolbar("rescan");
+                    }
+                }
+                IconButton {
+                    icon: Icons.region;
+                    active: root.region-mode;
+                    label: @tr("Select area");
+                    shortcut: root.hotkey-region;
+                    description: @tr("Drag a box around the code you want to scan.");
+                    clicked => {
+                        root.toolbar("region");
+                    }
+                }
+                ToolbarSeparator {
+                    y: (parent.height - self.height) / 2;
+                }
+                IconButton {
+                    icon: Icons.camera;
+                    enabled: root.camera-available;
+                    label: @tr("Scan with camera");
+                    shortcut: root.hotkey-camera;
+                    description: @tr("Hold a printed code or a phone screen up to your webcam.");
+                    clicked => {
+                        root.toolbar("camera");
+                    }
+                }
+                IconButton {
+                    icon: Icons.clipboard;
+                    label: @tr("Scan image from clipboard");
+                    description: @tr("Reads a screenshot or picture you copied.");
+                    clicked => {
+                        root.toolbar("clipboard");
+                    }
+                }
+                IconButton {
+                    icon: Icons.image;
+                    label: @tr("Open image…");
+                    description: @tr("Scan a picture or screenshot file.");
+                    clicked => {
+                        root.toolbar("image");
+                    }
+                }
+                ToolbarSeparator {
+                    y: (parent.height - self.height) / 2;
+                }
+                IconButton {
+                    icon: Icons.qr;
+                    label: @tr("Create QR code…");
+                    description: @tr("Turn a link or text into a QR code to scan with your phone.");
+                    clicked => {
+                        root.toolbar("generate");
+                    }
+                }
+                IconButton {
+                    icon: Icons.history;
+                    label: @tr("History");
+                    clicked => {
+                        root.toolbar("history");
+                    }
+                }
+                IconButton {
+                    icon: Icons.settings;
+                    label: @tr("Settings");
+                    clicked => {
+                        root.toolbar("settings");
+                    }
+                }
+                ToolbarSeparator {
+                    y: (parent.height - self.height) / 2;
+                }
+                IconButton {
+                    icon: Icons.close;
+                    label: @tr("Close");
+                    shortcut: "Esc";
+                    clicked => {
+                        root.key("escape");
+                    }
+                }
+            }
+        }
+
+        // Status chip
+        if root.primary && !root.detail-visible: Rectangle {
+            x: (root.width - self.width) / 2;
+            y: 80px;
+            width: status-row.preferred-width;
+            height: 34px;
+            border-radius: 17px;
+            background: Theme.pill-bg;
+            status-row := HorizontalLayout {
+                padding-left: 14px;
+                padding-right: 14px;
+                spacing: 8px;
+                if root.status == 1: Rectangle {
+                    width: 8px;
+                    height: 8px;
+                    y: (parent.height - self.height) / 2;
+                    border-radius: 4px;
+                    background: Theme.accent.brighter(0.5);
+                }
+                Text {
+                    text: root.status-text;
+                    color: #ffffff;
+                    font-size: 13px;
+                    vertical-alignment: center;
+                }
+            }
+        }
+
+        // Detail card
+        if root.detail-visible: Rectangle {
+            background: Theme.scrim;
+            TouchArea {
+                clicked => {
+                    root.detail-close();
+                }
+            }
+            DetailCard {
+                data: root.detail;
+                width: min(520px, root.width - 48px);
+                height: self.preferred-height;
+                x: (root.width - self.width) / 2;
+                y: max(24px, (root.height - self.height) / 2);
+                action(id) => {
+                    root.detail-action(id);
+                }
+                copy-field(i) => {
+                    root.detail-copy-field(i);
+                }
+                close => {
+                    root.detail-close();
+                }
+            }
+        }
+    }
+}

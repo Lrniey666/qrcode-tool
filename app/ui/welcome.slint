@@ -1,0 +1,211 @@
+// First-run window: language, autostart notice, how to scan.
+
+import { Button, ComboBox, Switch, Palette } from "std-widgets.slint";
+import { Theme } from "theme.slint";
+import { Icons } from "icons.slint";
+import { KeyCap } from "widgets.slint";
+
+component Step inherits HorizontalLayout {
+    in property <image> icon;
+    in property <string> title;
+    in property <string> text;
+    spacing: 14px;
+    Rectangle {
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+        background: Theme.selected;
+        Image {
+            source: root.icon;
+            width: 20px;
+            height: 20px;
+            colorize: Theme.accent-fg;
+        }
+    }
+    VerticalLayout {
+        alignment: center;
+        spacing: 2px;
+        horizontal-stretch: 1;
+        Text {
+            text: root.title;
+            color: Theme.text;
+            font-weight: 600;
+            wrap: word-wrap;
+        }
+        Text {
+            text: root.text;
+            color: Theme.text-secondary;
+            font-size: Theme.caption;
+            wrap: word-wrap;
+        }
+    }
+}
+
+export component WelcomeWindow inherits Window {
+    title: @tr("Welcome to QRcode tool");
+    icon: Icons.logo;
+    width: 600px;
+    min-height: 640px;
+    background: Theme.bg;
+    property <bool> dark: Theme.dark;
+
+    in property <[string]> languages;
+    in-out property <int> language-index: 0;
+    in-out property <bool> autostart: true;
+    in property <string> hotkey-screen;
+    in property <string> hotkey-region;
+    in property <string> hotkey-camera;
+    in property <bool> hotkeys-supported: true;
+    in property <bool> camera-available: true;
+
+    callback language-changed(int);
+    callback autostart-toggled(bool);
+    // try-now: start a screen scan right after closing
+    callback finish(bool);
+
+    init => {
+        Palette.color-scheme = root.dark ? ColorScheme.dark : ColorScheme.light;
+    }
+    changed dark => {
+        Palette.color-scheme = root.dark ? ColorScheme.dark : ColorScheme.light;
+    }
+
+    VerticalLayout {
+        // Brand header
+        Rectangle {
+            height: 150px;
+            background: Theme.brand;
+            VerticalLayout {
+                alignment: center;
+                spacing: 8px;
+                HorizontalLayout {
+                    alignment: center;
+                    Rectangle {
+                        width: 72px;
+                        height: 72px;
+                        border-radius: 18px;
+                        background: #ffffff;
+                        Image {
+                            source: Icons.logo;
+                            width: 56px;
+                            height: 56px;
+                        }
+                    }
+                }
+                Text {
+                    text: @tr("Welcome to QRcode tool");
+                    color: #ffffff;
+                    font-size: Theme.subtitle;
+                    font-weight: 600;
+                    horizontal-alignment: center;
+                }
+            }
+        }
+
+        VerticalLayout {
+            padding: 28px;
+            padding-top: 22px;
+            spacing: 18px;
+
+            HorizontalLayout {
+                spacing: 12px;
+                Image {
+                    source: Icons.globe;
+                    width: 20px;
+                    height: 20px;
+                    y: (parent.height - self.height) / 2;
+                    colorize: Theme.text;
+                }
+                Text {
+                    text: @tr("Language");
+                    color: Theme.text;
+                    vertical-alignment: center;
+                    horizontal-stretch: 1;
+                }
+                ComboBox {
+                    min-width: 220px;
+                    model: root.languages;
+                    current-index <=> root.language-index;
+                    selected => {
+                        root.language-changed(self.current-index);
+                    }
+                }
+            }
+
+            Step {
+                icon: Icons.fullscreen;
+                title: root.hotkeys-supported ? @tr("Press {} to scan the whole screen", root.hotkey-screen) : @tr("Click the tray icon to scan the whole screen");
+                text: @tr("Every code on the screen is marked. Press Enter or click one to open it.");
+            }
+            Step {
+                icon: Icons.region;
+                title: root.hotkeys-supported ? @tr("Press {} to select an area", root.hotkey-region) : @tr("Select an area from the tray menu");
+                text: @tr("Drag a box around a small, blurry or tilted code. Only that area is scanned.");
+            }
+            if root.camera-available: Step {
+                icon: Icons.camera;
+                title: root.hotkeys-supported ? @tr("Press {} to use the webcam", root.hotkey-camera) : @tr("Use the webcam from the tray menu");
+                text: @tr("Hold a printed code or a phone screen up to the camera.");
+            }
+            Step {
+                icon: Icons.shield;
+                title: @tr("Links never open by surprise");
+                text: @tr("Every link shows its real site name first. Suspicious links are marked and always ask before opening.");
+            }
+
+            Rectangle {
+                background: Theme.card;
+                border-radius: Theme.radius;
+                border-width: 1px;
+                border-color: Theme.stroke;
+                HorizontalLayout {
+                    padding: 14px;
+                    spacing: 12px;
+                    VerticalLayout {
+                        horizontal-stretch: 1;
+                        spacing: 2px;
+                        Text {
+                            text: @tr("Start with the computer");
+                            color: Theme.text;
+                            wrap: word-wrap;
+                        }
+                        Text {
+                            text: @tr("QRcode tool starts hidden in the tray so the shortcut is always ready. It uses very little memory. You can change this any time in Settings.");
+                            color: Theme.text-secondary;
+                            font-size: Theme.caption;
+                            wrap: word-wrap;
+                        }
+                    }
+                    Switch {
+                        checked <=> root.autostart;
+                        toggled => {
+                            root.autostart-toggled(self.checked);
+                        }
+                    }
+                }
+            }
+
+            Rectangle {
+                vertical-stretch: 1;
+            }
+
+            HorizontalLayout {
+                alignment: end;
+                spacing: 10px;
+                Button {
+                    text: @tr("Close");
+                    clicked => {
+                        root.finish(false);
+                    }
+                }
+                Button {
+                    text: @tr("Try it now");
+                    primary: true;
+                    clicked => {
+                        root.finish(true);
+                    }
+                }
+            }
+        }
+    }
+}

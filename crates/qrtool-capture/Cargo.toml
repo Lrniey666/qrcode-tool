@@ -1,0 +1,16 @@
+[package]
+name = "qrtool-capture"
+description = "Multi-monitor screen capture for QRcode tool (wraps xcap)."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+publish = false
+
+[dependencies]
+xcap = "0.9"
+image.workspace = true
+thiserror.workspace = true
+tracing.workspace = true

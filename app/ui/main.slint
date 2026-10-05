@@ -1,0 +1,34 @@
+// Entry point: re-exports every window plus the globals and structs used from Rust.
+
+import { Theme } from "theme.slint";
+import { Strings } from "strings.slint";
+import { PillData, FieldRow, FindingRow, ActionRow, DetailData, HistoryRow, HotkeyRow } from "types.slint";
+import { OverlayWindow } from "overlay.slint";
+import { PreviewWindow } from "preview.slint";
+import { ToolbarWindow, BubbleWindow } from "floating.slint";
+import { SettingsWindow } from "settings.slint";
+import { GeneratorWindow } from "generator.slint";
+import { WelcomeWindow } from "welcome.slint";
+import { MessageWindow } from "message.slint";
+import { AppTray } from "tray.slint";
+
+export {
+    Theme,
+    Strings,
+    PillData,
+    FieldRow,
+    FindingRow,
+    ActionRow,
+    DetailData,
+    HistoryRow,
+    HotkeyRow,
+    OverlayWindow,
+    PreviewWindow,
+    ToolbarWindow,
+    BubbleWindow,
+    SettingsWindow,
+    GeneratorWindow,
+    WelcomeWindow,
+    MessageWindow,
+    AppTray,
+}
