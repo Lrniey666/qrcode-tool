@@ -127,7 +127,7 @@ jobs:
           done > SHA256SUMS-${{ matrix.channel }}.txt
           cat SHA256SUMS-${{ matrix.channel }}.txt
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: release-${{ matrix.channel }}
           path: releases/
