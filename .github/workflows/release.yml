@@ -134,7 +134,9 @@ jobs:
 
   publish:
     needs: build
-    runs-on: windows-latest
+    # Ubuntu: this job only uploads artifacts. A Windows runner was cancelled
+    # when GitHub could not assign a hosted runner.
+    runs-on: ubuntu-latest
     defaults:
       run:
         shell: bash
