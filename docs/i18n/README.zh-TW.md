@@ -2,10 +2,6 @@
 
 ![QRcode tool — 讓您如同使用手機般在電腦上輕鬆快速使用 QR Code。](../assets/banner-zh-TW.jpg)
 
-按一個快速鍵 → 螢幕上每個 QR Code 都會出現標籤 → 按 Enter 開啟。  
-
-也能用網路攝影機掃描。免費、開源、不蒐集任何資料。
-
 ![CI](https://github.com/Lrniey666/qrcode-tool/actions/workflows/ci.yml/badge.svg)
 ![Release](https://img.shields.io/github/v/release/Lrniey666/qrcode-tool?sort=semver&display_name=tag)
 ![Downloads](https://img.shields.io/github/downloads/Lrniey666/qrcode-tool/total)
@@ -16,7 +12,11 @@
 ![Languages](https://img.shields.io/badge/languages-10-informational)
 ![Privacy](https://img.shields.io/badge/privacy-no%20telemetry-success)
 
-[English](../../README.md) · **繁體中文**
+ · [English](../../README.md) · **繁體中文** · 
+
+按一個快速鍵 → 螢幕上每個 QR Code 都會出現標籤 → 按 Enter 開啟。  
+
+也能用網路攝影機掃描。免費、開源、不蒐集任何資料。
 
 ![螢幕掃描：每個條碼都會出現顯示網站名稱的標籤](../assets/screen-scan-zh-TW.png)
 
@@ -53,7 +53,7 @@
 |                                                           |                                                                   |
 | --------------------------------------------------------- | ----------------------------------------------------------------- |
 | ![可疑連結會先顯示原因](../assets/link-warning.png) 可疑連結會說明原因，等你確認。 | ![Wi-Fi 條碼可一鍵連線](../assets/wifi-details.png) Wi-Fi 條碼一鍵連線，密碼預設隱藏。 |
-| ![掃描剪貼簿圖片](../assets/image-scan.png) 掃描剪貼簿或圖片檔。           | ![產生 QR Code](../assets/create-qr.png) 產生 QR Code，把連結傳到手機。        |
+| ![掃描剪貼簿圖片](../assets/image-scan.png) 掃描剪貼簿或圖片檔。           | ![產生 QR Code](../assets/create-qr.png) 產生 QR Code。        |
 
 
 
