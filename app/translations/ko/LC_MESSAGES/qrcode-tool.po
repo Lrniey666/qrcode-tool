@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: qrcode-tool 0.1.0\n"
+"Project-Id-Version: qrcode-tool 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/Lrniey666/qrcode-tool/issues\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
@@ -270,6 +270,11 @@ msgctxt "OverlayWindow"
 msgid "Turn a link or text into a QR code to scan with your phone."
 msgstr "링크나 텍스트를 휴대폰으로 스캔할 수 있는 QR 코드로 만듭니다."
 
+#: ui/overlay.slint
+msgctxt "OverlayWindow"
+msgid "History"
+msgstr "기록"
+
 #: ui/overlay.slint:402
 msgctxt "OverlayWindow"
 msgid "Settings"
@@ -435,10 +440,35 @@ msgctxt "SettingsWindow"
 msgid "QRcode tool waits quietly in the tray so the shortcut always works."
 msgstr "QRcode tool이 시스템 트레이에서 조용히 대기하므로 바로 가기 키를 언제든 사용할 수 있습니다."
 
-#: ui/settings.slint:368
+#: ui/settings.slint
 msgctxt "SettingsWindow"
-msgid "Floating bubble"
-msgstr "플로팅 버블"
+msgid "Floating toolbar and bubble"
+msgstr "플로팅 도구 모음과 버블"
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "Toolbar layout"
+msgstr "도구 모음 배치"
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "A row at the top of the screen, or a column at its right or left edge."
+msgstr "화면 위쪽에 가로로, 또는 화면 오른쪽이나 왼쪽 가장자리에 세로로 놓습니다."
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "Horizontal, at the top"
+msgstr "가로, 위쪽"
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "Vertical, on the right"
+msgstr "세로, 오른쪽"
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "Vertical, on the left"
+msgstr "세로, 왼쪽"
 
 #: ui/settings.slint:372
 msgctxt "SettingsWindow"
@@ -739,6 +769,11 @@ msgstr "휴대폰처럼 쉽게 컴퓨터에서 QR 코드를 스캔하세요."
 msgctxt "SettingsWindow"
 msgid "Check for updates"
 msgstr "업데이트 확인"
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "User manual (PDF and Word)"
+msgstr "사용 설명서(PDF 및 Word)"
 
 #: ui/settings.slint:943
 msgctxt "SettingsWindow"

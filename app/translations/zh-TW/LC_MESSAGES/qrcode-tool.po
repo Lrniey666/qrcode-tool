@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: qrcode-tool 0.1.0\n"
+"Project-Id-Version: qrcode-tool 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/Lrniey666/qrcode-tool/issues\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -270,6 +270,11 @@ msgctxt "OverlayWindow"
 msgid "Turn a link or text into a QR code to scan with your phone."
 msgstr "將連結或文字轉成 QR Code，用手機掃描。"
 
+#: ui/overlay.slint
+msgctxt "OverlayWindow"
+msgid "History"
+msgstr "掃描記錄"
+
 #: ui/overlay.slint:402
 msgctxt "OverlayWindow"
 msgid "Settings"
@@ -435,10 +440,35 @@ msgctxt "SettingsWindow"
 msgid "QRcode tool waits quietly in the tray so the shortcut always works."
 msgstr "QRcode tool 會安靜地待在系統匣中，讓快速鍵隨時可用。"
 
-#: ui/settings.slint:368
+#: ui/settings.slint
 msgctxt "SettingsWindow"
-msgid "Floating bubble"
-msgstr "浮動泡泡"
+msgid "Floating toolbar and bubble"
+msgstr "浮動工具列與泡泡"
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "Toolbar layout"
+msgstr "工具列排列方式"
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "A row at the top of the screen, or a column at its right or left edge."
+msgstr "可在螢幕上方橫向排列，或在螢幕右側、左側直向排列。"
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "Horizontal, at the top"
+msgstr "橫式，置於上方"
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "Vertical, on the right"
+msgstr "直式，置於右側"
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "Vertical, on the left"
+msgstr "直式，置於左側"
 
 #: ui/settings.slint:372
 msgctxt "SettingsWindow"
@@ -739,6 +769,11 @@ msgstr "在電腦上掃描 QR Code，就像用手機一樣簡單。"
 msgctxt "SettingsWindow"
 msgid "Check for updates"
 msgstr "檢查更新"
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "User manual (PDF and Word)"
+msgstr "使用說明書（PDF 與 Word）"
 
 #: ui/settings.slint:943
 msgctxt "SettingsWindow"

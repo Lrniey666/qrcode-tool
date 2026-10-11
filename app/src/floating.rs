@@ -6,6 +6,7 @@
 use std::cell::{Cell, RefCell};
 use std::time::Duration;
 
+use qrtool_core::settings::ToolbarLayout;
 use slint::winit_030::{winit, EventResult, WinitWindowAccessor as _};
 use slint::ComponentHandle;
 
@@ -138,6 +139,8 @@ impl Floating {
             };
             let a = app();
             apply_theme!(w, a.theme.get());
+            // The layout is fixed for the life of the window; `layout_changed` rebuilds it.
+            w.set_vertical(a.settings().floating.toolbar_layout.is_vertical());
             w.on_action(|id| toolbar_action(id.as_str()));
             let weak = w.as_weak();
             w.on_drag_start(move || {
@@ -171,8 +174,13 @@ impl Floating {
             w.as_weak()
         };
         if place {
+            let placement = match app().settings().floating.toolbar_layout {
+                ToolbarLayout::Horizontal => Placement::TopCenter,
+                ToolbarLayout::VerticalRight => Placement::RightCenter,
+                ToolbarLayout::VerticalLeft => Placement::LeftCenter,
+            };
             if let Some(w) = weak.upgrade() {
-                position_window(&w, saved, Placement::TopCenter, |p| {
+                position_window(&w, saved, placement, |p| {
                     app().floating.toolbar_pos.set(Some(p));
                 });
                 self.toolbar_placed.set(true);
@@ -332,6 +340,20 @@ impl Floating {
         self.update_poll();
     }
 
+    /// The toolbar switched between row and column. The old position belongs to the old
+    /// shape, so the toolbar goes back to the default spot of the new layout; an open
+    /// toolbar is rebuilt there right away.
+    pub fn layout_changed(&self) {
+        self.toolbar_pos.set(None);
+        if self.toolbar.borrow().is_some() {
+            self.unmount_toolbar();
+            if self.toolbar_wanted.get() {
+                self.mount_toolbar();
+            }
+        }
+        self.save_positions();
+    }
+
     fn check_fullscreen(&self) {
         let a = app();
         if a.overlay.borrow().is_some() {
@@ -443,8 +465,14 @@ fn bubble_action(id: &str) {
 
 #[derive(Clone, Copy)]
 enum Placement {
+    /// Horizontal toolbar.
     TopCenter,
+    /// Bubble: right edge, a little below the middle.
     RightEdge,
+    /// Vertical toolbar on the right.
+    RightCenter,
+    /// Vertical toolbar on the left.
+    LeftCenter,
 }
 
 /// Moves a freshly shown window to its saved position (if still on a monitor) or a
@@ -555,6 +583,11 @@ fn default_position(w: &winit::window::Window, placement: Placement) -> Option<(
             m.x + m.width as i32 - size.width as i32 - margin,
             m.y + (m.height as i32) * 3 / 5,
         ),
+        Placement::RightCenter => (
+            m.x + m.width as i32 - size.width as i32 - margin,
+            m.y + (m.height as i32 - size.height as i32) / 2,
+        ),
+        Placement::LeftCenter => (m.x + margin, m.y + (m.height as i32 - size.height as i32) / 2),
     })
 }
 
@@ -589,6 +622,25 @@ mod tests {
     }
 
     #[test]
+    fn toolbar_actions_cover_every_button() {
+        let src = include_str!("../ui/floating.slint");
+        for id in [
+            "scan-screen",
+            "scan-region",
+            "camera",
+            "clipboard",
+            "image",
+            "generate",
+            "history",
+            "settings",
+            "collapse",
+            "close",
+        ] {
+            assert!(src.contains(&format!("{{ id: \"{id}\",")), "toolbar item {id} missing");
+        }
+    }
+
+    #[test]
     fn clamp_keeps_the_trailing_buttons_on_screen() {
         // 420px toolbar shoved past the right edge of a 1920px monitor.
         assert_eq!(clamp_to_rect(1800, 40, 420, 80, 0, 0, 1920, 1080), (1500, 40));
@@ -603,15 +655,15 @@ mod tests {
         let start = src.find("export component ToolbarWindow").unwrap();
         let end = src.find("export component BubbleWindow").unwrap();
         let bar = &src[start..end];
-        let bubble = bar
-            .find("icon: Icons.bubble;")
-            .expect("collapse uses the bubble icon");
-        let collapse = bar.find("root.action(\"collapse\")").expect("collapse action");
-        let close_icon = bar.find("icon: Icons.close;").expect("close icon");
-        let close = bar.find("root.action(\"close\")").expect("close action");
-        assert!(bubble < collapse && collapse < close_icon && close_icon < close);
+        // Both layouts draw the same item list, so collapse and close stay distinct there.
+        assert!(bar.contains("{ id: \"collapse\", icon: Icons.bubble,"));
+        assert!(bar.contains("{ id: \"close\", icon: Icons.close,"));
+        let collapse = bar.find("id: \"collapse\"").expect("collapse item");
+        let close = bar.find("id: \"close\"").expect("close item");
+        assert!(collapse < close, "close is the last button");
+        assert_eq!(bar.matches("root.action(item.id)").count(), 2, "row and column send the item id");
         assert!(!bar.contains("width: layout.preferred-width"));
-        assert!(bar.contains("min-width: 460px"));
+        assert!(bar.contains("min-width: root.vertical ? 64px : 460px;"));
 
         let menu = &src[end..];
         for id in [

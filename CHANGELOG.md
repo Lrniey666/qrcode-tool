@@ -7,8 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-10-12
+
 ### Added
 
+- The floating toolbar can be a vertical column at the right (default) or left edge of the screen, in addition to the horizontal row at the top. Choose it in *Settings › General › Toolbar layout*; the toolbar moves to the default place of the new layout right away.
+- User manual in English and Traditional Chinese, as PDF and Word, in `docs/manual` and attached to every release. *Settings › About* links to it.
 - On Windows, the desktop right-click menu can scan the screen, scan a selection, open the camera and show the toolbar. Image files (PNG, JPEG, BMP, GIF, WebP) can be scanned from their own right-click menu. Turn it off in *Settings › General › Right-click menu*. On Windows 11 the entries are under **Show more options**.
 
 ### Changed
@@ -42,5 +46,6 @@ First public preview.
   Français, Deutsch, Русский.
 - In-app updates through Velopack and GitHub Releases.
 
-[Unreleased]: https://github.com/Lrniey666/qrcode-tool/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/Lrniey666/qrcode-tool/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/Lrniey666/qrcode-tool/releases/tag/v1.0.0
 [0.1.0]: https://github.com/Lrniey666/qrcode-tool/releases/tag/v0.1.0

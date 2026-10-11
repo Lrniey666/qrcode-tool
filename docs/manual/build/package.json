@@ -1,0 +1,16 @@
+{
+  "name": "qrcode-tool-manual",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Builds the QRcode tool user manuals (Word and PDF) with screenshots of the real UI.",
+  "scripts": {
+    "build": "powershell -NoProfile -ExecutionPolicy Bypass -File build.ps1"
+  },
+  "dependencies": {
+    "docx": "9.5.1",
+    "jpeg-js": "0.4.4",
+    "pngjs": "7.0.0",
+    "qrcode": "1.5.4",
+    "slint-ui": "1.18.1"
+  }
+}

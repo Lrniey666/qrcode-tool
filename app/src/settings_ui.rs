@@ -5,7 +5,7 @@ use std::time::Duration;
 use qrtool_core::app_info;
 use qrtool_core::history::{History, HistoryEntry};
 use qrtool_core::payload::{classify, Payload};
-use qrtool_core::settings::{Hotkeys, ThemeMode};
+use qrtool_core::settings::{Hotkeys, ThemeMode, ToolbarLayout};
 use qrtool_core::url_safety::{self, Severity};
 use qrtool_platform::{autostart, paths};
 use slint::{ComponentHandle, ModelRc, SharedString, VecModel};
@@ -89,6 +89,7 @@ impl SettingsUi {
         w.set_shell_menu_supported(cfg!(windows));
         w.set_bubble_at_startup(s.floating.bubble_at_startup);
         w.set_hide_in_fullscreen(s.floating.hide_in_fullscreen);
+        w.set_toolbar_layout_index(s.floating.toolbar_layout.index());
         w.set_fullscreen_detection_supported(cfg!(windows));
         w.set_check_updates(s.updates.check_automatically);
 
@@ -359,6 +360,13 @@ fn changed(key: &str) {
             a.update_settings(|s| s.floating.hide_in_fullscreen = w.get_hide_in_fullscreen());
             a.floating.settings_changed();
         }
+        "toolbar-layout" => {
+            let layout = ToolbarLayout::from_index(w.get_toolbar_layout_index());
+            if a.settings().floating.toolbar_layout != layout {
+                a.update_settings(|s| s.floating.toolbar_layout = layout);
+                a.floating.layout_changed();
+            }
+        }
         "check-updates" => a.update_settings(|s| s.updates.check_automatically = w.get_check_updates()),
         "auto-open-trusted" => a.update_settings(|s| s.scan.auto_open_trusted = w.get_auto_open_trusted()),
         "auto-copy" => a.update_settings(|s| s.scan.auto_copy = w.get_auto_copy()),
@@ -403,6 +411,7 @@ fn open_link(which: &str) {
         "repo" => repo.to_string(),
         "issues" => format!("{repo}/issues"),
         "releases" => format!("{repo}/releases"),
+        "manual" => format!("{repo}/tree/main/docs/manual"),
         "privacy" => format!("{repo}/blob/main/docs/PRIVACY.md"),
         "licenses" => format!("{repo}/blob/main/THIRD_PARTY_NOTICES.md"),
         "sponsor" => "https://github.com/sponsors/Lrniey666".to_string(),

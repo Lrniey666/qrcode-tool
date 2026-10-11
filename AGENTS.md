@@ -71,6 +71,14 @@ triggered from one of their own callbacks.
 2. Keep `{}` placeholders identical; the CI checks this.
 3. Languages: en (source), zh-TW, zh-CN, es, pt-BR, ja, ko, fr, de, ru.
 
+## User manual
+
+`docs/manual` holds the user manual (PDF + Word, English and Traditional Chinese). Its text is in
+`docs/manual/build/content.*.js`; the screenshots are rendered from the real `.slint` files. When a
+visible feature or window changes, update the text and rebuild with
+`docs/manual/build/build.ps1` (Windows, Node.js, Microsoft Word). The release workflow attaches
+the committed files to every GitHub release.
+
 ## Checks before you finish
 
 ```bash

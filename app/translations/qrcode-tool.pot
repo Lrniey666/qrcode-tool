@@ -269,6 +269,11 @@ msgctxt "OverlayWindow"
 msgid "Turn a link or text into a QR code to scan with your phone."
 msgstr ""
 
+#: ui/overlay.slint
+msgctxt "OverlayWindow"
+msgid "History"
+msgstr ""
+
 #: ui/overlay.slint:402
 msgctxt "OverlayWindow"
 msgid "Settings"
@@ -446,9 +451,34 @@ msgid ""
 "Windows 11, open Show more options."
 msgstr ""
 
-#: ui/settings.slint:381
+#: ui/settings.slint
 msgctxt "SettingsWindow"
-msgid "Floating bubble"
+msgid "Floating toolbar and bubble"
+msgstr ""
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "Toolbar layout"
+msgstr ""
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "A row at the top of the screen, or a column at its right or left edge."
+msgstr ""
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "Horizontal, at the top"
+msgstr ""
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "Vertical, on the right"
+msgstr ""
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "Vertical, on the left"
 msgstr ""
 
 #: ui/settings.slint:385
@@ -749,6 +779,11 @@ msgstr ""
 #: ui/settings.slint:937
 msgctxt "SettingsWindow"
 msgid "Check for updates"
+msgstr ""
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "User manual (PDF and Word)"
 msgstr ""
 
 #: ui/settings.slint:956

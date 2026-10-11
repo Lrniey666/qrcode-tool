@@ -13,9 +13,11 @@
   <launchable type="desktop-id">io.github.lrniey666.qrcode-tool.desktop</launchable>
   <url type="homepage">https://github.com/Lrniey666/qrcode-tool</url>
   <url type="bugtracker">https://github.com/Lrniey666/qrcode-tool/issues</url>
+  <url type="help">https://github.com/Lrniey666/qrcode-tool/tree/main/docs/manual</url>
   <developer id="io.github.lrniey666"><name>Lrniey666</name></developer>
   <content_rating type="oars-1.1" />
   <releases>
+    <release version="1.0.0" date="2026-10-12" />
     <release version="0.1.0" date="2026-10-05" />
   </releases>
 </component>

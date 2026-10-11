@@ -4719,7 +4719,7 @@ checksum = "d68782463e408eb1e668cf6152704bd856c78c5b6417adaee3203d8f4c1fc9ec"
 
 [[package]]
 name = "qrcode-tool"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "anyhow",
  "clap",
@@ -4746,7 +4746,7 @@ dependencies = [
 
 [[package]]
 name = "qrtool-camera"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "image",
  "nokhwa",
@@ -4757,7 +4757,7 @@ dependencies = [
 
 [[package]]
 name = "qrtool-capture"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "image",
  "thiserror 2.0.21",
@@ -4767,7 +4767,7 @@ dependencies = [
 
 [[package]]
 name = "qrtool-core"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "base64 0.22.1",
  "encoding_rs",
@@ -4783,7 +4783,7 @@ dependencies = [
 
 [[package]]
 name = "qrtool-decode"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "image",
  "qrcode",
@@ -4795,7 +4795,7 @@ dependencies = [
 
 [[package]]
 name = "qrtool-platform"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "arboard",
  "auto-launch",

@@ -83,6 +83,8 @@ export component IconButton inherits Rectangle {
     in property <bool> tooltip-above: false;
     out property <bool> hovered: ta.has-hover;
     callback clicked();
+    // Lets a parent that builds buttons from a model track which one is hovered.
+    callback hover-changed(bool);
 
     property <bool> show-tip;
 
@@ -132,6 +134,7 @@ export component IconButton inherits Rectangle {
         if (!self.hovered) {
             self.show-tip = false;
         }
+        root.hover-changed(self.hovered);
     }
 
     if root.show-tip && ta.has-hover: tip := Tooltip {
