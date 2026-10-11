@@ -416,6 +416,7 @@ module.exports = {
           ['Create QR code…', 'Opens the QR code generator.'],
           ['History', 'Opens **Settings › Privacy & history**.'],
           ['Settings', 'Opens Settings.'],
+          ['User manual (“?” button)', 'Opens the PDF user manual on GitHub in a new browser tab: the Traditional Chinese edition when the UI is in Chinese, the English edition otherwise.'],
           ['Collapse to bubble', 'Hides the toolbar and shows the small round bubble instead.'],
           ['Close toolbar', 'Hides the toolbar (the bubble does not appear). The program keeps running in the tray.'],
         ],
@@ -582,7 +583,6 @@ module.exports = {
     {
       ul: [
         'Shows the current version. **Check for updates** checks right away.',
-        '**User manual (PDF and Word)** opens the download location of this manual on GitHub.',
         'Links to the source code, problem reports, the privacy statement and open-source licenses.',
         '**Open the settings folder** and **Open the log folder** open those folders directly, for backing up your settings or attaching log files to a problem report.',
       ],
@@ -641,6 +641,7 @@ module.exports = {
         ['My antivirus program warns about it.', 'New unsigned programs that register shortcuts, read the screen and start with the computer are sometimes flagged by behaviour-based detection. QRcode tool uses standard system interfaces and its source code is public. Please report the false positive to your antivirus vendor, or open an issue on GitHub.'],
         ['On macOS the screenshot is black.', 'Allow QRcode tool under **System Settings › Privacy & Security › Screen Recording** and restart the program. macOS may ask again after system updates.'],
         ['On Linux with Wayland the shortcut does nothing.', 'Wayland does not allow programs to register global shortcuts. Add a custom shortcut in your desktop’s keyboard settings that runs `qrcode-tool scan-screen` or another command.'],
+        ['How do I open this manual again?', 'Click the **?** button (**User manual**) on the floating toolbar; the PDF edition on GitHub opens in a new browser tab. The Word and PDF files can also be downloaded from the GitHub release page.'],
         ['How do I report a problem?', 'Click **Report a problem or suggest an idea** in **Settings › About** and describe your system, the steps and the messages you saw. You can attach files from the log folder; logs contain events and errors only, never scanned content.'],
       ],
     },

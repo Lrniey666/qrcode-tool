@@ -198,7 +198,7 @@ export component SettingsWindow inherits Window {
     callback history-copy(int);
     callback history-clear();
     callback check-for-updates();
-    // repo | issues | privacy | licenses | logs | config | releases | sponsor | manual
+    // repo | issues | privacy | licenses | logs | config | releases | sponsor
     callback open-link(string);
     callback show-welcome();
 
@@ -967,12 +967,6 @@ export component SettingsWindow inherits Window {
                         VerticalLayout {
                             padding: 16px;
                             spacing: 10px;
-                            LinkText {
-                                text: @tr("User manual (PDF and Word)");
-                                clicked => {
-                                    root.open-link("manual");
-                                }
-                            }
                             LinkText {
                                 text: @tr("Source code on GitHub");
                                 clicked => {

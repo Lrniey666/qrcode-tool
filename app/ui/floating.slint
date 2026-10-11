@@ -58,12 +58,12 @@ export component ToolbarWindow inherits Window {
     background: transparent;
     // Fixed sizes: binding the window to the layout's preferred size cycles with the hint
     // text and can shrink the window until the bubble and close buttons are clipped.
-    // Row: grip 22 + 10×38 + 2 separators + 12×2 gaps = 428, plus padding and room for
+    // Row: grip 22 + 11×38 + 2 separators + 13×2 gaps = 468, plus padding and room for
     // the hint. Column: the same buttons stacked, with a two-line hint below them.
-    min-width: root.vertical ? 64px : 460px;
-    min-height: root.vertical ? 536px : 80px;
-    preferred-width: root.vertical ? 64px : 460px;
-    preferred-height: root.vertical ? 536px : 80px;
+    min-width: root.vertical ? 64px : 500px;
+    min-height: root.vertical ? 576px : 80px;
+    preferred-width: root.vertical ? 64px : 500px;
+    preferred-height: root.vertical ? 576px : 80px;
 
     // Set by Rust before the window is shown: a column at the screen edge instead of a row.
     in property <bool> vertical: false;
@@ -73,7 +73,8 @@ export component ToolbarWindow inherits Window {
     in property <string> hotkey-camera;
     property <bool> dark: Theme.dark;
 
-    // scan-screen | scan-region | camera | clipboard | image | generate | history | settings | collapse | close
+    // scan-screen | scan-region | camera | clipboard | image | generate | history | settings | help | collapse | close
+    // `help` opens the user manual (PDF) in the browser.
     // `collapse` switches to the bubble. `close` dismisses the floating UI and must not
     // bring the bubble back.
     callback action(string);
@@ -95,6 +96,7 @@ export component ToolbarWindow inherits Window {
         if (id == "generate") { return @tr("Create QR code…"); }
         if (id == "history") { return @tr("History"); }
         if (id == "settings") { return @tr("Settings"); }
+        if (id == "help") { return @tr("User manual"); }
         if (id == "collapse") { return @tr("Collapse to bubble"); }
         if (id == "close") { return @tr("Close toolbar"); }
         if (id == "grip") { return @tr("Drag to move"); }
@@ -111,6 +113,7 @@ export component ToolbarWindow inherits Window {
         { id: "generate", icon: Icons.qr, label: label-for("generate"), enabled: true, group-start: true },
         { id: "history", icon: Icons.history, label: label-for("history"), enabled: true, group-start: false },
         { id: "settings", icon: Icons.settings, label: label-for("settings"), enabled: true, group-start: false },
+        { id: "help", icon: Icons.help, label: label-for("help"), enabled: true, group-start: false },
         // Bubble icon: collapse. X: close. They must stay distinct.
         { id: "collapse", icon: Icons.bubble, label: label-for("collapse"), enabled: true, group-start: true },
         { id: "close", icon: Icons.close, label: label-for("close"), enabled: true, group-start: false },
@@ -142,7 +145,7 @@ export component ToolbarWindow inherits Window {
         spacing: 2px;
         HorizontalLayout {
             spacing: 2px;
-            min-width: 428px;
+            min-width: 468px;
             Grip {
                 vertical: false;
                 drag-start => {

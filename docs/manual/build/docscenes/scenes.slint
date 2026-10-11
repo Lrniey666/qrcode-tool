@@ -354,9 +354,9 @@ export component SceneFloating inherits Window {
         qr3: root.qr3;
     }
     if root.mode == "row": ToolbarPanel {
-        x: (root.width - 460px) / 2;
+        x: (root.width - 500px) / 2;
         y: 24px;
-        width: 460px;
+        width: 500px;
         height: 80px;
         vertical: false;
         hotkey-screen: root.hotkey-screen;
@@ -365,9 +365,9 @@ export component SceneFloating inherits Window {
     }
     if root.mode == "right" || root.mode == "left": ToolbarPanel {
         x: root.mode == "right" ? root.width - 64px - 24px : 24px;
-        y: (root.height - 536px) / 2;
+        y: (root.height - 576px) / 2;
         width: 64px;
-        height: 536px;
+        height: 576px;
         vertical: true;
         hotkey-screen: root.hotkey-screen;
         hotkey-region: root.hotkey-region;

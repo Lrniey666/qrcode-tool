@@ -53,6 +53,11 @@ msgctxt "ToolbarWindow"
 msgid "Settings"
 msgstr "설정"
 
+#: ui/floating.slint
+msgctxt "ToolbarWindow"
+msgid "User manual"
+msgstr "사용 설명서"
+
 #: ui/floating.slint:59 ui/floating.slint:160
 msgctxt "ToolbarWindow"
 msgid "Collapse to bubble"
@@ -769,11 +774,6 @@ msgstr "휴대폰처럼 쉽게 컴퓨터에서 QR 코드를 스캔하세요."
 msgctxt "SettingsWindow"
 msgid "Check for updates"
 msgstr "업데이트 확인"
-
-#: ui/settings.slint
-msgctxt "SettingsWindow"
-msgid "User manual (PDF and Word)"
-msgstr "사용 설명서(PDF 및 Word)"
 
 #: ui/settings.slint:943
 msgctxt "SettingsWindow"

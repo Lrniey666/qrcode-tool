@@ -83,7 +83,9 @@ const capture = (out, mode = 'client') =>
     ),
   );
 
-async function shot(comp, name, { mode = 'client', x = 0, y = 0, wait = 900, before } = {}) {
+// `hold` is repeated until the capture is done: the real mouse cursor also sends events to
+// full-screen scenes and would otherwise undo a simulated hover.
+async function shot(comp, name, { mode = 'client', x = 0, y = 0, wait = 900, before, hold } = {}) {
   comp.window.logicalPosition = { x, y };
   comp.show();
   await sleep(wait);
@@ -91,8 +93,14 @@ async function shot(comp, name, { mode = 'client', x = 0, y = 0, wait = 900, bef
     await before(comp);
     await sleep(400);
   }
+  let timer;
+  if (hold) {
+    hold(comp);
+    timer = setInterval(() => hold(comp), 25);
+    await sleep(300);
+  }
   const file = path.join(outDir, `${name}.png`);
-  const size = await capture(file, mode);
+  const size = await capture(file, mode).finally(() => clearInterval(timer));
   comp.hide();
   await sleep(150);
   const img = opaque(loadPng(file));
@@ -172,16 +180,19 @@ async function main() {
   // 3. Select area: dragging a box around the Wi-Fi code.
   {
     const o = overlay({ region_mode: true, status: 0, pills: model([]) });
+    const b = qrBox(1);
+    const x0 = b.x - 26;
+    const y0 = b.y - 26;
+    const end = { x: x0 + b.w + 52, y: y0 + b.h + 52 };
     await shot(o, 'scan-region', {
       before: async (c) => {
-        const b = qrBox(1);
-        const x0 = b.x - 26;
-        const y0 = b.y - 26;
         c.window.dispatchEvent({ type: 'pointer-moved', position: { x: x0, y: y0 } });
         c.window.dispatchEvent({ type: 'pointer-pressed', position: { x: x0, y: y0 }, button: 'left' });
         for (let k = 1; k <= 10; k++)
-          c.window.dispatchEvent({ type: 'pointer-moved', position: { x: x0 + (k * (b.w + 52)) / 10, y: y0 + (k * (b.h + 52)) / 10 } });
+          c.window.dispatchEvent({ type: 'pointer-moved', position: { x: x0 + (k * (end.x - x0)) / 10, y: y0 + (k * (end.y - y0)) / 10 } });
       },
+      // Keep the box where it is if the real mouse moves meanwhile.
+      hold: (c) => c.window.dispatchEvent({ type: 'pointer-moved', position: end }),
     });
   }
 
@@ -258,14 +269,12 @@ async function main() {
     const s = new doc.SceneFloating();
     Object.assign(s, qrs, { mode });
     await shot(s, name, {
-      before: async (c) => {
-        if (hover) c.window.dispatchEvent({ type: 'pointer-moved', position: hover });
-      },
+      hold: hover ? (c) => c.window.dispatchEvent({ type: 'pointer-moved', position: hover }) : undefined,
     });
   };
-  await floating('row', 'toolbar-row', { x: 459, y: 49 });
-  await floating('right', 'toolbar-right', { x: 1224, y: 181 });
-  await floating('left', 'toolbar-left', { x: 56, y: 141 });
+  await floating('row', 'toolbar-row', { x: 762, y: 49 });
+  await floating('right', 'toolbar-right', { x: 1224, y: 452 });
+  await floating('left', 'toolbar-left', { x: 56, y: 161 });
   await floating('bubble', 'bubble', null);
 
   // 6. Tray menu.
