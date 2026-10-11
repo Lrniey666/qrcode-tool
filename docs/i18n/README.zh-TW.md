@@ -18,6 +18,8 @@
 
 也能用網路攝影機掃描。免費、開源、不蒐集任何資料。
 
+📘 **使用說明書：**[PDF](../manual/QRcode-tool-User-Manual-zh-TW.pdf) · [Word](../manual/QRcode-tool-User-Manual-zh-TW.docx) · English manual: [PDF](../manual/QRcode-tool-User-Manual-en.pdf) · [Word](../manual/QRcode-tool-User-Manual-en.docx)。每個[版本發布](https://github.com/Lrniey666/qrcode-tool/releases/latest)也都附有說明書可下載。
+
 ![螢幕掃描：每個條碼都會出現顯示網站名稱的標籤](../assets/screen-scan-zh-TW.png)
 
 ---
@@ -38,7 +40,7 @@
 | 🧾 **支援一維條碼**       | EAN、UPC、Code 128、Data Matrix、PDF417、Aztec…                                     |
 | 🖼️ **圖片與剪貼簿**      | 掃描複製的截圖或任何圖片檔。                                                                 |
 | 🔳 **簡易QR Code產生器** | 把連結或文字變成 QR Code，可複製或存成 PNG/SVG。                                               |
-| 🧰 **簡潔工具列與收泡泡圖示**  | 簡潔的浮動工具列及可收縮成泡泡圖示，全螢幕應用程式執行時自動隱藏。                                              |
+| 🧰 **簡潔工具列與收泡泡圖示**  | 簡潔的浮動工具列，可橫放於螢幕上方或直立於螢幕右側、左側，也能收合成泡泡圖示，全螢幕應用程式執行時自動隱藏。                                              |
 | 🎨 **原生外觀**         | Windows系統風格，跟隨淺色/深色模式與系統輔色。                                                    |
 | 🌍 **10 種語言**       | English、繁體中文、简体中文、Español、Português (Brasil)、日本語、한국어、Français、Deutsch、Русский。 |
 | 🔒 **隱私保障**         | 全部用戶本機運行。不需帳號、沒有遙測、不會上網查詢連結。掃描記錄預設關閉。                                          |
@@ -125,7 +127,7 @@ flowchart LR
 
 > **出現「Windows 已保護您的電腦」？** 早期版本尚未進行程式碼簽章，SmartScreen 可能顯示未知發行者。請點 **其他資訊 → 仍要執行**。每個版本都附 SHA-256 檢查碼可供核對，詳見 [FAQ](../FAQ.md#windows-smartscreen)。
 
-也提供免安裝的**可攜版** `.zip`（不會自動更新）。
+也提供免安裝的**可攜版** `.zip`（不會自動更新）。版本發布中同時附有中、英文使用說明書（PDF 與 Word）。
 
 ### macOS 13 以上
 

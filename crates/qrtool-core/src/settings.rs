@@ -120,6 +120,39 @@ impl Default for CameraSettings {
     }
 }
 
+/// How the floating toolbar is laid out and where it appears by default.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default, Serialize, Deserialize)]
+#[serde(rename_all = "kebab-case")]
+pub enum ToolbarLayout {
+    /// A row of buttons, centred at the top of the screen.
+    #[default]
+    Horizontal,
+    /// A column of buttons at the right edge of the screen.
+    VerticalRight,
+    /// A column of buttons at the left edge of the screen.
+    VerticalLeft,
+}
+
+impl ToolbarLayout {
+    pub fn index(self) -> i32 {
+        match self {
+            ToolbarLayout::Horizontal => 0,
+            ToolbarLayout::VerticalRight => 1,
+            ToolbarLayout::VerticalLeft => 2,
+        }
+    }
+    pub fn from_index(i: i32) -> Self {
+        match i {
+            1 => ToolbarLayout::VerticalRight,
+            2 => ToolbarLayout::VerticalLeft,
+            _ => ToolbarLayout::Horizontal,
+        }
+    }
+    pub fn is_vertical(self) -> bool {
+        self != ToolbarLayout::Horizontal
+    }
+}
+
 /// Floating bubble / toolbar placement.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(default)]
@@ -128,6 +161,8 @@ pub struct FloatingSettings {
     pub bubble_at_startup: bool,
     /// Hide the bubble while a full-screen app or game is in the foreground.
     pub hide_in_fullscreen: bool,
+    /// Row at the top (default) or column at the right / left edge.
+    pub toolbar_layout: ToolbarLayout,
     pub bubble_position: Option<(i32, i32)>,
     pub toolbar_position: Option<(i32, i32)>,
 }
@@ -137,6 +172,7 @@ impl Default for FloatingSettings {
         Self {
             bubble_at_startup: false,
             hide_in_fullscreen: true,
+            toolbar_layout: ToolbarLayout::Horizontal,
             bubble_position: None,
             toolbar_position: None,
         }
@@ -310,6 +346,29 @@ mod tests {
         assert!(s.scan.trusted_domains.is_empty());
         assert_eq!(s.hotkeys.scan_screen, "Ctrl+Alt+Q");
         assert_eq!(s.hotkeys.scan_region, "Ctrl+Alt+A");
+        assert_eq!(s.floating.toolbar_layout, ToolbarLayout::Horizontal);
+    }
+
+    #[test]
+    fn toolbar_layout_round_trips() {
+        for layout in [
+            ToolbarLayout::Horizontal,
+            ToolbarLayout::VerticalRight,
+            ToolbarLayout::VerticalLeft,
+        ] {
+            assert_eq!(ToolbarLayout::from_index(layout.index()), layout);
+        }
+        assert_eq!(ToolbarLayout::from_index(99), ToolbarLayout::Horizontal);
+        assert!(!ToolbarLayout::Horizontal.is_vertical());
+        assert!(ToolbarLayout::VerticalLeft.is_vertical());
+
+        let s: Settings = toml::from_str("[floating]\ntoolbar_layout = \"vertical-left\"\n").unwrap();
+        assert_eq!(s.floating.toolbar_layout, ToolbarLayout::VerticalLeft);
+        let text = toml::to_string_pretty(&s).unwrap();
+        assert!(text.contains("toolbar_layout = \"vertical-left\""));
+        // Files from older versions have no layout and keep the row at the top.
+        let old: Settings = toml::from_str("[floating]\nbubble_at_startup = true\n").unwrap();
+        assert_eq!(old.floating.toolbar_layout, ToolbarLayout::Horizontal);
     }
 
     #[test]

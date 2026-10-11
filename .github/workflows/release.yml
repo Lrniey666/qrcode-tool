@@ -1,6 +1,6 @@
 name: Release
 
-# Push a tag like v0.1.0 to build the Windows installer and portable zip (x64 and ARM64) and
+# Push a tag like v1.0.0 to build the Windows installer and portable zip (x64 and ARM64) and
 # publish a GitHub release. Velopack creates Setup.exe, Portable.zip and the update feed.
 on:
   push:
@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Version without the v (e.g. 0.1.0)"
+        description: "Version without the v (e.g. 1.0.0)"
         required: true
 
 permissions:
@@ -168,3 +168,11 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release upload "v$VERSION" artifacts/release-*/SHA256SUMS-*.txt --clobber
+      # The user manuals (built with docs/manual/build/build.ps1 and committed) are
+      # downloadable next to the installers.
+      - name: User manuals
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ls docs/manual/QRcode-tool-User-Manual-*.pdf docs/manual/QRcode-tool-User-Manual-*.docx
+          gh release upload "v$VERSION" docs/manual/QRcode-tool-User-Manual-*.pdf docs/manual/QRcode-tool-User-Manual-*.docx --clobber

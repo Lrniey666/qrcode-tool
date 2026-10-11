@@ -18,6 +18,8 @@ Press a shortcut → every QR code on your screen gets a label → press Enter.
 
 Works with your webcam too. Free, open source and private.
 
+📘 **User manual:** [PDF](docs/manual/QRcode-tool-User-Manual-en.pdf) · [Word](docs/manual/QRcode-tool-User-Manual-en.docx) · 使用說明書（繁體中文）：[PDF](docs/manual/QRcode-tool-User-Manual-zh-TW.pdf) · [Word](docs/manual/QRcode-tool-User-Manual-zh-TW.docx) — also attached to every [release](https://github.com/Lrniey666/qrcode-tool/releases/latest).
+
 ![Screen scan: every code on the screen gets a pill with its site name](docs/assets/screen-scan.png)
 
 ---
@@ -38,7 +40,7 @@ Works with your webcam too. Free, open source and private.
 | 🧾 **Barcodes**                | EAN, UPC, Code 128, Data Matrix, PDF417, Aztec…                                                                                                                                     |
 | 🖼️ **Images & clipboard**     | Scan a screenshot you copied or any image file.                                                                                                                                     |
 | 🔳 **Simple QR generator**     | Turn a link or text into a QR code; copy it or save PNG/SVG.                                                                                                                        |
-| 🧰 **Toolbar & bubble**        | A clean floating toolbar that collapses into a bubble, and hides automatically during full-screen apps.                                                                             |
+| 🧰 **Toolbar & bubble**        | A clean floating toolbar — a row at the top or a column at the right or left edge — that collapses into a bubble and hides automatically during full-screen apps.                  |
 | 🎨 **Native look**             | Windows style, follows light/dark mode and your accent colour.                                                                                                                      |
 | 🌍 **10 languages**            | English, 繁體中文, 简体中文, Español, Português (Brasil), 日本語, 한국어, Français, Deutsch, Русский.                                                                                             |
 | 🔒 **Private**                 | Everything runs on your computer. No account, no telemetry, no online link checks. History is off by default.                                                                       |
@@ -146,7 +148,7 @@ See **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** for threads, data flow and 
 
 > **"Windows protected your PC"?** Early releases are not code-signed yet, so SmartScreen may warn about an unknown publisher. Click **More info → Run anyway**. You can verify the download with the SHA-256 checksums published with every release. See the [FAQ](docs/FAQ.md#windows-smartscreen).
 
-A **portable** `.zip` is available too (no installer, no automatic updates).
+A **portable** `.zip` is available too (no installer, no automatic updates). The release also contains the user manual as PDF and Word, in English and Traditional Chinese.
 
 ### macOS 13+ (Apple silicon and Intel)
 
@@ -199,6 +201,7 @@ qrcode-tool/
 ├─ assets/icons/           # App and tray icons
 ├─ packaging/              # MSIX, Linux desktop entry, macOS bundle info
 ├─ docs/                   # Architecture, building, FAQ, privacy, translations
+│  └─ manual/              #   User manual (PDF + Word, English and 繁體中文) and its build scripts
 └─ .github/workflows/      # CI and release pipeline
 ```
 

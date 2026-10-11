@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: qrcode-tool 0.1.0\n"
+"Project-Id-Version: qrcode-tool 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/Lrniey666/qrcode-tool/issues\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -270,6 +270,11 @@ msgctxt "OverlayWindow"
 msgid "Turn a link or text into a QR code to scan with your phone."
 msgstr "Transforme um link ou texto em um código QR para escanear com o celular."
 
+#: ui/overlay.slint
+msgctxt "OverlayWindow"
+msgid "History"
+msgstr "Histórico"
+
 #: ui/overlay.slint:402
 msgctxt "OverlayWindow"
 msgid "Settings"
@@ -435,10 +440,35 @@ msgctxt "SettingsWindow"
 msgid "QRcode tool waits quietly in the tray so the shortcut always works."
 msgstr "O QRcode tool aguarda discretamente na bandeja do sistema para que o atalho sempre funcione."
 
-#: ui/settings.slint:368
+#: ui/settings.slint
 msgctxt "SettingsWindow"
-msgid "Floating bubble"
-msgstr "Bolha flutuante"
+msgid "Floating toolbar and bubble"
+msgstr "Barra de ferramentas e bolha flutuantes"
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "Toolbar layout"
+msgstr "Layout da barra de ferramentas"
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "A row at the top of the screen, or a column at its right or left edge."
+msgstr "Uma linha no topo da tela ou uma coluna na borda direita ou esquerda."
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "Horizontal, at the top"
+msgstr "Horizontal, no topo"
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "Vertical, on the right"
+msgstr "Vertical, à direita"
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "Vertical, on the left"
+msgstr "Vertical, à esquerda"
 
 #: ui/settings.slint:372
 msgctxt "SettingsWindow"
@@ -739,6 +769,11 @@ msgstr "Escaneie códigos QR no computador com a mesma facilidade que no celular
 msgctxt "SettingsWindow"
 msgid "Check for updates"
 msgstr "Verificar atualizações"
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "User manual (PDF and Word)"
+msgstr "Manual do usuário (PDF e Word)"
 
 #: ui/settings.slint:943
 msgctxt "SettingsWindow"

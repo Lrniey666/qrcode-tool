@@ -119,7 +119,7 @@ locally:
 dotnet tool install -g vpk
 cargo build --release
 mkdir dist; copy target\release\qrcode-tool.exe dist\
-vpk pack --packId QRcodeTool --packVersion 0.1.0 --packDir dist --mainExe qrcode-tool.exe `
+vpk pack --packId QRcodeTool --packVersion 1.0.0 --packDir dist --mainExe qrcode-tool.exe `
   --packTitle "QRcode tool" --packAuthors "Lrniey666" --icon assets\icons\app.ico --channel win-x64
 ```
 

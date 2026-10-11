@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: qrcode-tool 0.1.0\n"
+"Project-Id-Version: qrcode-tool 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/Lrniey666/qrcode-tool/issues\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -270,6 +270,11 @@ msgctxt "OverlayWindow"
 msgid "Turn a link or text into a QR code to scan with your phone."
 msgstr "Превратите ссылку или текст в QR-код для сканирования телефоном."
 
+#: ui/overlay.slint
+msgctxt "OverlayWindow"
+msgid "History"
+msgstr "Журнал"
+
 #: ui/overlay.slint:402
 msgctxt "OverlayWindow"
 msgid "Settings"
@@ -435,10 +440,35 @@ msgctxt "SettingsWindow"
 msgid "QRcode tool waits quietly in the tray so the shortcut always works."
 msgstr "QRcode tool незаметно работает в области уведомлений, чтобы сочетание клавиш всегда срабатывало."
 
-#: ui/settings.slint:368
+#: ui/settings.slint
 msgctxt "SettingsWindow"
-msgid "Floating bubble"
-msgstr "Плавающая кнопка"
+msgid "Floating toolbar and bubble"
+msgstr "Плавающая панель и кнопка"
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "Toolbar layout"
+msgstr "Расположение панели"
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "A row at the top of the screen, or a column at its right or left edge."
+msgstr "Строка вверху экрана или столбец у его правого или левого края."
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "Horizontal, at the top"
+msgstr "Горизонтально, сверху"
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "Vertical, on the right"
+msgstr "Вертикально, справа"
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "Vertical, on the left"
+msgstr "Вертикально, слева"
 
 #: ui/settings.slint:372
 msgctxt "SettingsWindow"
@@ -739,6 +769,11 @@ msgstr "Сканируйте QR-коды на компьютере так же �
 msgctxt "SettingsWindow"
 msgid "Check for updates"
 msgstr "Проверить наличие обновлений"
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "User manual (PDF and Word)"
+msgstr "Руководство пользователя (PDF и Word)"
 
 #: ui/settings.slint:943
 msgctxt "SettingsWindow"

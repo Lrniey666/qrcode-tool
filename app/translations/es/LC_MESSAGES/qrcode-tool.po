@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: qrcode-tool 0.1.0\n"
+"Project-Id-Version: qrcode-tool 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/Lrniey666/qrcode-tool/issues\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -270,6 +270,11 @@ msgctxt "OverlayWindow"
 msgid "Turn a link or text into a QR code to scan with your phone."
 msgstr "Convierte un enlace o texto en un código QR para escanearlo con el teléfono."
 
+#: ui/overlay.slint
+msgctxt "OverlayWindow"
+msgid "History"
+msgstr "Historial"
+
 #: ui/overlay.slint:402
 msgctxt "OverlayWindow"
 msgid "Settings"
@@ -435,10 +440,35 @@ msgctxt "SettingsWindow"
 msgid "QRcode tool waits quietly in the tray so the shortcut always works."
 msgstr "QRcode tool espera discretamente en la bandeja del sistema para que el método abreviado siempre funcione."
 
-#: ui/settings.slint:368
+#: ui/settings.slint
 msgctxt "SettingsWindow"
-msgid "Floating bubble"
-msgstr "Burbuja flotante"
+msgid "Floating toolbar and bubble"
+msgstr "Barra de herramientas y burbuja flotantes"
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "Toolbar layout"
+msgstr "Disposición de la barra"
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "A row at the top of the screen, or a column at its right or left edge."
+msgstr "Una fila en la parte superior de la pantalla o una columna en su borde derecho o izquierdo."
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "Horizontal, at the top"
+msgstr "Horizontal, arriba"
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "Vertical, on the right"
+msgstr "Vertical, a la derecha"
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "Vertical, on the left"
+msgstr "Vertical, a la izquierda"
 
 #: ui/settings.slint:372
 msgctxt "SettingsWindow"
@@ -739,6 +769,11 @@ msgstr "Escanea códigos QR en tu equipo tan fácilmente como en tu teléfono."
 msgctxt "SettingsWindow"
 msgid "Check for updates"
 msgstr "Buscar actualizaciones"
+
+#: ui/settings.slint
+msgctxt "SettingsWindow"
+msgid "User manual (PDF and Word)"
+msgstr "Manual de usuario (PDF y Word)"
 
 #: ui/settings.slint:943
 msgctxt "SettingsWindow"

@@ -150,6 +150,8 @@ export component SettingsWindow inherits Window {
     in property <bool> shell-menu-supported: false;
     in-out property <bool> bubble-at-startup: false;
     in-out property <bool> hide-in-fullscreen: true;
+    // 0 row at the top, 1 column on the right, 2 column on the left
+    in-out property <int> toolbar-layout-index: 0;
     in-out property <bool> check-updates: true;
     in property <bool> fullscreen-detection-supported: true;
 
@@ -196,7 +198,7 @@ export component SettingsWindow inherits Window {
     callback history-copy(int);
     callback history-clear();
     callback check-for-updates();
-    // repo | issues | privacy | licenses | logs | config | releases | sponsor
+    // repo | issues | privacy | licenses | logs | config | releases | sponsor | manual
     callback open-link(string);
     callback show-welcome();
 
@@ -378,7 +380,20 @@ export component SettingsWindow inherits Window {
                         height: 14px;
                     }
                     SectionTitle {
-                        text: @tr("Floating bubble");
+                        text: @tr("Floating toolbar and bubble");
+                    }
+                    SettingRow {
+                        icon: Icons.toolbar;
+                        title: @tr("Toolbar layout");
+                        description: @tr("A row at the top of the screen, or a column at its right or left edge.");
+                        ComboBox {
+                            min-width: 220px;
+                            model: [@tr("Horizontal, at the top"), @tr("Vertical, on the right"), @tr("Vertical, on the left")];
+                            current-index <=> root.toolbar-layout-index;
+                            selected => {
+                                root.changed("toolbar-layout");
+                            }
+                        }
                     }
                     SettingRow {
                         icon: Icons.bubble;
@@ -952,6 +967,12 @@ export component SettingsWindow inherits Window {
                         VerticalLayout {
                             padding: 16px;
                             spacing: 10px;
+                            LinkText {
+                                text: @tr("User manual (PDF and Word)");
+                                clicked => {
+                                    root.open-link("manual");
+                                }
+                            }
                             LinkText {
                                 text: @tr("Source code on GitHub");
                                 clicked => {
