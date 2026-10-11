@@ -1,7 +1,10 @@
 // Renders the app's real Slint windows (baked in one language) with demo data and saves
-// screenshots for the user manual.
+// screenshots for the user manual (docs/manual/screenshots/<lang>/<name>.png, not in git).
 //
-// Usage (SLINT_SCALE_FACTOR=1.5): node shoot.js <repo> <lang> <outDir>
+// Usage (SLINT_SCALE_FACTOR=1.5): node shoot.js <repo> <lang> <outDir> [--all | --only=name,name]
+//   default    take only the screenshots that are missing
+//   --only=…   retake these (plus anything missing); see NAMES for the list
+//   --all      retake everything
 // Expects baked/<lang>/ from bake.js and capture.exe next to this script.
 const fs = require('fs');
 const path = require('path');
@@ -10,9 +13,37 @@ const slint = require('slint-ui');
 const { PNG } = require('pngjs');
 const QRCode = require('qrcode');
 
-const [repo, lang, outDir] = process.argv.slice(2);
+const [repo, lang, outDir, ...flags] = process.argv.slice(2);
 const SCALE = 1.5;
 fs.mkdirSync(outDir, { recursive: true });
+
+// Every screenshot, in the order they are taken.
+const NAMES = [
+  'desktop', 'scan-screen', 'scan-region', 'detail-wifi', 'detail-link', 'detail-danger', 'detail-warning',
+  'toolbar-row', 'toolbar-right', 'toolbar-left', 'bubble', 'tray-menu', 'shell-desktop', 'shell-image',
+  'camera-source', 'camera', 'image-preview', 'generator', 'welcome',
+  'settings-general', 'settings-scanning', 'settings-camera', 'settings-shortcuts', 'settings-privacy', 'settings-about',
+  'message-update',
+];
+// Screenshots drawn on top of another one are retaken whenever that one is.
+const DEPENDS = {
+  desktop: ['scan-screen', 'scan-region', 'detail-wifi', 'detail-link', 'detail-danger', 'detail-warning', 'image-preview'],
+  'camera-source': ['camera'],
+};
+const ALL = flags.includes('--all');
+const ONLY = new Set(
+  flags
+    .filter((f) => f.startsWith('--only='))
+    .flatMap((f) => f.slice(7).split(','))
+    .map((s) => s.trim())
+    .filter(Boolean),
+);
+for (const n of ONLY) if (!NAMES.includes(n)) throw new Error(`unknown screenshot "${n}". Known: ${NAMES.join(', ')}`);
+const retaken = new Set();
+function wanted(name) {
+  if (ALL || ONLY.has(name) || !fs.existsSync(path.join(outDir, `${name}.png`))) return true;
+  return Object.entries(DEPENDS).some(([parent, kids]) => kids.includes(name) && retaken.has(parent));
+}
 const CAPTURE = path.join(__dirname, 'capture.exe');
 const baked = path.join(__dirname, 'baked', lang);
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -86,6 +117,12 @@ const capture = (out, mode = 'client') =>
 // `hold` is repeated until the capture is done: the real mouse cursor also sends events to
 // full-screen scenes and would otherwise undo a simulated hover.
 async function shot(comp, name, { mode = 'client', x = 0, y = 0, wait = 900, before, hold } = {}) {
+  if (!NAMES.includes(name)) throw new Error(`add "${name}" to NAMES`);
+  if (!wanted(name)) {
+    console.log(`${lang} ${name} kept`);
+    return loadPng(path.join(outDir, `${name}.png`));
+  }
+  retaken.add(name);
   comp.window.logicalPosition = { x, y };
   comp.show();
   await sleep(wait);
@@ -284,6 +321,13 @@ async function main() {
     await shot(s, 'tray-menu');
   }
 
+  // 6b. Windows right-click menus: desktop background and one picture.
+  for (const mode of ['desktop', 'image']) {
+    const s = new doc.SceneShellMenu();
+    s.mode = mode;
+    await shot(s, `shell-${mode}`);
+  }
+
   // 7. Camera: a phone with the Wi-Fi code held up to the webcam.
   const photo = new doc.ScenePhoto();
   photo.qr = qrImage(CODES.wifi, 8);
@@ -401,6 +445,7 @@ async function main() {
     Object.assign(m, { kind: 'update-available', arg: '1.0.1', level: 0 });
     await shot(m, 'message-update', { mode: 'frame', x: 200, y: 200 });
   }
+  console.log(`${lang}: ${retaken.size} screenshots taken, ${NAMES.length - retaken.size} kept`);
 }
 
 setTimeout(() => {

@@ -251,7 +251,8 @@ function body() {
     } else if (b.h2) {
       section++;
       out.push(new Paragraph({ heading: HeadingLevel.HEADING_2, children: [new TextRun({ text: `${chapterId()}.${section}${SEP}${b.h2}` })] }));
-    } else if (b.p) out.push(para(b.p));
+    } else if (b.h3) out.push(new Paragraph({ heading: HeadingLevel.HEADING_3, children: [new TextRun({ text: b.h3 })] }));
+    else if (b.p) out.push(para(b.p));
     else if (b.ul) for (const t of b.ul) out.push(new Paragraph({ numbering: { reference: 'bullets', level: 0 }, spacing: { after: 80 }, children: runs(t) }));
     else if (b.ol) {
       numberingInstance++;
@@ -386,6 +387,8 @@ const doc = new Document({
         paragraph: { spacing: { before: 0, after: 360 }, keepNext: true, border: { bottom: { style: BorderStyle.SINGLE, size: 12, color: BLUE, space: 8 } } },
       },
       heading2: { run: { font: FONT, size: 28, bold: true, color: DEEP }, paragraph: { spacing: { before: 360, after: 140 }, keepNext: true } },
+      // Not in the table of contents (it lists levels 1–2).
+      heading3: { run: { font: FONT, size: 23, bold: true, color: TEXT }, paragraph: { spacing: { before: 240, after: 100 }, keepNext: true } },
     },
     // Compact table of contents (Word applies "toc 1" / "toc 2" to the generated entries).
     paragraphStyles: [

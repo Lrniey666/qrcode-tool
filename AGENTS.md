@@ -77,7 +77,33 @@ triggered from one of their own callbacks.
 `docs/manual/build/content.*.js`; the screenshots are rendered from the real `.slint` files. When a
 visible feature or window changes, update the text and rebuild with
 `docs/manual/build/build.ps1` (Windows, Node.js, Microsoft Word). The release workflow attaches
-the committed files to every GitHub release.
+the committed `.pdf`/`.docx` files to every GitHub release.
+
+**Screenshots are stored in `docs/manual/screenshots/<lang>/<name>.png`.** That folder is
+git-ignored: never commit or push it. `build.ps1` reuses these files and only takes the missing
+ones, so retake just the windows you changed:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File docs\manual\build\build.ps1 -Shots toolbar-row,settings-general
+```
+
+`-Shots all` retakes everything (needed on a fresh checkout or after changing `Theme`/widgets
+used everywhere); `-SkipShots` only rebuilds the documents. Retaking `desktop` also retakes the
+scan and detail screenshots drawn on it, and `camera-source` retakes `camera`. Names (defined in
+`NAMES` in `docs/manual/build/shoot.js`, cropped in `figures.js`):
+
+| Name | Shows |
+|---|---|
+| `desktop` | mock desktop with four codes (background of the scan screenshots) |
+| `scan-screen`, `scan-region` | overlay after a screen scan / while dragging a box |
+| `detail-wifi`, `detail-link`, `detail-warning`, `detail-danger` | detail cards on the overlay |
+| `toolbar-row`, `toolbar-right`, `toolbar-left`, `bubble` | floating toolbar layouts and bubble |
+| `tray-menu`, `shell-desktop`, `shell-image` | tray menu, Windows right-click menus (drawn mock-ups) |
+| `camera-source`, `camera`, `image-preview` | webcam and image preview windows |
+| `generator`, `welcome`, `message-update` | QR generator, welcome screen, update prompt |
+| `settings-general` … `settings-about` | the six Settings pages |
+
+A window not in the list needs a new entry in `NAMES` and in `shoot.js`/`figures.js`.
 
 ## Checks before you finish
 
