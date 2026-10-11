@@ -1,4 +1,4 @@
-// Turns the raw screenshots in shots/<lang>/ into the figures used by the manual
+// Turns the raw screenshots in docs/manual/screenshots/<lang>/ into the figures used by the manual
 // (figures/<lang>/<name>.jpg): crops the region that matters, rounds the corners and
 // adds a soft shadow on a white background.
 //
@@ -9,7 +9,7 @@ const { PNG } = require('pngjs');
 const jpeg = require('jpeg-js');
 
 const lang = process.argv[2];
-const src = path.join(__dirname, 'shots', lang);
+const src = path.join(__dirname, '..', 'screenshots', lang);
 const dst = path.join(__dirname, 'figures', lang);
 fs.mkdirSync(dst, { recursive: true });
 
@@ -17,6 +17,9 @@ fs.mkdirSync(dst, { recursive: true });
 const FIGURES = {
   welcome: {},
   'tray-menu': { crop: [1050, 300, 870, 780] },
+  // menus: desktop at logical (560, 150), image at (120, 250); 300 wide
+  'shell-desktop': { crop: [690, 180, 780, 700] },
+  'shell-image': { crop: [0, 300, 780, 760] },
   'scan-screen': { crop: [0, 0, 1920, 1080] },
   'scan-region': { crop: [0, 0, 1920, 1080] },
   'detail-wifi': { crop: [520, 290, 880, 500] },

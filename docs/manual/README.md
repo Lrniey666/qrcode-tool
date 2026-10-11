@@ -31,16 +31,20 @@ On Windows with Node.js 20+ and Microsoft Word installed:
 powershell -ExecutionPolicy Bypass -File docs\manual\build\build.ps1
 ```
 
-This bakes the UI in each language, takes the screenshots (windows appear on screen for about a
-minute), draws the cover, writes the `.docx` files and exports the PDFs through Word, which also
-fills in the table of contents. Use `-SkipShots` to rebuild only the documents from existing
-screenshots.
+This bakes the UI in each language, takes the screenshots that are missing (windows appear on
+screen while they are taken), draws the cover, writes the `.docx` files and exports the PDFs
+through Word, which also fills in the table of contents.
+
+Screenshots are kept in `screenshots/<lang>/` next to this file. The folder is not in git, so a
+fresh checkout takes them all once; after that only changed windows need retaking:
+`build.ps1 -Shots toolbar-row,settings-general` (names are listed in `AGENTS.md`),
+`-Shots all` for everything, `-SkipShots` to rebuild only the documents.
 
 | Step | Script |
 |---|---|
 | Copy the UI with translations filled in | `bake.js` |
 | Render windows with demo data and capture them | `shoot.js`, `capture.cs`, `docscenes/` |
 | Cover and back-cover artwork (SVG) | `art.js` |
-| Crop, round and shadow the figures | `figures.js` |
+| Crop, round and shadow the figures (from `../screenshots/`) | `figures.js` |
 | Word document | `build-docx.js` |
 | Table of contents and PDF export | `to-pdf.ps1` |
