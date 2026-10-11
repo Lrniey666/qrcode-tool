@@ -411,7 +411,6 @@ fn open_link(which: &str) {
         "repo" => repo.to_string(),
         "issues" => format!("{repo}/issues"),
         "releases" => format!("{repo}/releases"),
-        "manual" => format!("{repo}/tree/main/docs/manual"),
         "privacy" => format!("{repo}/blob/main/docs/PRIVACY.md"),
         "licenses" => format!("{repo}/blob/main/THIRD_PARTY_NOTICES.md"),
         "sponsor" => "https://github.com/sponsors/Lrniey666".to_string(),

@@ -422,6 +422,8 @@ fn toolbar_action(id: &str) {
         "generate" => Action::Generate(None),
         "history" => Action::History,
         "settings" => Action::Settings,
+        // "?": the PDF manual in the browser.
+        "help" => Action::Manual,
         // Bubble icon: leave the toolbar and show only the bubble.
         "collapse" => Action::CollapseToBubble,
         // X: dismiss the toolbar. Do not switch back to the bubble.
@@ -633,11 +635,13 @@ mod tests {
             "generate",
             "history",
             "settings",
+            "help",
             "collapse",
             "close",
         ] {
             assert!(src.contains(&format!("{{ id: \"{id}\",")), "toolbar item {id} missing");
         }
+        assert!(src.contains("{ id: \"help\", icon: Icons.help,"), "help uses the ? icon");
     }
 
     #[test]
@@ -663,7 +667,7 @@ mod tests {
         assert!(collapse < close, "close is the last button");
         assert_eq!(bar.matches("root.action(item.id)").count(), 2, "row and column send the item id");
         assert!(!bar.contains("width: layout.preferred-width"));
-        assert!(bar.contains("min-width: root.vertical ? 64px : 460px;"));
+        assert!(bar.contains("min-width: root.vertical ? 64px : 500px;"));
 
         let menu = &src[end..];
         for id in [

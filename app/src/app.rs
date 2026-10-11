@@ -44,6 +44,8 @@ pub enum Action {
     HideBubble,
     Settings,
     History,
+    /// Open the PDF user manual in the browser.
+    Manual,
     CheckUpdates,
     Quit,
 }
@@ -211,8 +213,23 @@ pub fn dispatch(action: Action) {
         Action::HideBubble => a.floating.hide_bubble(),
         Action::Settings => settings_ui::open(None),
         Action::History => settings_ui::open(Some(4)),
+        Action::Manual => open_manual(),
         Action::CheckUpdates => updater::check(true),
         Action::Quit => quit(),
+    }
+}
+
+/// Opens the PDF manual on GitHub in the language of the UI (a new browser tab).
+fn open_manual() {
+    let language = i18n::effective_language(&app().settings().language);
+    let url = qrtool_core::app_info::manual_url(language);
+    match qrtool_core::url_safety::analyze_url(&url) {
+        Ok(report) => {
+            if let Err(e) = qrtool_platform::open::open_web(&report) {
+                crate::message::show("open-failed", &e.to_string(), 3);
+            }
+        }
+        Err(e) => tracing::warn!("manual link rejected: {e}"),
     }
 }
 

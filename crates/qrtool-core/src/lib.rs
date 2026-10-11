@@ -40,4 +40,28 @@ pub mod app_info {
     pub const QR_TRADEMARK_NOTICE: &str = "QR Code is a registered trademark of DENSO WAVE INCORPORATED.";
     /// Crate version.
     pub const VERSION: &str = env!("CARGO_PKG_VERSION");
+
+    /// The PDF user manual in the repository for a UI language code ("zh-TW", "en", …).
+    /// Chinese UI languages get the Traditional Chinese manual, every other one English.
+    pub fn manual_url(language: &str) -> String {
+        let file = if language.starts_with("zh") { "zh-TW" } else { "en" };
+        format!("{REPO_URL}/blob/main/docs/manual/QRcode-tool-User-Manual-{file}.pdf")
+    }
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn manual_follows_the_ui_language() {
+            assert_eq!(
+                manual_url("zh-TW"),
+                "https://github.com/Lrniey666/qrcode-tool/blob/main/docs/manual/QRcode-tool-User-Manual-zh-TW.pdf"
+            );
+            assert!(manual_url("zh-CN").ends_with("-zh-TW.pdf"));
+            assert!(manual_url("en").ends_with("-en.pdf"));
+            assert!(manual_url("ja").ends_with("-en.pdf"));
+            assert!(crate::url_safety::analyze_url(&manual_url("de")).is_ok());
+        }
+    }
 }
