@@ -18,7 +18,7 @@ Press a shortcut → every QR code on your screen gets a label → press Enter.
 
 Works with your webcam too. Free, open source and private.
 
-📘 **User manual:** [PDF](docs/manual/QRcode-tool-User-Manual-en.pdf) · [Word](docs/manual/QRcode-tool-User-Manual-en.docx) · 使用說明書（繁體中文）：[PDF](docs/manual/QRcode-tool-User-Manual-zh-TW.pdf) · [Word](docs/manual/QRcode-tool-User-Manual-zh-TW.docx) — also attached to every [release](https://github.com/Lrniey666/qrcode-tool/releases/latest).
+📘 **User manual:** [PDF](docs/manual/QRcode-tool-User-Manual-en.pdf) · [.docx](docs/manual/QRcode-tool-User-Manual-en.docx) — also attached to every [release](https://github.com/Lrniey666/qrcode-tool/releases/latest).
 
 ![Screen scan: every code on the screen gets a pill with its site name](docs/assets/screen-scan.png)
 

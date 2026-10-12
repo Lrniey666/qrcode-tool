@@ -18,7 +18,7 @@
 
 也能用網路攝影機掃描。免費、開源、不蒐集任何資料。
 
-📘 **使用說明書：**[PDF](../manual/QRcode-tool-User-Manual-zh-TW.pdf) · [Word](../manual/QRcode-tool-User-Manual-zh-TW.docx) · English manual: [PDF](../manual/QRcode-tool-User-Manual-en.pdf) · [Word](../manual/QRcode-tool-User-Manual-en.docx)。每個[版本發布](https://github.com/Lrniey666/qrcode-tool/releases/latest)也都附有說明書可下載。
+📘 **使用說明書：**[PDF](../manual/QRcode-tool-User-Manual-zh-TW.pdf) · [Word](../manual/QRcode-tool-User-Manual-zh-TW.docx)。每個[版本發布](https://github.com/Lrniey666/qrcode-tool/releases/latest)也都附有說明書可下載。
 
 ![螢幕掃描：每個條碼都會出現顯示網站名稱的標籤](../assets/screen-scan-zh-TW.png)
 
