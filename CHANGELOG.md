@@ -46,6 +46,6 @@ First public preview.
   Français, Deutsch, Русский.
 - In-app updates through Velopack and GitHub Releases.
 
-[Unreleased]: https://github.com/Lrniey666/qrcode-tool/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/Lrniey666/qrcode-tool/releases/tag/v1.0.0
-[0.1.0]: https://github.com/Lrniey666/qrcode-tool/releases/tag/v0.1.0
+[Unreleased]: https://github.com/naritaroad/qrcode-tool/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/naritaroad/qrcode-tool/releases/tag/v1.0.0
+[0.1.0]: https://github.com/naritaroad/qrcode-tool/releases/tag/v0.1.0

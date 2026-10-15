@@ -413,7 +413,7 @@ fn open_link(which: &str) {
         "releases" => format!("{repo}/releases"),
         "privacy" => format!("{repo}/blob/main/docs/PRIVACY.md"),
         "licenses" => format!("{repo}/blob/main/THIRD_PARTY_NOTICES.md"),
-        "sponsor" => "https://github.com/sponsors/Lrniey666".to_string(),
+        "sponsor" => "https://github.com/sponsors/naritaroad".to_string(),
         "config" => {
             let dir = paths::config_dir();
             let _ = std::fs::create_dir_all(&dir);

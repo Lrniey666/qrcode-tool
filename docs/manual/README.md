@@ -7,7 +7,7 @@ The complete user manual for QRcode tool 1.0, with screenshots of every window i
 | English | [QRcode-tool-User-Manual-en.pdf](QRcode-tool-User-Manual-en.pdf) | [QRcode-tool-User-Manual-en.docx](QRcode-tool-User-Manual-en.docx) |
 | 繁體中文 | [QRcode-tool-User-Manual-zh-TW.pdf](QRcode-tool-User-Manual-zh-TW.pdf) | [QRcode-tool-User-Manual-zh-TW.docx](QRcode-tool-User-Manual-zh-TW.docx) |
 
-The same files are attached to every [GitHub release](https://github.com/Lrniey666/qrcode-tool/releases/latest).
+The same files are attached to every [GitHub release](https://github.com/naritaroad/qrcode-tool/releases/latest).
 
 **Contents:** introduction · installation and first start · scanning the screen · webcam, clipboard,
 image files, right-click menu and command line · results and detail cards · link safety ·

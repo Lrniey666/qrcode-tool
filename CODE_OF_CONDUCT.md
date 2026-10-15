@@ -11,7 +11,7 @@ discussions or anywhere else the project is represented.
 ## Reporting
 
 If you experience or witness unacceptable behaviour, contact the maintainer privately through
-the contact options on the [maintainer's GitHub profile](https://github.com/Lrniey666), or use
+the contact options on the [maintainer's GitHub profile](https://github.com/naritaroad), or use
 GitHub's *Report content* feature. Reports are handled confidentially.
 
 The maintainer may remove, edit or reject comments, commits, code, issues and other

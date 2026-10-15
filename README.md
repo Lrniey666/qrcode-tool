@@ -2,9 +2,9 @@
 
 ![QRcode tool — Scan QR codes on your computer as easily as on your phone.](docs/assets/banner.jpg)
 
-![CI](https://github.com/Lrniey666/qrcode-tool/actions/workflows/ci.yml/badge.svg)
-![Release](https://img.shields.io/github/v/release/Lrniey666/qrcode-tool?sort=semver&display_name=tag)
-![Downloads](https://img.shields.io/github/downloads/Lrniey666/qrcode-tool/total)
+![CI](https://github.com/naritaroad/qrcode-tool/actions/workflows/ci.yml/badge.svg)
+![Release](https://img.shields.io/github/v/release/naritaroad/qrcode-tool?sort=semver&display_name=tag)
+![Downloads](https://img.shields.io/github/downloads/naritaroad/qrcode-tool/total)
 ![License](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue)
 ![Platforms](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)
 ![Rust](https://img.shields.io/badge/rust-1.85%2B-orange?logo=rust)
@@ -18,7 +18,7 @@ Press a shortcut → every QR code on your screen gets a label → press Enter.
 
 Works with your webcam too. Free, open source and private.
 
-📘 **User manual:** [PDF](docs/manual/QRcode-tool-User-Manual-en.pdf) · [.docx](docs/manual/QRcode-tool-User-Manual-en.docx) — also attached to every [release](https://github.com/Lrniey666/qrcode-tool/releases/latest).
+📘 **User manual:** [PDF](docs/manual/QRcode-tool-User-Manual-en.pdf) · [.docx](docs/manual/QRcode-tool-User-Manual-en.docx) — also attached to every [release](https://github.com/naritaroad/qrcode-tool/releases/latest).
 
 ![Screen scan: every code on the screen gets a pill with its site name](docs/assets/screen-scan.png)
 
@@ -142,7 +142,7 @@ See **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** for threads, data flow and 
 
 ### Windows 10 (21H2+) / 11 — x64 and ARM64
 
-1. Download `QRcodeTool-win-x64-Setup.exe` (or `…-arm64-…`) from the [latest release](https://github.com/Lrniey666/qrcode-tool/releases/latest).
+1. Download `QRcodeTool-win-x64-Setup.exe` (or `…-arm64-…`) from the [latest release](https://github.com/naritaroad/qrcode-tool/releases/latest).
 2. Run it. QRcode tool installs for your user only (no admin rights) and starts in the tray.
 3. Press Ctrl+Alt+Q to scan (change it in *Settings › Shortcuts* if another app already uses it). Right-click the desktop or a picture for the same tools (*Settings › General › Right-click menu*). On Windows 11, open **Show more options**.
 
@@ -152,7 +152,7 @@ A **portable** `.zip` is available too (no installer, no automatic updates). The
 
 ### macOS 13+ (Apple silicon and Intel)
 
-Download the `.pkg` from the [latest release](https://github.com/Lrniey666/qrcode-tool/releases/latest). On first scan, allow **Screen Recording** (and **Camera** for webcam scanning) in *System Settings › Privacy & Security*. Releases are not notarized yet — right-click the app and choose **Open** the first time.
+Download the `.pkg` from the [latest release](https://github.com/naritaroad/qrcode-tool/releases/latest). On first scan, allow **Screen Recording** (and **Camera** for webcam scanning) in *System Settings › Privacy & Security*. Releases are not notarized yet — right-click the app and choose **Open** the first time.
 
 ### Linux
 
@@ -161,7 +161,7 @@ Download the `.AppImage`, make it executable and run it. On Wayland, add a keybo
 ### Build from source
 
 ```bash
-git clone https://github.com/Lrniey666/qrcode-tool
+git clone https://github.com/naritaroad/qrcode-tool
 cd qrcode-tool
 cargo run --release
 ```
@@ -216,7 +216,7 @@ Contributions are welcome — bug reports, translations, code and ideas.
 - Found a security problem? Please follow **[SECURITY.md](SECURITY.md)** instead of opening a public issue.
 - Everyone taking part is expected to follow the **[Code of Conduct](CODE_OF_CONDUCT.md)**.
 
-If QRcode tool saves you time, you can [sponsor the project](https://github.com/sponsors/Lrniey666). ❤️
+If QRcode tool saves you time, you can [sponsor the project](https://github.com/sponsors/naritaroad). ❤️
 
 ## License
 

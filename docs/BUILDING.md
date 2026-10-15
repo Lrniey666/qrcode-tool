@@ -22,7 +22,7 @@ The first build takes a few minutes (zxing-cpp and Slint); later builds are incr
    Or install CMake separately: `winget install Kitware.CMake`.
 3. Build and run (in *Developer PowerShell for VS* or a normal terminal after a restart):
    ```powershell
-   git clone https://github.com/Lrniey666/qrcode-tool
+   git clone https://github.com/naritaroad/qrcode-tool
    cd qrcode-tool
    cargo run --release
    ```

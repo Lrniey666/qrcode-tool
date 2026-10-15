@@ -21,9 +21,9 @@ module.exports = {
       'Everything happens on your computer. The program collects no usage data and never sends what you scan to the internet.',
     ],
     links: [
-      ['Project page', 'https://github.com/Lrniey666/qrcode-tool'],
-      ['Latest release', 'https://github.com/Lrniey666/qrcode-tool/releases/latest'],
-      ['Report a problem', 'https://github.com/Lrniey666/qrcode-tool/issues'],
+      ['Project page', 'https://github.com/naritaroad/qrcode-tool'],
+      ['Latest release', 'https://github.com/naritaroad/qrcode-tool/releases/latest'],
+      ['Report a problem', 'https://github.com/naritaroad/qrcode-tool/issues'],
     ],
     license: 'The software is released under the MIT or Apache-2.0 license. This manual may be copied and adapted under the same terms.',
     trademark: 'QR Code is a registered trademark of DENSO WAVE INCORPORATED. QRcode tool is not affiliated with DENSO WAVE, Google or Microsoft.',
@@ -99,7 +99,7 @@ module.exports = {
     { h2: 'Download and install (Windows)' },
     {
       ol: [
-        'Open the release page on GitHub (https://github.com/Lrniey666/qrcode-tool/releases/latest).',
+        'Open the release page on GitHub (https://github.com/naritaroad/qrcode-tool/releases/latest).',
         'Download `QRcodeTool-win-x64-Setup.exe` for most computers, or `QRcodeTool-win-arm64-Setup.exe` for computers with an ARM processor.',
         'Run the downloaded file. QRcode tool is installed for your user account only and does not need administrator rights.',
         'When setup finishes, QRcode tool starts and shows the welcome screen.',

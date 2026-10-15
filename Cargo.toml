@@ -16,8 +16,8 @@ edition = "2021"
 rust-version = "1.85"
 license = "MIT OR Apache-2.0"
 authors = ["Naritaroad (Lrniey666)"]
-repository = "https://github.com/Lrniey666/qrcode-tool"
-homepage = "https://github.com/Lrniey666/qrcode-tool"
+repository = "https://github.com/naritaroad/qrcode-tool"
+homepage = "https://github.com/naritaroad/qrcode-tool"
 
 [workspace.dependencies]
 # internal crates

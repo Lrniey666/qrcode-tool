@@ -44,4 +44,4 @@ you choose to, through your browser or system apps.
 
 ## Contact
 
-Questions: open an issue at <https://github.com/Lrniey666/qrcode-tool/issues>.
+Questions: open an issue at <https://github.com/naritaroad/qrcode-tool/issues>.

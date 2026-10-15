@@ -35,7 +35,7 @@ pub mod app_info {
     /// Reverse-DNS application id (used for config dirs, IPC names, installers).
     pub const APP_ID: &str = "io.github.lrniey666.qrcode-tool";
     /// GitHub repository used for update checks and links.
-    pub const REPO_URL: &str = "https://github.com/Lrniey666/qrcode-tool";
+    pub const REPO_URL: &str = "https://github.com/naritaroad/qrcode-tool";
     /// Trademark notice that must accompany the words "QR Code".
     pub const QR_TRADEMARK_NOTICE: &str = "QR Code is a registered trademark of DENSO WAVE INCORPORATED.";
     /// Crate version.
@@ -56,7 +56,7 @@ pub mod app_info {
         fn manual_follows_the_ui_language() {
             assert_eq!(
                 manual_url("zh-TW"),
-                "https://github.com/Lrniey666/qrcode-tool/blob/main/docs/manual/QRcode-tool-User-Manual-zh-TW.pdf"
+                "https://github.com/naritaroad/qrcode-tool/blob/main/docs/manual/QRcode-tool-User-Manual-zh-TW.pdf"
             );
             assert!(manual_url("zh-CN").ends_with("-zh-TW.pdf"));
             assert!(manual_url("en").ends_with("-en.pdf"));

@@ -83,7 +83,7 @@ function cover() {
   <!-- scanned card with brackets, as in the app -->
   <rect x="${card.x + 18}" y="${card.y + 26}" width="${card.s}" height="${card.s}" rx="56" fill="#0b1f4d" opacity="0.18"/>
   <rect x="${card.x}" y="${card.y}" width="${card.s}" height="${card.s}" rx="56" fill="#ffffff"/>
-  ${qrPath('https://github.com/Lrniey666/qrcode-tool', q.x, q.y, q.s)}
+  ${qrPath('https://github.com/naritaroad/qrcode-tool', q.x, q.y, q.s)}
   <g fill="none" stroke="#1D4FFF" stroke-width="16" stroke-linecap="round" stroke-linejoin="round">
     <path d="M${bx0} ${by0 + br} V${by0 + 24} Q${bx0} ${by0} ${bx0 + 24} ${by0} H${bx0 + br}"/>
     <path d="M${bx1 - br} ${by0} H${bx1 - 24} Q${bx1} ${by0} ${bx1} ${by0 + 24} V${by0 + br}"/>

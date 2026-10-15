@@ -324,7 +324,7 @@ function coverPage() {
     placed(19, 108, 125, 20, [new TextRun({ text: c.tagline, size: 26, color: 'FFFFFF' })]),
     placed(19, 238, 150, 8, [new TextRun({ text: c.edition, size: 24, bold: true, color: TEXT })]),
     placed(19, 247, 150, 14, [new TextRun({ text: c.platforms, size: 20, color: MUTED })]),
-    placed(19, 284, 172, 6, [new TextRun({ text: 'github.com/Lrniey666/qrcode-tool', size: 17, color: MUTED })]),
+    placed(19, 284, 172, 6, [new TextRun({ text: 'github.com/naritaroad/qrcode-tool', size: 17, color: MUTED })]),
   ];
 }
 

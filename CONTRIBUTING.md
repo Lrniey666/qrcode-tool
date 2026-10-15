@@ -4,7 +4,7 @@ Thanks for helping! Bug reports, translations, documentation and code are all we
 
 ## Ways to help
 
-- **Report a bug** — open an [issue](https://github.com/Lrniey666/qrcode-tool/issues/new/choose).
+- **Report a bug** — open an [issue](https://github.com/naritaroad/qrcode-tool/issues/new/choose).
   Include your OS version, the app version (Settings › About) and, if possible, the log file
   (Settings › About › *Open the log folder*). Logs never contain scanned content.
 - **A code isn't detected?** Attach the image (or a similar one without private data).
@@ -17,7 +17,7 @@ Thanks for helping! Bug reports, translations, documentation and code are all we
 See [docs/BUILDING.md](docs/BUILDING.md) for the toolchain per platform. In short:
 
 ```bash
-git clone https://github.com/Lrniey666/qrcode-tool
+git clone https://github.com/naritaroad/qrcode-tool
 cd qrcode-tool
 cargo run              # debug build of the tray app
 cargo test --workspace

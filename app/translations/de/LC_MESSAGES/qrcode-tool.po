@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: qrcode-tool 1.0.0\n"
-"Report-Msgid-Bugs-To: https://github.com/Lrniey666/qrcode-tool/issues\n"
+"Report-Msgid-Bugs-To: https://github.com/naritaroad/qrcode-tool/issues\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"

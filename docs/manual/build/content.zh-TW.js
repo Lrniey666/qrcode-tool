@@ -21,9 +21,9 @@ module.exports = {
       '所有處理都在本機完成。程式不收集使用資料，也不會把您掃描的內容送到網路上。',
     ],
     links: [
-      ['專案首頁', 'https://github.com/Lrniey666/qrcode-tool'],
-      ['下載最新版本', 'https://github.com/Lrniey666/qrcode-tool/releases/latest'],
-      ['回報問題', 'https://github.com/Lrniey666/qrcode-tool/issues'],
+      ['專案首頁', 'https://github.com/naritaroad/qrcode-tool'],
+      ['下載最新版本', 'https://github.com/naritaroad/qrcode-tool/releases/latest'],
+      ['回報問題', 'https://github.com/naritaroad/qrcode-tool/issues'],
     ],
     license: '本軟體以 MIT 或 Apache-2.0 授權條款發布。本說明書內容可依相同條款自由轉載與修改。',
     trademark: 'QR Code 為 DENSO WAVE INCORPORATED 的註冊商標。QRcode tool 與 DENSO WAVE、Google 及 Microsoft 均無關聯。',
@@ -99,7 +99,7 @@ module.exports = {
     { h2: '下載與安裝（Windows）' },
     {
       ol: [
-        '前往 GitHub 的版本發布頁面（https://github.com/Lrniey666/qrcode-tool/releases/latest）。',
+        '前往 GitHub 的版本發布頁面（https://github.com/naritaroad/qrcode-tool/releases/latest）。',
         '一般電腦請下載 `QRcodeTool-win-x64-Setup.exe`；使用 ARM 處理器的電腦請下載 `QRcodeTool-win-arm64-Setup.exe`。',
         '執行下載的安裝程式。程式只會安裝到目前的使用者帳戶，不需要系統管理員權限。',
         '安裝完成後，QRcode tool 會自動啟動，並在第一次執行時顯示歡迎畫面。',

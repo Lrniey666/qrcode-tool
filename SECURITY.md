@@ -5,7 +5,7 @@
 Please **do not open a public issue** for security problems.
 
 Use GitHub's private reporting instead:
-**[Report a vulnerability](https://github.com/Lrniey666/qrcode-tool/security/advisories/new)**
+**[Report a vulnerability](https://github.com/naritaroad/qrcode-tool/security/advisories/new)**
 (Security tab › *Report a vulnerability*).
 
 Please include the app version, your OS, steps to reproduce and — if relevant — the QR code

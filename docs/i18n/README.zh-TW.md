@@ -2,9 +2,9 @@
 
 ![QRcode tool — 讓您如同使用手機般在電腦上輕鬆快速使用 QR Code。](../assets/banner-zh-TW.jpg)
 
-![CI](https://github.com/Lrniey666/qrcode-tool/actions/workflows/ci.yml/badge.svg)
-![Release](https://img.shields.io/github/v/release/Lrniey666/qrcode-tool?sort=semver&display_name=tag)
-![Downloads](https://img.shields.io/github/downloads/Lrniey666/qrcode-tool/total)
+![CI](https://github.com/naritaroad/qrcode-tool/actions/workflows/ci.yml/badge.svg)
+![Release](https://img.shields.io/github/v/release/naritaroad/qrcode-tool?sort=semver&display_name=tag)
+![Downloads](https://img.shields.io/github/downloads/naritaroad/qrcode-tool/total)
 ![License](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-blue)
 ![Platforms](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)
 ![Rust](https://img.shields.io/badge/rust-1.85%2B-orange?logo=rust)
@@ -18,7 +18,7 @@
 
 也能用網路攝影機掃描。免費、開源、不蒐集任何資料。
 
-📘 **使用說明書：**[PDF](../manual/QRcode-tool-User-Manual-zh-TW.pdf) · [Word](../manual/QRcode-tool-User-Manual-zh-TW.docx)。每個[版本發布](https://github.com/Lrniey666/qrcode-tool/releases/latest)也都附有說明書可下載。
+📘 **使用說明書：**[PDF](../manual/QRcode-tool-User-Manual-zh-TW.pdf) · [Word](../manual/QRcode-tool-User-Manual-zh-TW.docx)。每個[版本發布](https://github.com/naritaroad/qrcode-tool/releases/latest)也都附有說明書可下載。
 
 ![螢幕掃描：每個條碼都會出現顯示網站名稱的標籤](../assets/screen-scan-zh-TW.png)
 
@@ -121,7 +121,7 @@ flowchart LR
 
 ### Windows 10（21H2 以上）/ 11 — x64 與 ARM64
 
-1. 到[最新版本](https://github.com/Lrniey666/qrcode-tool/releases/latest)下載 `QRcodeTool-win-x64-Setup.exe`（ARM 電腦選 `…-arm64-…`）。
+1. 到[最新版本](https://github.com/naritaroad/qrcode-tool/releases/latest)下載 `QRcodeTool-win-x64-Setup.exe`（ARM 電腦選 `…-arm64-…`）。
 2. 執行即可，安裝在你的使用者帳號下（不需系統管理員權限），完成後在系統匣待命。
 3. 按 Ctrl+Alt+Q 開始掃描（若已被其他程式占用，可在「設定 › 快捷鍵」改成別組）。在桌面空白處或圖片上按右鍵也能用（「設定 › 一般 › 右鍵清單」）。Windows 11 請先點「顯示更多選項」。
 
@@ -131,7 +131,7 @@ flowchart LR
 
 ### macOS 13 以上
 
-從[最新版本](https://github.com/Lrniey666/qrcode-tool/releases/latest)下載 `.pkg`。第一次掃描時，請在「系統設定 › 隱私權與安全性」允許**螢幕錄製**（使用攝影機時另需允許**相機**）。目前尚未公證，第一次請按右鍵 → **打開**。
+從[最新版本](https://github.com/naritaroad/qrcode-tool/releases/latest)下載 `.pkg`。第一次掃描時，請在「系統設定 › 隱私權與安全性」允許**螢幕錄製**（使用攝影機時另需允許**相機**）。目前尚未公證，第一次請按右鍵 → **打開**。
 
 ### Linux
 
@@ -140,7 +140,7 @@ flowchart LR
 ### 從原始碼建置
 
 ```bash
-git clone https://github.com/Lrniey666/qrcode-tool
+git clone https://github.com/naritaroad/qrcode-tool
 cd qrcode-tool
 cargo run --release
 ```
@@ -194,7 +194,7 @@ qrcode-tool/
 - 發現安全問題請依 **[SECURITY.md](../../SECURITY.md)** 私下回報，不要開公開 issue。
 - 參與者請遵守 **[行為準則](../../CODE_OF_CONDUCT.md)**。
 
-如果 QRcode tool 幫你省下時間，歡迎[贊助這個專案](https://github.com/sponsors/Lrniey666)。❤️
+如果 QRcode tool 幫你省下時間，歡迎[贊助這個專案](https://github.com/sponsors/naritaroad)。❤️
 
 ## 授權
 
