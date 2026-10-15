@@ -639,9 +639,15 @@ mod tests {
             "collapse",
             "close",
         ] {
-            assert!(src.contains(&format!("{{ id: \"{id}\",")), "toolbar item {id} missing");
+            assert!(
+                src.contains(&format!("{{ id: \"{id}\",")),
+                "toolbar item {id} missing"
+            );
         }
-        assert!(src.contains("{ id: \"help\", icon: Icons.help,"), "help uses the ? icon");
+        assert!(
+            src.contains("{ id: \"help\", icon: Icons.help,"),
+            "help uses the ? icon"
+        );
     }
 
     #[test]
@@ -665,7 +671,11 @@ mod tests {
         let collapse = bar.find("id: \"collapse\"").expect("collapse item");
         let close = bar.find("id: \"close\"").expect("close item");
         assert!(collapse < close, "close is the last button");
-        assert_eq!(bar.matches("root.action(item.id)").count(), 2, "row and column send the item id");
+        assert_eq!(
+            bar.matches("root.action(item.id)").count(),
+            2,
+            "row and column send the item id"
+        );
         assert!(!bar.contains("width: layout.preferred-width"));
         assert!(bar.contains("min-width: root.vertical ? 64px : 500px;"));
 
