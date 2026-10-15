@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-10-15
+
+### Changed
+
+- The project moved to [github.com/naritaroad/qrcode-tool](https://github.com/naritaroad/qrcode-tool) after the GitHub account was renamed from Lrniey666. Update checks, the project, issue and sponsor links, and the user manuals now use the new address. Settings, history and the app ID are unchanged, so nothing needs to be set up again.
+
 ## [1.0.0] - 2026-10-12
 
 ### Added
@@ -46,6 +52,7 @@ First public preview.
   Français, Deutsch, Русский.
 - In-app updates through Velopack and GitHub Releases.
 
-[Unreleased]: https://github.com/naritaroad/qrcode-tool/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/naritaroad/qrcode-tool/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/naritaroad/qrcode-tool/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/naritaroad/qrcode-tool/releases/tag/v1.0.0
 [0.1.0]: https://github.com/naritaroad/qrcode-tool/releases/tag/v0.1.0
